@@ -11,7 +11,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>分类: webGIS | GIS技术部门</title>
+  <title>cesium 建筑泛光动效 | GIS技术部门</title>
 
   
     
@@ -528,233 +528,578 @@
     <!-- 内容区域 -->
     <main class="main" id="pjax-container" style="margin-top: 0;">
       
-
-<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"></div>
-<div class="bg-light-floor-categoryDetail" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -3;"></div>
-
-<div class="lazyload category-header" data-original="https://pic3.zhimg.com/80/v2-98dcd81cb0d1fee52a807c13cedb8338_1440w.jpg?source=1940ef5c">
-  <div class="category-header-title">
-    category
-  </div>
-  <div class="category-header-desc">
+ <!-- prismjs 代码高亮 -->
+ 
     
-      <span class="title" id="category-header-desc"></span>
-      <script>
-  function typedFn() {
-    const el = '#category-header-desc';
-    const type = 'categoryDetail';
-    let desc = '愿你如风，被人温柔以待'
-    var typed = new Typed(el, {
-      strings: [desc],
-      startDelay: 100,
-      typeSpeed: 80,
-      loop: true,
-      backSpeed: 30,
-      showCursor: true
-    });
-  }
-  typedFn();
-</script>
+    <link href="/js/prism/prism-line-numbers.css" rel="stylesheet">
+    
+        <link href="/js/prism/prism.min.css" rel="stylesheet">
+    
+
+    <style>
+        pre[class*="language-"] {
+            overflow-y: hidden;
+        }
+        .line-numbers .line-numbers-rows {
+            border: none;
+        }
+    </style>
+  
+
+
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
+
+<!-- 文章详情页顶部图片和标题 -->
+
+
+
+
+<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="/medias/8.jpg" style="background-repeat: no-repeat; background-size: cover; 
+  background-position: center center;position: relative;">
+  <div class="post-detail-header-mask"></div>
+  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
+  
+  <div class="post-detail-header_info-box">
+    <div class="title-box">
+      <span class="title">
+        cesium 建筑泛光动效
+      </span>
+    </div>
+    
+    
       
+        <span class="post-detail-header_date">
+          <i class="fa fa-calendar"></i> 发表于：2021-09-14 |
+        </span>
+      
+
+      
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> 分类：
+          
+            <a href="/categories/%E5%89%8D%E7%AB%AF/" class="post-detail-header_category">
+              前端
+            </a>
+          
+            <a href="/categories/%E5%89%8D%E7%AB%AF/GIS/" class="post-detail-header_category">
+              GIS
+            </a>
+          
+            <a href="/categories/%E5%89%8D%E7%AB%AF/GIS/webGIS/" class="post-detail-header_category">
+              webGIS
+            </a>
+          
+        </span>
+      
+
+      
+    
   </div>
-  <div class="mask-box"></div>
+  
+  
+    <script src="/js/bubble/bubble.js"></script>
+  
 </div>
 
 
-<div class="category">
-  <div class="category-name">
-    <div class="name" style="background-color: #F9E79F;">webGIS 分类</div>
-  </div>
-  <section class="posts">
-    
-    <article class="post" data-aos="fade-up"
-      style="flex-direction: row-reverse;">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fa fa-clock-o" aria-hidden="true"></i>
-            <span class="post-time">2021-09-14</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2021/09/14/cesium%E6%B3%9B%E5%85%89%E5%BB%BA%E7%AD%91/">cesium 建筑泛光动效</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
 
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cesium/" rel="tag">Cesium</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gis/" rel="tag">gis</a></li></ul>
+<div class="row justify-position">
+  <div class="main-content">
+    <article class="post post-detail">
+      
+      <div class="post-content">
+        <h2 id="指定3dtiles"><a href="#指定3dtiles" class="headerlink" title="指定3dtiles"></a>指定3dtiles</h2><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">func_1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 找到需要光环效果的3dtiles</span>
+        <span class="token keyword">var</span> confprimitives <span class="token operator">=</span> viewer<span class="token punctuation">.</span>scene<span class="token punctuation">.</span>primitives<span class="token punctuation">.</span>_primitives<span class="token punctuation">;</span>
+        confprimitives<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">val</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>val<span class="token punctuation">.</span>name <span class="token operator">==</span> <span class="token string">"jzw"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                val<span class="token punctuation">.</span>show <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>    <span class="token comment">// 显示 3dtiles</span>
+                <span class="token keyword">let</span> customShader <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+                      varying vec3 v_positionEC;
+                      void main(void)&#123;
+                          vec4 position = czm_inverseModelView * vec4(v_positionEC,1); // 位置
+                          float glowRange = 20.0; // 光环的移动范围(高度)
+                          gl_FragColor = vec4(0.2,  0.5, 1.0, 1.0); // 颜色
+                          gl_FragColor *= vec4(vec3(position.z / 10.0), 1.0); // 渐变
+                          // 动态光环
+                          float time = fract(czm_frameNumber / 180.0);
+                          time = abs(time - 0.5) * 2.0;
+                          float diff = step(0.005, abs( clamp(position.z / glowRange, 0.0, 1.0) - time));
+                          gl_FragColor.rgb += gl_FragColor.rgb * (1.0 - diff);
+                      &#125;
+                     </span><span class="token template-punctuation string">`</span></span>
+                <span class="token keyword">function</span> <span class="token function">updateTile</span><span class="token punctuation">(</span><span class="token parameter">tile</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    <span class="token keyword">let</span> content <span class="token operator">=</span> tile<span class="token punctuation">.</span>content
+                    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> content<span class="token punctuation">.</span>featuresLength<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                        <span class="token keyword">let</span> feature <span class="token operator">=</span> content<span class="token punctuation">.</span><span class="token function">getFeature</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+                        <span class="token keyword">let</span> model <span class="token operator">=</span> feature<span class="token punctuation">.</span>content<span class="token punctuation">.</span>_model
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span>
+                            customShader <span class="token operator">&amp;&amp;</span>
+                            model <span class="token operator">&amp;&amp;</span>
+                            model<span class="token punctuation">.</span>_sourcePrograms <span class="token operator">&amp;&amp;</span>
+                            model<span class="token punctuation">.</span>_rendererResources
+                        <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                            Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>model<span class="token punctuation">.</span>_sourcePrograms<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">key</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+                                <span class="token keyword">let</span> program <span class="token operator">=</span> model<span class="token punctuation">.</span>_sourcePrograms<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
+                                model<span class="token punctuation">.</span>_rendererResources<span class="token punctuation">.</span>sourceShaders<span class="token punctuation">[</span>
+                                    program<span class="token punctuation">.</span>fragmentShader
+                                    <span class="token punctuation">]</span> <span class="token operator">=</span> customShader
+                            <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+                            model<span class="token punctuation">.</span>_shouldRegenerateShaders <span class="token operator">=</span> <span class="token boolean">true</span>
+                        <span class="token punctuation">&#125;</span>
+                    <span class="token punctuation">&#125;</span>
+                <span class="token punctuation">&#125;</span>
+                <span class="token comment">// 监听函数</span>
+                val<span class="token punctuation">.</span>tileVisible<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">tile</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    <span class="token function">updateTile</span><span class="token punctuation">(</span>tile<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment">// viewer.flyTo(val);</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
+<h2 id="所有3dtiles（直接js引入）"><a href="#所有3dtiles（直接js引入）" class="headerlink" title="所有3dtiles（直接js引入）"></a>所有3dtiles（直接js引入）</h2><pre class="line-numbers language-JS" data-language="JS"><code class="language-JS">; if (typeof Cesium !&#x3D;&#x3D; &#39;undefined&#39;) (function (Cesium) &#123;
 
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/GIS/">GIS</a> <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/GIS/webGIS/">webGIS</a>
-</div>
+  &#x2F;**
+   * 通过重写模型每一帧渲染着色逻辑注入自定义着色器
+   * 性能以及通用性较差,建议单独写一套3dtiles加载逻辑，自定义着色程序
+   *&#x2F;
+  Cesium.TILE_EFFECT_STATE &#x3D; true;
+  Cesium.TILE_FS_BODY &#x3D; &#96; float stc_pl &#x3D; fract(czm_frameNumber &#x2F; 120.0) * 3.14159265 * 2.0;
+                float stc_sd &#x3D; v_stcVertex.z &#x2F; 60.0 + sin(stc_pl) * 0.1;
+                gl_FragColor *&#x3D; vec4(stc_sd, stc_sd, stc_sd, 1.0);
+                float stc_a13 &#x3D; fract(czm_frameNumber &#x2F; 360.0);
+                float stc_h &#x3D; clamp(v_stcVertex.z &#x2F; 450.0, 0.0, 1.0);
+                stc_a13 &#x3D; abs(stc_a13 - 0.5) * 2.0;
+                float stc_diff &#x3D; step(0.005, abs(stc_h - stc_a13));
+                gl_FragColor.rgb +&#x3D; gl_FragColor.rgb * (1.0 - stc_diff);&#96;;
+
+  function install () &#123;
+
+    Cesium.ModelUtility.updateForwardAxis &#x3D; function (model) &#123;
+      this._model &#x3D; model;
+      var cachedSourceVersion &#x3D; model.gltf.extras.sourceVersion;
+
+      if (
+        (Cesium.defined(cachedSourceVersion) &amp;&amp; cachedSourceVersion !&#x3D;&#x3D; &quot;2.0&quot;) ||
+        Cesium.ModelUtility.getAssetVersion(model.gltf) !&#x3D;&#x3D; &quot;2.0&quot;
+      ) &#123;
+        model._gltfForwardAxis &#x3D; Cesium.Axis.X;
+      &#125;
+    &#125;;
+
+    Cesium.ModelUtility.modifyFragmentShaderForLogDepth &#x3D; function (shader) &#123;
+      let state &#x3D; false;
+      if (Cesium.TILE_EFFECT_STATE &amp;&amp; this._model &amp;&amp; this._model._resource._url.indexOf(&#39;b3dm&#39;) !&#x3D;&#x3D; -1) state &#x3D; true;
+      shader &#x3D; Cesium.ShaderSource.replaceMain(shader, &quot;czm_depth_main&quot;);
+
+      if (state) &#123;
+        shader +&#x3D; &#96;
+                varying vec3 v_stcVertex;
+                void main()&#123;
+                    czm_depth_main();
+                    &#96;+ Cesium.TILE_FS_BODY + &#96;
+                    czm_writeLogDepth();
+                &#125;
+                &#96;;
+      &#125; else &#123;
+        shader +&#x3D; &#96;
+                    varying vec3 v_stcVertex;
+                    void main()&#123;
+                        czm_depth_main();
+                        czm_writeLogDepth();
+                    &#125;
+                    &#96;;
+      &#125;
+      return shader;
+    &#125;;
+
+    Cesium.ModelUtility.modifyVertexShaderForLogDepth &#x3D; function (
+      shader,
+      toClipCoordinatesGLSL
+    ) &#123;
+      shader &#x3D; Cesium.ShaderSource.replaceMain(shader, &quot;czm_depth_main&quot;);
+      shader +&#x3D;
+        &quot;\n&quot; +
+        &quot;varying vec3 v_stcVertex;\n&quot; +
+        &quot;void main() \n&quot; +
+        &quot;&#123; \n&quot; +
+        &quot;    czm_depth_main(); \n&quot; +
+        &quot;    v_stcVertex &#x3D; a_position;\n&quot; +
+        &quot;    czm_vertexLogDepth(&quot; +
+        toClipCoordinatesGLSL +
+        &quot;); \n&quot; +
+        &quot;&#125; \n&quot;;
+      return shader;
+    &#125;;
+  &#125;
+  install();
+&#125;)(Cesium)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            
-              <a href="/2021/09/14/cesium%E6%B3%9B%E5%85%89%E5%BB%BA%E7%AD%91/" class="lazyload" data-original="/medias/8.jpg" style="background-size: cover; 
-                background-position: center center;">
-              </a>
-            
-          </div>
-          <div class="post-content">
-            指定3dtilesfunction func_1() &#123;
-        // 找到需要光环效果的3dtiles
-        var confprimitives = viewer.scene.primitives._prim
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/2021/09/14/cesium%E6%B3%9B%E5%85%89%E5%BB%BA%E7%AD%91/">
-            <i class="iconfont iconmore" pointer style="float: right;" title="阅读更多"></i>
-          </a>
-        </div>
       </div>
-      <div class="post-img">
+      <div class="post-tags-categories">
         
-          <a href="/2021/09/14/cesium%E6%B3%9B%E5%85%89%E5%BB%BA%E7%AD%91/" class="lazyload" data-original="/medias/8.jpg" style="background-size: cover; 
-            background-position: center center;">
-          </a>
+        <div class="tags">
+          
+            <a href="/tags/Cesium/" class="">
+              Cesium
+            </a>
+          
+            <a href="/tags/gis/" class="">
+              gis
+            </a>
+          
+        </div>
         
       </div>
+      
+        <div class="copyright">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+    <strong>作者:  </strong>Giser</a>
+    </li>
+    <li class="post-copyright-link">
+    <strong>文章链接:  </strong>
+    <a href="/2021/09/14/cesium泛光建筑/" target="_blank" title="cesium 建筑泛光动效">https://gaochundu.github.io/2021/09/14/cesium泛光建筑/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明:   </strong>
+      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+      许可协议。转载请注明出处!
+    </li>
+  </ul>
+<div>
+      
     </article>
+    <!-- 上一篇文章和下一篇文章 -->
     
-    <article class="post" data-aos="fade-up"
-      style="">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fa fa-clock-o" aria-hidden="true"></i>
-            <span class="post-time">2021-08-30</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2021/08/30/cesium%E5%8A%A0%E8%BD%BD%E6%B5%B7%E9%87%8F%E6%A8%A1%E5%9E%8B/">cesium 海量gltf三维模型可视化</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
-
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cesium/" rel="tag">Cesium</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gis/" rel="tag">gis</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/GIS/">GIS</a> <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/GIS/webGIS/">webGIS</a>
-</div>
+      <!-- 文章详情页的上一页和下一页 -->
+<div class="post-nav">
 
 
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            
-              <a href="/2021/08/30/cesium%E5%8A%A0%E8%BD%BD%E6%B5%B7%E9%87%8F%E6%A8%A1%E5%9E%8B/" class="lazyload" data-original="/medias/11.jpg" style="background-size: cover; 
-                background-position: center center;">
-              </a>
-            
-          </div>
-          <div class="post-content">
-            cesium 海量gltf三维模型可视化加载海量模型时，除了使用3dtiles，还可以使用ModelInstanceCollection来批量加载gltf或者glb格式的三维模型，效果如下：
 
-核心代码如下：
-function getIns
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/2021/08/30/cesium%E5%8A%A0%E8%BD%BD%E6%B5%B7%E9%87%8F%E6%A8%A1%E5%9E%8B/">
-            <i class="iconfont iconmore" pointer style="" title="阅读更多"></i>
-          </a>
-        </div>
+
+
+  
+  <div class="post-nav-next post-nav-item">
+    <div class="post-nav-img lazyload" data-original="/medias/5.jpg" style="background-size: cover; 
+      background-position: center center;">
+    </div>
+    <a href="/2021/09/09/GLSL%E4%B8%AD%E6%96%87%E6%89%8B%E5%86%8C/" class="post-nav-link">
+      <div class="title">
+        下一篇: <i class="fa fa-angle-right"></i>
+        <div class="title-text">GLSL中文手册</div>
       </div>
-      <div class="post-img">
-        
-          <a href="/2021/08/30/cesium%E5%8A%A0%E8%BD%BD%E6%B5%B7%E9%87%8F%E6%A8%A1%E5%9E%8B/" class="lazyload" data-original="/medias/11.jpg" style="background-size: cover; 
-            background-position: center center;">
-          </a>
-        
-      </div>
-    </article>
-    
-    <article class="post" data-aos="fade-up"
-      style="flex-direction: row-reverse;">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fa fa-clock-o" aria-hidden="true"></i>
-            <span class="post-time">2021-08-09</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2021/08/09/cesium%E6%96%B9%E6%B3%95%E5%90%88%E9%9B%86/">cesium方法合集</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
-
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cesium/" rel="tag">Cesium</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gis/" rel="tag">gis</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/GIS/">GIS</a> <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/GIS/webGIS/">webGIS</a>
-</div>
+      <!-- <div class="content">
+        GLSL 中文手册基本类型:
 
 
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            
-              <a href="/2021/08/09/cesium%E6%96%B9%E6%B3%95%E5%90%88%E9%9B%86/" class="lazyload" data-original="/medias/1.jpg" style="background-size: cover; 
-                background-position: center center;">
-              </a>
-            
-          </div>
-          <div class="post-content">
-            cesium 坐标简述1、常用坐标转换API
-
-
-API
+类型
 说明
 
 
 
-Cesium.Cartographic.fromCartesian(cartesian, ellipsoid, result)
-笛卡尔转弧度
+void
+空类型,即不返回任何值
 
 
-Cesium.Carto
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/2021/08/09/cesium%E6%96%B9%E6%B3%95%E5%90%88%E9%9B%86/">
-            <i class="iconfont iconmore" pointer style="float: right;" title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        
-          <a href="/2021/08/09/cesium%E6%96%B9%E6%B3%95%E5%90%88%E9%9B%86/" class="lazyload" data-original="/medias/1.jpg" style="background-size: cover; 
-            background-position: center center;">
-          </a>
-        
-      </div>
-    </article>
-    
-  </section>
+bool
+布尔类型 true,
+      </div> -->
+    </a>
+  </div>
+
 </div>
 
+    
+    
+
+    <!-- 打赏 -->
+    
+      <div id="appDonate" class="post-donate">
+  <div id="donate_board" class="donate_bar center" ref="donate">
+    <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏" @click="showDialogDrawer()"></a>
+  </div>
+  <transition name="fade">
+    <div 
+      class="donate-box-mask"
+      v-cloak 
+      v-if="visible"
+      @click="cancelDialogDrawer()"
+    >
+    </div>
+  </transition>
+  <transition name="bounce">
+    <div class="donate-box" v-cloak v-if="visible">
+      <div class="donate-box_close">
+        <i class="fa fa-times" aria-hidden="true" @click="cancelDialogDrawer" pointer></i>
+      </div>
+      <div class="donate-box_title">
+        <h4>
+          你的赏识是我前进的动力
+        </h4>
+      </div>
+      <div class="donate-box_tab">
+        <div class="Alipay" pointer :class="{'active': tabActive === 'Alipay'}" @click="changeTabActive('Alipay')">
+          支付宝
+        </div>
+        <div class="WeChatpay" pointer :class="{'active': tabActive === 'WeChatpay'}" @click="changeTabActive('WeChatpay')">
+          微信
+        </div>
+      </div>
+      <div class="donate-box_img">
+        <div class="AlipayImg" v-if="tabActive === 'Alipay'">
+          <img src="/medias/zfb.png" alt="支付宝打赏" />
+        </div> 
+        <div class="WeChatpayImg" v-if="tabActive === 'WeChatpay'">
+          <img src="/medias/wx.png" alt="微信打赏" />
+        </div>
+      </div>
+    </div>
+  </transition>
+</div>
+
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDonate',
+    data: {
+      visible: false,
+      tabActive: 'Alipay',
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        // function getScroll() {
+        //   return {
+        //     left: window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0,
+        //     top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+        //   };
+        // }
+        this.top = $(document).scrollTop() // or getScroll().top
+        // console.log('aa', $('.main-content'));
+        body.style.cssText = 'overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      },
+      changeTabActive(name) {
+        this.tabActive = name;
+      }
+    },
+    created() {}
+  })
+</script>
+    
+
+    <!-- 分享 -->
+    
+      <!-- https://github.com/overtrue/share.js -->
+<!-- 文章详情页的分享 -->
+<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+
+<script src="/js/shareJs/social-share.min.js"></script>
+</script>
+
+<style>
+  .social-share {
+    margin: 20px 0;
+  }
+</style>
+
+
+    
+    
+    <!-- 评论 -->
+    <!-- 评论 -->
+
+  <div id="myComment">
+    
+  </div>
+
+
+  </div>
+
+  <!-- 目录 -->
+  <!-- 文章详情页右侧目录 -->
+
+  <div class="toc-aside">
+    <div class="toc-main">
+      <div class="toc-aside-title">
+        <i class="fa fa-list-ul" aria-hidden="true"></i><span>本文目录</span>
+        
+          <div class="toc-open-close">本文目录</div>
+        
+      </div>
+      <div class="toc-content">
+        <div class="toc"></div>
+      </div>
+    </div>
+  </div>
+  <!-- js在scripts目录下的的toc.ejs里面 -->
+  
+
+  <script>
+    function openBtnClickFn () {
+      let openOrCloseBtn = $('.toc-aside .toc-aside-title .toc-open-close');
+      let open = eval('' || 'true');
+      openOrCloseBtn.click(function() {
+        if (open === true) {
+          $(".toc-aside").css({'width': 0, 'padding': 0});
+          $(".toc-content").css({'width': 0});
+          $(".toc-aside-title span, .toc-aside-title i").css({'display': 'none'});
+          $(".main-content").css({'width': '75%', 'margin': '10px auto'});
+          open = false;
+        } else {
+          $(".toc-aside").css({'width': '300px', 'padding': '0 10px'});
+          $(".toc-content").css({'width': '300px'});
+          $(".toc-aside-title span, .toc-aside-title i").css({'display': 'inline-block'});
+          $(".main-content").css({'width': '65%', 'margin-right': '10px', 'margin-left': 'calc(35% - 350px)'});
+          open = true;
+        }
+      });
+    };
+    openBtnClickFn();
+    document.addEventListener('pjax:complete', function () {
+      openBtnClickFn();
+    })
+  </script>
+
+
+  
+
+  <!-- 图片放大 Wrap images with fancybox support -->
+  <script src="/js/wrapImage.js"></script>
+</div>
+
+<!-- 文章详情页背景图 -->
+<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;" :style="{'background-color': bgColor ? bgColor : 'transparent'}">
+    <transition-group tag="ul" :name="names">
+        <li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
+            <img :src="image" class="bg-swiper-img">
+        </li>
+    </transition-group>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#appBgSwiper',
+        data: {
+            names: '' || 'fade' || 'fade', // translate-fade fade
+            mark: 0,
+            img: [],
+            bgColor: '',
+            time: null
+        },
+        methods: {   //添加方法
+            change(i, m) {
+                if (i > m) {
+                    // this.names = 'fade';
+                } else if (i < m) {
+                    // this.names = 'fade';
+                } else {
+                    return;
+                }
+                this.mark = i;
+            },
+            prev() {
+                // this.names = 'fade';
+                this.mark--;
+                if (this.mark === -1) {
+                    this.mark = 3;
+                    return
+                }
+            },
+            next() {
+                // this.names = 'fade';
+                this.mark++;
+                if (this.mark === this.img.length) {
+                    this.mark = 0;
+                    return
+                }
+            },
+            autoPlay() {
+                // this.names = 'fade';
+                this.mark++;
+                if (this.mark === this.img.length) {
+                    this.mark = 0;
+                    return
+                }
+            },
+            play() {
+                let bgImgDelay = '' || '180000'
+                let delay = parseInt(bgImgDelay) || 180000;
+                this.time = setInterval(this.autoPlay, delay);
+            },
+            enter() {
+                clearInterval(this.time);
+            },
+            leave() {
+                this.play();
+            }
+        },
+        created() {
+            this.play()
+        },
+        beforeDestroy() {
+            clearInterval(this.time);
+        },
+        mounted() {
+            let prop = ''|| '';
+            let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://') 
+            if (isImg) {
+                let img = prop.split(',');
+                let configRoot = '/'
+                let arrImg = [];
+                img.forEach(el => {
+                    var Expression=/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+			        var objExp = new RegExp(Expression);
+
+                    if(objExp.test(el)) {
+                        // http or https
+                        arrImg.push(el);
+                    } else {
+                        // 非http or https开头
+                        // 本地文件
+                        let firstStr = el.charAt(0);
+                        if (firstStr == '/') {
+                            el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
+                        }
+                        el = configRoot + el;
+                        arrImg.push(el);
+                    }
+                })
+                this.img = arrImg;
+            } else {
+                this.bgColor = prop;
+            }
+        }
+    })
+</script>
+
+<style>
+    .bg-swiper-box {
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    .bg-swiper-img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+</style>
 
     </main>
 
