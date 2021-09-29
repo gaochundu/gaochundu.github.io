@@ -11,7 +11,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>标签 | GIS技术部门</title>
+  <title>安装 zerotier-one | GIS技术部门</title>
 
   
     
@@ -528,178 +528,490 @@
     <!-- 内容区域 -->
     <main class="main" id="pjax-container" style="margin-top: 0;">
       
-<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"></div>
-<div class="bg-light-floor-tags" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -3;"></div>
-
-<div class="lazyload tags-header" data-original="https://tva1.sinaimg.cn/large/002BTEObgy1gt8ju3ijufj61jk111dvn02.jpg">
-    <div class="tags-header-title">
-        tags
-    </div>
-    <div class="tags-header-desc">
+ <!-- prismjs 代码高亮 -->
+ 
     
-        <span class="title" id="tags-header-desc"></span>
-        <script>
-  function typedFn() {
-    const el = '#tags-header-desc';
-    const type = 'tag';
-    let desc = '愿你如风，被人温柔以待'
-    var typed = new Typed(el, {
-      strings: [desc],
-      startDelay: 100,
-      typeSpeed: 80,
-      loop: true,
-      backSpeed: 30,
-      showCursor: true
-    });
-  }
-  typedFn();
+    <link href="/js/prism/prism-line-numbers.css" rel="stylesheet">
+    
+        <link href="/js/prism/prism.min.css" rel="stylesheet">
+    
+
+    <style>
+        pre[class*="language-"] {
+            overflow-y: hidden;
+        }
+        .line-numbers .line-numbers-rows {
+            border: none;
+        }
+    </style>
+  
+
+
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
+
+<!-- 文章详情页顶部图片和标题 -->
+
+
+
+
+<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="/medias/7.jpg" style="background-repeat: no-repeat; background-size: cover; 
+  background-position: center center;position: relative;">
+  <div class="post-detail-header-mask"></div>
+  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
+  
+  <div class="post-detail-header_info-box">
+    <div class="title-box">
+      <span class="title">
+        安装 zerotier-one
+      </span>
+    </div>
+    
+    
+      
+        <span class="post-detail-header_date">
+          <i class="fa fa-calendar"></i> 发表于：2021-09-29 |
+        </span>
+      
+
+      
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> 分类：
+          
+            <a href="/categories/NAS/" class="post-detail-header_category">
+              NAS
+            </a>
+          
+            <a href="/categories/NAS/zerotier-one/" class="post-detail-header_category">
+              zerotier-one
+            </a>
+          
+            <a href="/categories/NAS/zerotier-one/moon/" class="post-detail-header_category">
+              moon
+            </a>
+          
+        </span>
+      
+
+      
+    
+  </div>
+  
+  
+    <script src="/js/bubble/bubble.js"></script>
+  
+</div>
+
+
+
+<div class="row justify-position">
+  <div class="main-content">
+    <article class="post post-detail">
+      
+      <div class="post-content">
+        <h1 id="Zerotier-Moon搭建教程"><a href="#Zerotier-Moon搭建教程" class="headerlink" title="Zerotier Moon搭建教程"></a>Zerotier Moon搭建教程</h1><p>ps：Zerotier是一款内网互联的工具，可以使用他自己的服务器，但是使用可能会有些不稳定(我没测试过)，所以为了稳妥起见，我们还是搭建一个自己的吧。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>直接按照步骤复制粘贴即可</p>
+<h2 id="安装-zerotier-one"><a href="#安装-zerotier-one" class="headerlink" title="安装 zerotier-one"></a>安装 zerotier-one</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">curl -s https:&#x2F;&#x2F;install.zerotier.com | sudo bash<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="云服务器加入虚拟网络"><a href="#云服务器加入虚拟网络" class="headerlink" title="云服务器加入虚拟网络"></a>云服务器加入虚拟网络</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">zerotier-cli join xxxxxxxx<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="配置Moon"><a href="#配置Moon" class="headerlink" title="配置Moon"></a>配置Moon</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">cd &#x2F;var&#x2F;lib&#x2F;zerotier-one<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="生成-moon-json-配置文件"><a href="#生成-moon-json-配置文件" class="headerlink" title="生成 moon.json 配置文件"></a>生成 moon.json 配置文件</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">zerotier-idtool initmoon identity.public &gt;&gt; moon.json<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="编辑-moon-json-配置文件"><a href="#编辑-moon-json-配置文件" class="headerlink" title="编辑 moon.json 配置文件"></a>编辑 moon.json 配置文件</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">vim moon.json<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+<p>修改(这里一定要带””还有端口一定要用/</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">&quot;stableEndpoints&quot;: [&quot;你服务器公网ip&#x2F;9993&quot;]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+
+
+<h2 id="生成-moon-文件"><a href="#生成-moon-文件" class="headerlink" title="生成 .moon 文件"></a>生成 .moon 文件</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">zerotier-idtool genmoon moon.json<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<h2 id="配置-Moon"><a href="#配置-Moon" class="headerlink" title="配置 Moon"></a>配置 Moon</h2><blockquote>
+<p><strong>.moon 配置文件的名一般为10个前导零+本机的节点ID</strong></p>
+</blockquote>
+<h3 id="1、移动文件"><a href="#1、移动文件" class="headerlink" title="1、移动文件"></a>1、移动文件</h3><p>将生成的 000000xxxxxxxxxx.moon 移动到 <code>moons.d</code> 目录</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">mkdir moons.d
+mv 000000xxxxxxxxxx.moon moons.d<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="2、命令行两次的外网的节点ID-moon文件名称的去掉0"><a href="#2、命令行两次的外网的节点ID-moon文件名称的去掉0" class="headerlink" title="2、命令行两次的外网的节点ID(.moon文件名称的去掉0)"></a>2、命令行两次的外网的节点ID(.moon文件名称的去掉0)</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">zerotier-cli orbit xxxxx[本机的节点ID] xxxxxx[本机的节点ID]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+
+<h2 id="重启-zerotier-one-服务"><a href="#重启-zerotier-one-服务" class="headerlink" title="重启 zerotier-one 服务"></a>重启 zerotier-one 服务</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">systemctl restart zerotier-one<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h1 id="检查是否添加成功"><a href="#检查是否添加成功" class="headerlink" title="检查是否添加成功"></a>检查是否添加成功</h1><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">zerotier-cli listpeers<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>如果显示的的列表里面有外网的IP,则添加成功</strong></p>
+
+      </div>
+      <div class="post-tags-categories">
+        
+        <div class="tags">
+          
+            <a href="/tags/NAS/" class="">
+              NAS
+            </a>
+          
+        </div>
+        
+      </div>
+      
+        <div class="copyright">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+    <strong>作者:  </strong>Giser</a>
+    </li>
+    <li class="post-copyright-link">
+    <strong>文章链接:  </strong>
+    <a href="/2021/09/29/Zerotier Moon搭建教程/" target="_blank" title="安装 zerotier-one">https://gaochundu.github.io/2021/09/29/Zerotier Moon搭建教程/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明:   </strong>
+      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+      许可协议。转载请注明出处!
+    </li>
+  </ul>
+<div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      <!-- 文章详情页的上一页和下一页 -->
+<div class="post-nav">
+
+
+
+  
+  <div class="post-nav-prev post-nav-item">
+    <div class="post-nav-img lazyload" data-original="/medias/5.jpg" style="background-size: cover; 
+      background-position: center center;">
+    </div>
+    <a href="/2021/09/29/%E5%8C%BA%E5%88%ABclientX%E3%80%81offsetX%E3%80%81screenX%E3%80%81pageX/" class="post-nav-link">
+      <div class="title">
+        <i class="fa fa-angle-left"></i> 上一篇:
+        <div class="title-text">区别了 clientX、offsetX、screenX、pageX等</div>
+      </div>
+      
+      <!-- <div class="content">
+        区别了 clientX、offsetX、screenX、pageX等
+
+
+      </div> -->
+    </a>
+  </div>
+
+
+
+  
+  <div class="post-nav-next post-nav-item">
+    <div class="post-nav-img lazyload" data-original="/medias/8.jpg" style="background-size: cover; 
+      background-position: center center;">
+    </div>
+    <a href="/2021/09/14/cesium%E6%B3%9B%E5%85%89%E5%BB%BA%E7%AD%91/" class="post-nav-link">
+      <div class="title">
+        下一篇: <i class="fa fa-angle-right"></i>
+        <div class="title-text">cesium 建筑泛光动效</div>
+      </div>
+      <!-- <div class="content">
+        指定3dtilesfunction func_1() &#123;
+        // 找到需要光环效果的3dtile
+      </div> -->
+    </a>
+  </div>
+
+</div>
+
+    
+    
+
+    <!-- 打赏 -->
+    
+      <div id="appDonate" class="post-donate">
+  <div id="donate_board" class="donate_bar center" ref="donate">
+    <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏" @click="showDialogDrawer()"></a>
+  </div>
+  <transition name="fade">
+    <div 
+      class="donate-box-mask"
+      v-cloak 
+      v-if="visible"
+      @click="cancelDialogDrawer()"
+    >
+    </div>
+  </transition>
+  <transition name="bounce">
+    <div class="donate-box" v-cloak v-if="visible">
+      <div class="donate-box_close">
+        <i class="fa fa-times" aria-hidden="true" @click="cancelDialogDrawer" pointer></i>
+      </div>
+      <div class="donate-box_title">
+        <h4>
+          你的赏识是我前进的动力
+        </h4>
+      </div>
+      <div class="donate-box_tab">
+        <div class="Alipay" pointer :class="{'active': tabActive === 'Alipay'}" @click="changeTabActive('Alipay')">
+          支付宝
+        </div>
+        <div class="WeChatpay" pointer :class="{'active': tabActive === 'WeChatpay'}" @click="changeTabActive('WeChatpay')">
+          微信
+        </div>
+      </div>
+      <div class="donate-box_img">
+        <div class="AlipayImg" v-if="tabActive === 'Alipay'">
+          <img src="/medias/zfb.png" alt="支付宝打赏" />
+        </div> 
+        <div class="WeChatpayImg" v-if="tabActive === 'WeChatpay'">
+          <img src="/medias/wx.png" alt="微信打赏" />
+        </div>
+      </div>
+    </div>
+  </transition>
+</div>
+
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDonate',
+    data: {
+      visible: false,
+      tabActive: 'Alipay',
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        // function getScroll() {
+        //   return {
+        //     left: window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0,
+        //     top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+        //   };
+        // }
+        this.top = $(document).scrollTop() // or getScroll().top
+        // console.log('aa', $('.main-content'));
+        body.style.cssText = 'overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      },
+      changeTabActive(name) {
+        this.tabActive = name;
+      }
+    },
+    created() {}
+  })
 </script>
     
-    </div>
-    <div class="mask-box"></div>
-</div>
+
+    <!-- 分享 -->
+    
+      <!-- https://github.com/overtrue/share.js -->
+<!-- 文章详情页的分享 -->
+<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+
+<script src="/js/shareJs/social-share.min.js"></script>
+</script>
+
+<style>
+  .social-share {
+    margin: 20px 0;
+  }
+</style>
 
 
-<div id="tags" class="container">
-    <div class="card">
-        <div class="card-content">
-            <div class="tag-title center-align">
-                <i class="fa fa-tags"></i>&nbsp;&nbsp;文章标签
-            </div>
-            <div class="tag-chips">
-                
-                
-                <a href="/tags/tomcat/" title="tomcat: 1">
-                    <span class="tag-content"
-                        title="tomcat" style="background-color: #F9E79F;">tomcat
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E8%B7%A8%E5%9F%9F/" title="跨域: 1">
-                    <span class="tag-content"
-                        title="跨域" style="background-color: #85C1E9;">跨域
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/NAS/" title="NAS: 1">
-                    <span class="tag-content"
-                        title="NAS" style="background-color: #F8F9F9;">NAS
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Cesium/" title="Cesium: 4">
-                    <span class="tag-content"
-                        title="Cesium" style="background-color: #A3E4D7;">Cesium
-                        <span class="tag-length">4</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/gis/" title="gis: 4">
-                    <span class="tag-content"
-                        title="gis" style="background-color: #FEF9E7;">gis
-                        <span class="tag-length">4</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/git/" title="git: 1">
-                    <span class="tag-content"
-                        title="git" style="background-color: #F8F9F9;">git
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/github/" title="github: 1">
-                    <span class="tag-content"
-                        title="github" style="background-color: #F5EEF8;">github
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/gitee/" title="gitee: 1">
-                    <span class="tag-content"
-                        title="gitee" style="background-color: #E8F8F5;">gitee
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/java/" title="java: 1">
-                    <span class="tag-content"
-                        title="java" style="background-color: #A3E4D7;">java
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E6%8A%BD%E7%A8%80/" title="抽稀: 1">
-                    <span class="tag-content"
-                        title="抽稀" style="background-color: #F8F9F9;">抽稀
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/vscode/" title="vscode: 1">
-                    <span class="tag-content"
-                        title="vscode" style="background-color: #F9E79F;">vscode
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E6%8F%92%E4%BB%B6%E5%90%8C%E6%AD%A5/" title="插件同步: 1">
-                    <span class="tag-content"
-                        title="插件同步" style="background-color: #F9E79F;">插件同步
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" title="树莓派: 1">
-                    <span class="tag-content"
-                        title="树莓派" style="background-color: #FFF;">树莓派
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E7%B3%BB%E7%BB%9F/" title="系统: 1">
-                    <span class="tag-content"
-                        title="系统" style="background-color: #D5F5E3;">系统
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/GLSL/" title="GLSL: 1">
-                    <span class="tag-content"
-                        title="GLSL" style="background-color: #A3E4D7;">GLSL
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/CSS/" title="CSS: 1">
-                    <span class="tag-content"
-                        title="CSS" style="background-color: #D5F5E3;">CSS
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-            </div>
-        </div>
+    
+    
+    <!-- 评论 -->
+    <!-- 评论 -->
+
+  <div id="myComment">
+    
+  </div>
+
+
+  </div>
+
+  <!-- 目录 -->
+  <!-- 文章详情页右侧目录 -->
+
+  <div class="toc-aside">
+    <div class="toc-main">
+      <div class="toc-aside-title">
+        <i class="fa fa-list-ul" aria-hidden="true"></i><span>本文目录</span>
+        
+          <div class="toc-open-close">本文目录</div>
+        
+      </div>
+      <div class="toc-content">
+        <div class="toc"></div>
+      </div>
     </div>
+  </div>
+  <!-- js在scripts目录下的的toc.ejs里面 -->
+  
+
+  <script>
+    function openBtnClickFn () {
+      let openOrCloseBtn = $('.toc-aside .toc-aside-title .toc-open-close');
+      let open = eval('' || 'true');
+      openOrCloseBtn.click(function() {
+        if (open === true) {
+          $(".toc-aside").css({'width': 0, 'padding': 0});
+          $(".toc-content").css({'width': 0});
+          $(".toc-aside-title span, .toc-aside-title i").css({'display': 'none'});
+          $(".main-content").css({'width': '75%', 'margin': '10px auto'});
+          open = false;
+        } else {
+          $(".toc-aside").css({'width': '300px', 'padding': '0 10px'});
+          $(".toc-content").css({'width': '300px'});
+          $(".toc-aside-title span, .toc-aside-title i").css({'display': 'inline-block'});
+          $(".main-content").css({'width': '65%', 'margin-right': '10px', 'margin-left': 'calc(35% - 350px)'});
+          open = true;
+        }
+      });
+    };
+    openBtnClickFn();
+    document.addEventListener('pjax:complete', function () {
+      openBtnClickFn();
+    })
+  </script>
+
+
+  
+
+  <!-- 图片放大 Wrap images with fancybox support -->
+  <script src="/js/wrapImage.js"></script>
 </div>
+
+<!-- 文章详情页背景图 -->
+<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;" :style="{'background-color': bgColor ? bgColor : 'transparent'}">
+    <transition-group tag="ul" :name="names">
+        <li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
+            <img :src="image" class="bg-swiper-img">
+        </li>
+    </transition-group>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#appBgSwiper',
+        data: {
+            names: '' || 'fade' || 'fade', // translate-fade fade
+            mark: 0,
+            img: [],
+            bgColor: '',
+            time: null
+        },
+        methods: {   //添加方法
+            change(i, m) {
+                if (i > m) {
+                    // this.names = 'fade';
+                } else if (i < m) {
+                    // this.names = 'fade';
+                } else {
+                    return;
+                }
+                this.mark = i;
+            },
+            prev() {
+                // this.names = 'fade';
+                this.mark--;
+                if (this.mark === -1) {
+                    this.mark = 3;
+                    return
+                }
+            },
+            next() {
+                // this.names = 'fade';
+                this.mark++;
+                if (this.mark === this.img.length) {
+                    this.mark = 0;
+                    return
+                }
+            },
+            autoPlay() {
+                // this.names = 'fade';
+                this.mark++;
+                if (this.mark === this.img.length) {
+                    this.mark = 0;
+                    return
+                }
+            },
+            play() {
+                let bgImgDelay = '' || '180000'
+                let delay = parseInt(bgImgDelay) || 180000;
+                this.time = setInterval(this.autoPlay, delay);
+            },
+            enter() {
+                clearInterval(this.time);
+            },
+            leave() {
+                this.play();
+            }
+        },
+        created() {
+            this.play()
+        },
+        beforeDestroy() {
+            clearInterval(this.time);
+        },
+        mounted() {
+            let prop = ''|| '';
+            let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://') 
+            if (isImg) {
+                let img = prop.split(',');
+                let configRoot = '/'
+                let arrImg = [];
+                img.forEach(el => {
+                    var Expression=/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+			        var objExp = new RegExp(Expression);
+
+                    if(objExp.test(el)) {
+                        // http or https
+                        arrImg.push(el);
+                    } else {
+                        // 非http or https开头
+                        // 本地文件
+                        let firstStr = el.charAt(0);
+                        if (firstStr == '/') {
+                            el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
+                        }
+                        el = configRoot + el;
+                        arrImg.push(el);
+                    }
+                })
+                this.img = arrImg;
+            } else {
+                this.bgColor = prop;
+            }
+        }
+    })
+</script>
+
+<style>
+    .bg-swiper-box {
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    .bg-swiper-img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+</style>
 
     </main>
 
