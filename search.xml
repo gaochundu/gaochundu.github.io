@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>坐标系命名规范</title>
+      <link href="/2021/10/12/%E5%9D%90%E6%A0%87%E7%B3%BB%E7%9A%84%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/"/>
+      <url>/2021/10/12/%E5%9D%90%E6%A0%87%E7%B3%BB%E7%9A%84%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/</url>
+      
+        <content type="html"><![CDATA[<h1 id="坐标系命名规范"><a href="#坐标系命名规范" class="headerlink" title="坐标系命名规范"></a>坐标系命名规范</h1><table><thead><tr><th>名称</th><th>描述</th></tr></thead><tbody><tr><td>Beijing 1954 3 Degree GK CM 75E.prj</td><td>表示三度分带法的北京54坐标系，中央经线在东75度的分带坐标，横坐标前不加带号；</td></tr><tr><td>Beijing 1954 3 Degree GK Zone 25.prj</td><td>表示三度分带法的北京54坐标系，中央经线在东75度的分带坐标，横坐标前加带号；</td></tr><tr><td>Beijing 1954 GK Zone 13.prj</td><td>表示六度分带法的北京54坐标系，分带号为13，横坐标前加带号；</td></tr><tr><td>Beijing 1954 GK Zone 13N.prj</td><td>表示六度分带法的北京54坐标系，分带号为13，横坐标前不加带号</td></tr></tbody></table><p><strong>x: 6 ~~ 8 位数</strong><br><strong>y: 7 位数</strong></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> GIS </category>
+          
+          <category> webgis </category>
+          
+          <category> 坐标 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> GIS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>区别了 clientX、offsetX、screenX、pageX等</title>
       <link href="/2021/09/29/%E5%8C%BA%E5%88%ABclientX%E3%80%81offsetX%E3%80%81screenX%E3%80%81pageX/"/>
       <url>/2021/09/29/%E5%8C%BA%E5%88%ABclientX%E3%80%81offsetX%E3%80%81screenX%E3%80%81pageX/</url>
