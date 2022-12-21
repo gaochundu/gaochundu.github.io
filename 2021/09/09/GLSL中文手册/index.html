@@ -1,0 +1,3129 @@
+<!DOCTYPE html>
+<html>
+  <!-- meta/link... -->
+  
+
+
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+  <title>GLSL中文手册 | GIS技术部门</title>
+
+  <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
+  <link href="https://unpkg.com/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="/js/swiper/swiper@5.4.1.min.css" rel="stylesheet">
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/animate.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+    
+<link rel="stylesheet" href="/js/fancybox/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="/js/shareJs/share.min.css">
+
+  
+  <style>
+        @media (max-width: 992px) {
+            #waifu {
+                display: none;
+            }
+        }
+    </style>
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+    
+        <script src="/js/valine/index.js"></script>
+    
+
+    <!-- import link -->
+    
+        
+            
+        
+            
+        
+    
+    <!-- import script -->
+    
+        
+            
+        
+            
+        
+    
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  
+  <!-- 依赖于jquery和vue -->
+  
+    
+<script src="https://unpkg.com/jquery@3.5.1/dist/jquery.min.js"></script>
+
+  
+
+  
+    
+<script src="https://unpkg.com/vue@2.6.11/dist/vue.min.js"></script>
+
+  
+  
+  <body>
+    <!-- 预加载动画 -->
+    <!-- 页面预加载动画 -->
+
+<div id='loader'>
+  <link rel="stylesheet" href="/js/loaded/index.css" >
+  <div class="loading-left-bg"></div>
+  <div class="loading-right-bg"></div>
+  <div class="spinner-box">
+    <div class="configure-border-1">
+      <div class="configure-core"></div>
+    </div>
+    <div class="configure-border-2">
+      <div class="configure-core"></div>
+    </div>
+    <div class="loading-word">加载中...</div>
+  </div>
+</div>
+
+<script>
+  var endLoading = function () {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loader').classList.add("loading");
+  }
+  window.addEventListener('DOMContentLoaded',endLoading);
+  
+</script>
+
+    
+    <!-- 判断是否为暗黑风格 -->
+    <!-- 判断是否为黑夜模式 -->
+<script>
+  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+
+  if (isDark) {
+    $(document.body).addClass('darkModel');
+  }
+</script>
+
+    <!-- 需要在上面加载的js -->
+    <script>
+  function loadScript(src, cb) {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var HEAD = document.getElementsByTagName("head")[0] || document.documentElement;
+        var script = document.createElement("script");
+        script.setAttribute("type", "text/javascript");
+        if (cb) {
+          if (JSON.stringify(cb)) {
+            for (let p in cb) {
+              if (p == "onload") {
+                script[p] = () => {
+                  cb[p]()
+                  resolve()
+                }
+              } else {
+                script[p] = cb[p]
+                script.onload = resolve
+              }
+            }
+          } else {
+            script.onload = () => {
+              cb()
+              resolve()
+            };
+          }
+        } else {
+          script.onload = resolve
+        }
+        script.setAttribute("src", src);
+        HEAD.appendChild(script);
+      });
+    });
+  }
+
+  //https://github.com/filamentgroup/loadCSS
+  var loadCSS = function (src) {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var link = document.createElement('link');
+        link.rel = "stylesheet";
+        link.href = src;
+        link.onload = resolve;
+        document.getElementsByTagName("head")[0].appendChild(link);
+      });
+    });
+  };
+
+</script> 
+
+<!-- 轮播图所需要的js -->
+<script src="/js/swiper/swiper.min.js"></script>
+<script src="/js/swiper/vue-awesome-swiper.js"></script>
+<script src="/js/swiper/swiper.animate1.0.3.min.js"></script>
+
+<script type="text/javascript">
+  Vue.use(window.VueAwesomeSwiper)
+</script>
+
+
+  <script src="/js/vue-typed-js/index.js"></script>
+
+
+<!-- 首页的公告滚动插件的js需要重新加载 -->
+<script src="/js/vue-seamless-scroll/index.js"></script>
+
+<!-- 打字机效果js -->
+<script src="https://unpkg.com/typed.js@2.0.11"></script>
+
+
+    <div id="safearea">
+      <main class="main" id="pjax-container">
+        <!-- 头部导航 -->
+        
+<header class="header   " 
+  id="navHeader"
+  style="position: fixed;
+  left: 0; top: 0; z-index: 10;width: 100%;"
+>
+  <div class="header-content">
+    <div class="bars">
+      <div id="appDrawer" class="sidebar-image">
+  <div class="drawer-box-icon">
+    <i class="fas fa-bars" aria-hidden="true" @click="showDialogDrawer"></i>
+  </div>
+  
+  <transition name="fade">
+    <div class="drawer-box_mask" v-cloak style="display: none;" v-show="visible" @click.self="cancelDialogDrawer">
+    </div>
+  </transition>
+  <div class="drawer-box" :class="{'active': visible}">
+    <div class="drawer-box-head bg-color">
+      <img class="drawer-box-head_logo lazyload placeholder" src="/medias/gis-logo.jpg" class="lazyload placeholder" data-srcset="/medias/gis-logo.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+      <h3 class="drawer-box-head_title">GIS技术部门</h3>
+      <h5 class="drawer-box-head_desc"></h5>
+    </div>
+    
+    <div class="drawer-box-content">
+      <ul class="drawer-box-content_menu">
+        
+          
+            <li class="drawer-box-content_item" style="position: relative;">
+              
+                <a href="/" class="drawer-menu-item-link">
+                  
+                    <i class="fas fa-home" aria-hidden="true"></i>
+                  
+                  <span class="name">首页</span>
+                </a>
+              
+            </li>
+          
+            <li class="drawer-box-content_item" style="position: relative;">
+              
+                <a href="/archives" class="drawer-menu-item-link">
+                  
+                    <i class="fas fa-archive" aria-hidden="true"></i>
+                  
+                  <span class="name">归档</span>
+                </a>
+              
+            </li>
+          
+            <li class="drawer-box-content_item" style="position: relative;">
+              
+                <a href="/tags" class="drawer-menu-item-link">
+                  
+                    <i class="fas fa-tags" aria-hidden="true"></i>
+                  
+                  <span class="name">标签</span>
+                </a>
+              
+            </li>
+          
+            <li class="drawer-box-content_item" style="position: relative;">
+              
+                <a href="/categories" class="drawer-menu-item-link">
+                  
+                    <i class="fas fa-bookmark" aria-hidden="true"></i>
+                  
+                  <span class="name">分类</span>
+                </a>
+              
+            </li>
+          
+            <li class="drawer-box-content_item" style="position: relative;">
+              
+                <a href="/about" class="drawer-menu-item-link">
+                  
+                    <i class="fas fa-user" aria-hidden="true"></i>
+                  
+                  <span class="name">关于</span>
+                </a>
+              
+            </li>
+          
+        
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDrawer',
+    data: {
+      visible: false,
+      top: 0,
+      openArr: [],
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      isOpen(index) {
+        if (this.openArr.includes(index)) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+      openOrCloseMenu(curIndex) {
+        const index = this.openArr.indexOf(curIndex);
+        if (index !== -1) {
+          this.openArr.splice(index, 1);
+        } else {
+          this.openArr.push(curIndex);
+        }
+      },
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'width: 100%; height: 100%;overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      }
+    },
+    created() {}
+  })
+</script>
+
+    </div>
+    <div class="blog-title" id="author-avatar">
+      
+        <div class="avatar">
+          <img src="/medias/gis-logo.jpg" class="lazyload placeholder" data-srcset="/medias/gis-logo.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+        </div>
+      
+      <a href="/" class="logo">GIS技术部门</a>
+    </div>
+    <nav class="navbar">
+      <ul class="menu">
+        
+          
+            <li class="menu-item" style="position: relative;">
+              
+                <a href="/" class="menu-item-link" title="首页">
+                  
+                    <i class="fas fa-home" aria-hidden="true"></i>
+                  
+                  <span class="name">首页</span>
+                </a>
+              
+            </li>
+          
+            <li class="menu-item" style="position: relative;">
+              
+                <a href="/archives" class="menu-item-link" title="归档">
+                  
+                    <i class="fas fa-archive" aria-hidden="true"></i>
+                  
+                  <span class="name">归档</span>
+                </a>
+              
+            </li>
+          
+            <li class="menu-item" style="position: relative;">
+              
+                <a href="/tags" class="menu-item-link" title="标签">
+                  
+                    <i class="fas fa-tags" aria-hidden="true"></i>
+                  
+                  <span class="name">标签</span>
+                </a>
+              
+            </li>
+          
+            <li class="menu-item" style="position: relative;">
+              
+                <a href="/categories" class="menu-item-link" title="分类">
+                  
+                    <i class="fas fa-bookmark" aria-hidden="true"></i>
+                  
+                  <span class="name">分类</span>
+                </a>
+              
+            </li>
+          
+            <li class="menu-item" style="position: relative;">
+              
+                <a href="/about" class="menu-item-link" title="关于">
+                  
+                    <i class="fas fa-user" aria-hidden="true"></i>
+                  
+                  <span class="name">关于</span>
+                </a>
+              
+            </li>
+          
+        
+      </ul>
+      
+      
+        <div id="appSearch">
+  <div class="search"  @click="showDialog()"><i class="fas fa-search" aria-hidden="true"></i></div>
+  <transition name="fade">
+    <div class="message-box_wrapper" style="display: none;" v-cloak v-show="dialogVisible" @click.self="cancelDialogVisible()">
+      <div class="message-box animated bounceInDown">
+        <h2>
+          <span>
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <span class="title">本地搜索</span>
+          </span>
+          <i class="fas fa-times close" pointer style="float:right;" aria-hidden="true" @click.self="cancelDialogVisible()"></i>
+        </h2>
+        <form class="site-search-form">
+          <input type="text"
+            placeholder="请输入关键字"
+            id="local-search-input" 
+            @click="getSearchFile()"
+            class="st-search-input"
+            v-model="searchInput"
+          />
+        </form>
+        <div class="result-wrapper">
+          <div id="local-search-result" class="local-search-result-cls"></div>
+        </div>
+      </div>
+    </div>
+  </transition>
+</div>
+<script src="/js/local_search.js"></script>
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appSearch',
+    data: {
+      dialogVisible: false,
+      searchInput: '',
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+      window.addEventListener('pjax:complete', () => {
+        this.cancelDialogVisible();
+      })
+    },
+    methods: {
+      showDialog() {
+        this.dialogVisible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'overflow: hidden;';
+      },
+      getSearchFile() {
+        if (!this.searchInput) {
+          getSearchFile("/search.xml");
+        }
+      },
+      cancelDialogVisible() {
+        this.dialogVisible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      },
+    },
+    created() {}
+  })
+</script>
+<!-- 解决刷新页面闪烁问题，可以在元素上添加display: none, 或者用vue.extend方法，详情：https://blog.csdn.net/qq_31393401/article/details/81017912 -->
+<!-- 下面是搜索基本写法 -->
+<!-- <script type="text/javascript" id="local.search.active">
+  var inputArea = document.querySelector("#local-search-input");
+  inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
+  inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
+</script> -->
+
+      
+
+    </nav>
+  </div>
+  
+  
+    <div id="he-plugin-simple"></div>
+    <script>
+      WIDGET = {
+        CONFIG: {
+          "modules": "012",
+          "background": 5,
+          "tmpColor": "4A4A4A",
+          "tmpSize": 16,
+          "cityColor": "4A4A4A",
+          "citySize": 16,
+          "aqiSize": 16,
+          "weatherIconSize": 24,
+          "alertIconSize": 18,
+          "padding": "10px 10px 10px 10px",
+          "shadow": "1",
+          "language": "auto",
+          "borderRadius": 5,
+          "fixed": "false",
+          "vertical": "middle",
+          "horizontal": "center",
+          "key": "2784dd3fcb1e4f0f9a9b579bf69641f2"
+        }
+      }
+    </script>
+    <script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script> 
+    
+</header>
+        <!-- 内容区域 -->
+        
+ <!-- prismjs 代码高亮 -->
+ 
+    
+    <link href="/js/prism/prism-line-numbers.css" rel="stylesheet">
+    
+        <link href="/js/prism/prism.min.css" rel="stylesheet">
+    
+
+    <style>
+        pre[class*="language-"] {
+            overflow-y: hidden;
+        }
+        .line-numbers .line-numbers-rows {
+            border: none;
+        }
+    </style>
+  
+
+
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
+
+
+  <!-- 文章详情页顶部图片和标题 -->
+
+
+
+
+<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
+  background-position: center center;position: relative;background-image:url('/medias/5.jpg')">
+  <div class="post-detail-header-mask"></div>
+  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
+  
+  <div class="post-detail-header_info-box">
+    <div class="title-box">
+      <span class="title">
+        GLSL中文手册
+      </span>
+    </div>
+    
+    
+      
+        <span class="post-detail-header_date">
+          <i class="fas fa-calendar"></i> 发表于：2021-09-09 |
+        </span>
+      
+
+      
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> 分类：
+          
+            <a href="/categories/%E5%89%8D%E7%AB%AF/" class="post-detail-header_category">
+              前端
+            </a>
+          
+            <a href="/categories/%E5%89%8D%E7%AB%AF/GLSL/" class="post-detail-header_category">
+              GLSL
+            </a>
+          
+            <a href="/categories/%E5%89%8D%E7%AB%AF/GLSL/webGIS/" class="post-detail-header_category">
+              webGIS
+            </a>
+          
+        </span>
+      
+
+      
+    
+  </div>
+  
+  
+    <script src="/js/bubble/bubble.js"></script>
+  
+</div>
+
+
+
+
+
+<div class="post-detail-content post-row" 
+  style="padding-top: 0px;">
+  <div class="main-content">
+    <article class="post post-detail">
+      <div class="post-content">
+        <h1 id="GLSL-中文手册"><a href="#GLSL-中文手册" class="headerlink" title="GLSL 中文手册"></a>GLSL 中文手册</h1><h3 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型:"></a>基本类型:</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>void</strong></td>
+<td>空类型,即不返回任何值</td>
+</tr>
+<tr>
+<td><strong>bool</strong></td>
+<td>布尔类型 true,false</td>
+</tr>
+<tr>
+<td><strong>int</strong></td>
+<td>带符号的整数 signed integer</td>
+</tr>
+<tr>
+<td><strong>float</strong></td>
+<td>带符号的浮点数 floating scalar</td>
+</tr>
+<tr>
+<td><strong>vec2, vec3, vec4</strong></td>
+<td>n维浮点数向量 n-component floating point vector</td>
+</tr>
+<tr>
+<td><strong>bvec2, bvec3, bvec4</strong></td>
+<td>n维布尔向量 Boolean vector</td>
+</tr>
+<tr>
+<td><strong>ivec2, ivec3, ivec4</strong></td>
+<td>n维整数向量 signed integer vector</td>
+</tr>
+<tr>
+<td><strong>mat2, mat3, mat4</strong></td>
+<td>2x2, 3x3, 4x4 浮点数矩阵 float matrix</td>
+</tr>
+<tr>
+<td><strong>sampler2D</strong></td>
+<td>2D纹理 a 2D texture</td>
+</tr>
+<tr>
+<td><strong>samplerCube</strong></td>
+<td>盒纹理 cube mapped texture</td>
+</tr>
+</tbody></table>
+<h3 id="基本结构和数组"><a href="#基本结构和数组" class="headerlink" title="基本结构和数组:"></a>基本结构和数组:</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>结构</td>
+<td>struct type-name{} 类似c语言中的 结构体</td>
+</tr>
+<tr>
+<td>数组</td>
+<td>float foo[3] glsl只支持1维数组,数组可以是结构体的成员</td>
+</tr>
+</tbody></table>
+<h3 id="向量的分量访问"><a href="#向量的分量访问" class="headerlink" title="向量的分量访问:"></a>向量的分量访问:</h3><p>glsl中的向量(vec2,vec3,vec4)往往有特殊的含义,比如可能代表了一个空间坐标(x,y,z,w),或者代表了一个颜色(r,g,b,a),再或者代表一个纹理坐标(s,t,p,q)<br>所以glsl提供了一些更人性化的分量访问方式.</p>
+<p><code>vector.xyzw</code>  其中xyzw 可以任意组合</p>
+<p><code>vector.rgba</code>  其中rgba 可以任意组合</p>
+<p><code>vector.stpq</code>  其中rgba 可以任意组合</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">vec4 v<span class="token operator">=</span><span class="token function">vec4</span><span class="token punctuation">(</span><span class="token number">1.0</span><span class="token punctuation">,</span><span class="token number">2.0</span><span class="token punctuation">,</span><span class="token number">3.0</span><span class="token punctuation">,</span><span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">float</span> x <span class="token operator">=</span> v<span class="token punctuation">.</span>x<span class="token punctuation">;</span> <span class="token comment">//1.0</span>
+<span class="token keyword">float</span> x1 <span class="token operator">=</span> v<span class="token punctuation">.</span>r<span class="token punctuation">;</span> <span class="token comment">//1.0</span>
+<span class="token keyword">float</span> x2 <span class="token operator">=</span> v<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">//1.0</span>
+
+vec3 xyz <span class="token operator">=</span> v<span class="token punctuation">.</span>xyz<span class="token punctuation">;</span> <span class="token comment">//vec3(1.0,2.0,3.0)</span>
+vec3 xyz1 <span class="token operator">=</span> <span class="token function">vec</span><span class="token punctuation">(</span>v<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>v<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>v<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//vec3(1.0,2.0,3.0)</span>
+vec3 rgb <span class="token operator">=</span> v<span class="token punctuation">.</span>rgb<span class="token punctuation">;</span> <span class="token comment">//vec3(1.0,2.0,3.0)</span>
+
+vec2 xyzw <span class="token operator">=</span> v<span class="token punctuation">.</span>xyzw<span class="token punctuation">;</span> <span class="token comment">//vec4(1.0,2.0,3.0,1.0);</span>
+vec2 rgba <span class="token operator">=</span> v<span class="token punctuation">.</span>rgba<span class="token punctuation">;</span> <span class="token comment">//vec4(1.0,2.0,3.0,1.0);</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="运算符"><a href="#运算符" class="headerlink" title="运算符:"></a>运算符:</h3><table>
+<thead>
+<tr>
+<th>优先级(越小越高)</th>
+<th>运算符</th>
+<th>说明</th>
+<th>结合性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td><strong>()</strong></td>
+<td>聚组:a*(b+c)</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>[] () . ++ –</strong></td>
+<td>数组下标__[]<strong>,方法参数__fun(arg1,arg2,arg3)</strong>,属性访问__a.b__,自增/减后缀__a++  a–__</td>
+<td>L - R</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>++ – + - !</strong></td>
+<td>自增/减前缀__++a  –a__,正负号(一般正号不写)<strong>a ,-a</strong>,取反__!false__</td>
+<td>R - L</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>* /</strong></td>
+<td>乘除数学运算</td>
+<td>L - R</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>+ -</strong></td>
+<td>加减数学运算</td>
+<td>L - R</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>&lt; &gt; &lt;= &gt;=</strong></td>
+<td>关系运算符</td>
+<td>L - R</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>== !=</strong></td>
+<td>相等性运算符</td>
+<td>L - R</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>&amp;&amp;</strong></td>
+<td>逻辑与</td>
+<td>L - R</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>^^</strong></td>
+<td>逻辑排他或(用处基本等于!=)</td>
+<td>L - R</td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>||</strong></td>
+<td>逻辑或</td>
+<td>L - R</td>
+</tr>
+<tr>
+<td>15</td>
+<td><strong>? :</strong></td>
+<td>三目运算符</td>
+<td>L - R</td>
+</tr>
+<tr>
+<td>16</td>
+<td><strong>= += -= *= /=</strong></td>
+<td>赋值与复合赋值</td>
+<td>L - R</td>
+</tr>
+<tr>
+<td>17</td>
+<td><strong>,</strong></td>
+<td>顺序分配运算</td>
+<td>L - R</td>
+</tr>
+</tbody></table>
+<p><em>ps 左值与右值:</em></p>
+<pre><code>左值:表示一个储存位置,可以是变量,也可以是表达式,但表达式最后的结果必须是一个储存位置.
+
+右值:表示一个值, 可以是一个变量或者表达式再或者纯粹的值.
+
+操作符的优先级：决定含有多个操作符的表达式的求值顺序，每个操作的优先级不同.
+
+操作符的结合性：决定相同优先级的操作符是从左到右计算，还是从右到左计算。
+</code></pre>
+<h3 id="基础类型间的运算"><a href="#基础类型间的运算" class="headerlink" title="基础类型间的运算:"></a>基础类型间的运算:</h3><p>glsl中,没有隐式类型转换,原则上glsl要求任何表达式左右两侧(l-value),(r-value)的类型必须一致 也就是说以下表达式都是错误的:</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> a <span class="token operator">=</span><span class="token number">2.0</span><span class="token punctuation">;</span> <span class="token comment">//错误,r-value为float 而 lvalue 为int.</span>
+<span class="token keyword">int</span> a <span class="token operator">=</span><span class="token number">1.0</span><span class="token operator">+</span><span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token keyword">float</span> a <span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token keyword">float</span> a <span class="token operator">=</span><span class="token number">2.0</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword">bool</span> a <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> 
+vec3 a <span class="token operator">=</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token number">3.0</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>下面来分别说说可能遇到的情况:</strong></p>
+<p><strong>1.<code>float</code> 与 <code>int</code>:</strong></p>
+<p> float与float , int与int之间是可以直接运算的,但float与int不行.它们需要进行一次显示转换.即要么把float转成int: <strong>int(1.0)</strong><br>,要么把int转成float: <strong>float(1)</strong> ,以下表达式都是正确的:</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">int a<span class="token operator">=</span><span class="token function">int</span><span class="token punctuation">(</span><span class="token number">2.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+float a<span class="token operator">=</span> <span class="token function">float</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+int a<span class="token operator">=</span><span class="token function">int</span><span class="token punctuation">(</span><span class="token number">2.0</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">2</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+float a<span class="token operator">=</span> <span class="token function">float</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">6.0</span><span class="token operator">+</span><span class="token number">2.3</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>2.<code>float</code>  与 <code>vec(向量)</code> <code>mat(矩阵)</code>:</strong></p>
+<p>vec,mat这些类型其实是由float复合而成的,当它们与float运算时,其实就是在每一个分量上分别与float进行运算,这就是所谓的<code>逐分量</code>运算.glsl里<br>大部分涉及vec,mat的运算都是<code>逐分量</code>运算,但也并不全是. 下文中就会讲到特例.</p>
+<p><code>逐分量</code>运算是线性的,这就是说 vec 与 float 的运算结果是还是 vec.</p>
+<p>int 与 vec,mat之间是不可运算的, 因为vec和mat中的每一个分量都是 float 类型的. 无法与int进行逐分量计算.</p>
+<p>下面枚举了几种 float 与 vec,mat 运算的情况</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">vec3 a <span class="token operator">=</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token number">3.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+mat3 m <span class="token operator">=</span> <span class="token function">mat3</span><span class="token punctuation">(</span><span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">float</span> s <span class="token operator">=</span> <span class="token number">10.0</span><span class="token punctuation">;</span>
+vec3 b <span class="token operator">=</span> s <span class="token operator">*</span> a<span class="token punctuation">;</span> <span class="token comment">// vec3(10.0, 20.0, 30.0)</span>
+vec3 c <span class="token operator">=</span> a <span class="token operator">*</span> s<span class="token punctuation">;</span> <span class="token comment">// vec3(10.0, 20.0, 30.0)</span>
+mat3 m2 <span class="token operator">=</span> s <span class="token operator">*</span> m<span class="token punctuation">;</span> <span class="token comment">// = mat3(10.0)</span>
+mat3 m3 <span class="token operator">=</span> m <span class="token operator">*</span> s<span class="token punctuation">;</span> <span class="token comment">// = mat3(10.0)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>3. <code>vec(向量)</code> 与 <code>vec(向量)</code>:</strong></p>
+<p>两向量间的运算首先要保证操作数的阶数都相同.否则不能计算.例如: vec3*vec2 vec4+vec3 等等都是不行的.</p>
+<p>它们的计算方式是两操作数在同位置上的分量分别进行运算,其本质还是逐分量进行的,这和上面所说的float类型的<br>逐分量运算可能有一点点差异,相同的是 vec 与 vec 运算结果还是 vec, 且阶数不变.</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">vec3 a <span class="token operator">=</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token number">3.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+vec3 b <span class="token operator">=</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token number">0.1</span><span class="token punctuation">,</span> <span class="token number">0.2</span><span class="token punctuation">,</span> <span class="token number">0.3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+vec3 c <span class="token operator">=</span> a <span class="token operator">+</span> b<span class="token punctuation">;</span> <span class="token comment">// = vec3(1.1, 2.2, 3.3)</span>
+vec3 d <span class="token operator">=</span> a <span class="token operator">*</span> b<span class="token punctuation">;</span> <span class="token comment">// = vec3(0.1, 0.4, 0.9)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="http://wshxbqq-wshxbqq.stor.sinaapp.com/2016-08-08_16-15-35_329___2.png" class="lazyload placeholder" data-srcset="http://wshxbqq-wshxbqq.stor.sinaapp.com/2016-08-08_16-15-35_329___2.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp"></p>
+<p><strong>3. <code>vec(向量)</code> 与 <code>mat(矩阵)</code>:</strong></p>
+<p>要保证操作数的阶数相同,且vec与mat间只存在乘法运算.</p>
+<p>它们的计算方式和线性代数中的矩阵乘法相同,不是逐分量运算.</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">vec2 v <span class="token operator">=</span> <span class="token function">vec2</span><span class="token punctuation">(</span><span class="token number">10.</span><span class="token punctuation">,</span> <span class="token number">20.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+mat2 m <span class="token operator">=</span> <span class="token function">mat2</span><span class="token punctuation">(</span><span class="token number">1.</span><span class="token punctuation">,</span> <span class="token number">2.</span><span class="token punctuation">,</span>  <span class="token number">3.</span><span class="token punctuation">,</span> <span class="token number">4.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+vec2 w <span class="token operator">=</span> m <span class="token operator">*</span> v<span class="token punctuation">;</span> <span class="token comment">// = vec2(1. * 10. + 3. * 20., 2. * 10. + 4. * 20.)</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+vec2 v <span class="token operator">=</span> <span class="token function">vec2</span><span class="token punctuation">(</span><span class="token number">10.</span><span class="token punctuation">,</span> <span class="token number">20.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+mat2 m <span class="token operator">=</span> <span class="token function">mat2</span><span class="token punctuation">(</span><span class="token number">1.</span><span class="token punctuation">,</span> <span class="token number">2.</span><span class="token punctuation">,</span>  <span class="token number">3.</span><span class="token punctuation">,</span> <span class="token number">4.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+vec2 w <span class="token operator">=</span> v <span class="token operator">*</span> m<span class="token punctuation">;</span> <span class="token comment">// = vec2(1. * 10. + 2. * 20., 3. * 10. + 4. * 20.)</span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>向量与矩阵的乘法规则如下:</p>
+<p><img src="http://wshxbqq-wshxbqq.stor.sinaapp.com/2016-08-08_16-15-36_966___3.png" class="lazyload placeholder" data-srcset="http://wshxbqq-wshxbqq.stor.sinaapp.com/2016-08-08_16-15-36_966___3.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp"></p>
+<p><img src="http://wshxbqq-wshxbqq.stor.sinaapp.com/2016-08-08_16-15-36_284___4.png" class="lazyload placeholder" data-srcset="http://wshxbqq-wshxbqq.stor.sinaapp.com/2016-08-08_16-15-36_284___4.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp"></p>
+<p><strong>4. <code>mat(矩阵)</code> 与 <code>mat(矩阵)</code>:</strong></p>
+<p>要保证操作数的阶数相同.</p>
+<p>在mat与mat的运算中, 除了乘法是线性代数中的矩阵乘法外.其余的运算任为逐分量运算.简单说就是只有乘法是特殊的,其余都和vec与vec运算类似.</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">mat2 a <span class="token operator">=</span> <span class="token function">mat2</span><span class="token punctuation">(</span><span class="token number">1.</span><span class="token punctuation">,</span> <span class="token number">2.</span><span class="token punctuation">,</span>  <span class="token number">3.</span><span class="token punctuation">,</span> <span class="token number">4.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+mat2 b <span class="token operator">=</span> <span class="token function">mat2</span><span class="token punctuation">(</span><span class="token number">10.</span><span class="token punctuation">,</span> <span class="token number">20.</span><span class="token punctuation">,</span>  <span class="token number">30.</span><span class="token punctuation">,</span> <span class="token number">40.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+mat2 c <span class="token operator">=</span> a <span class="token operator">*</span> b<span class="token punctuation">;</span> <span class="token comment">//mat2(1.*10.+3.*20.,2.*10.+4.*20.,1.* 30.+3.*40.,2.* 30.+4.*40.);</span>
+
+mat2 d <span class="token operator">=</span> a<span class="token operator">+</span>b<span class="token punctuation">;</span><span class="token comment">//mat2(1.+10.,2.+20.,3.+30.,4.+40);</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>矩阵乘法规则如下:</p>
+<p><img src="http://wshxbqq-wshxbqq.stor.sinaapp.com/2016-08-08_16-15-36_985___5.png" class="lazyload placeholder" data-srcset="http://wshxbqq-wshxbqq.stor.sinaapp.com/2016-08-08_16-15-36_985___5.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp"></p>
+<h3 id="变量限定符"><a href="#变量限定符" class="headerlink" title="变量限定符:"></a>变量限定符:</h3><table>
+<thead>
+<tr>
+<th>修饰符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>none</strong></td>
+<td>(默认的可省略)本地变量,可读可写,函数的输入参数既是这种类型</td>
+</tr>
+<tr>
+<td><strong>const</strong></td>
+<td>声明变量或函数的参数为只读类型</td>
+</tr>
+<tr>
+<td><strong>attribute</strong></td>
+<td>只能存在于vertex shader中,一般用于保存顶点或法线数据,它可以在数据缓冲区中读取数据</td>
+</tr>
+<tr>
+<td><strong>uniform</strong></td>
+<td>在运行时shader无法改变uniform变量, 一般用来放置程序传递给shader的变换矩阵，材质，光照参数等等.</td>
+</tr>
+<tr>
+<td><strong>varying</strong></td>
+<td>主要负责在vertex 和 fragment 之间传递变量</td>
+</tr>
+</tbody></table>
+<p><strong>const</strong>:</p>
+<p>和C语言类似,被const限定符修饰的变量初始化后不可变,除了局部变量,函数参数也可以使用const修饰符.但要注意的是结构变量可以用const修饰,<br>但结构中的字段不行.</p>
+<p>const变量必须在声明时就初始化 <code>const vec3 v3 = vec3(0.,0.,0.)</code></p>
+<p>局部变量只能使用const限定符.</p>
+<p>函数参数只能使用const限定符.</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">struct</span> <span class="token class-name">light</span> <span class="token punctuation">&#123;</span>
+        vec4 color<span class="token punctuation">;</span>
+        vec3 pos<span class="token punctuation">;</span>
+        <span class="token comment">//const vec3 pos1; //结构中的字段不可用const修饰会报错.</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> light lgt <span class="token operator">=</span> <span class="token function">light</span><span class="token punctuation">(</span><span class="token function">vec4</span><span class="token punctuation">(</span><span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//结构变量可以用const修饰</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>attribute</strong>:</p>
+<p>attribute变量是<code>全局</code>且<code>只读</code>的,它只能在vertex shader中使用,只能与浮点数,向量或矩阵变量组合,<br>一般attribute变量用来放置程序传递来的模型顶点,法线,颜色,纹理等数据它可以访问数据缓冲区<br>(还记得__gl.vertexAttribPointer__这个函数吧)</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">attribute vec4 a_Position<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>uniform</strong>:</p>
+<p>uniform变量是<code>全局</code>且<code>只读</code>的,在整个shader执行完毕前其值不会改变,他可以和任意基本类型变量组合,<br>一般我们使用uniform变量来放置外部程序传递来的环境数据(如点光源位置,模型的变换矩阵等等)<br>这些数据在运行中显然是不需要被改变的.</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">uniform vec4 lightPosition<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>varying</strong>:</p>
+<p>varying类型变量是 vertex shader 与 fragment shader 之间的信使,一般我们在 vertex shader 中修改它然后在fragment shader使用它,但不能在<br>fragment shader中修改它.</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//顶点着色器</span>
+varying vec4 v_Color<span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span> 
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    v_Color <span class="token operator">=</span> <span class="token function">vec4</span><span class="token punctuation">(</span><span class="token number">1.</span><span class="token punctuation">,</span><span class="token number">1.</span><span class="token punctuation">,</span><span class="token number">1.</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">//片元着色器</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+varying vec4 v_Color<span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  gl_FragColor <span class="token operator">=</span> v_Color<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>要注意全局变量限制符只能为 const、attribute、uniform和varying中的一个.不可复合.</p>
+<h3 id="函数参数限定符"><a href="#函数参数限定符" class="headerlink" title="函数参数限定符:"></a>函数参数限定符:</h3><p>函数的参数默认是以拷贝的形式传递的,也就是值传递,任何传递给函数参数的变量,其值都会被复制一份,然后再交给函数内部进行处理.<br>我们可以为参数添加限定符来达到传递引用的目的,glsl中提供的参数限定符如下:</p>
+<table>
+<thead>
+<tr>
+<th>限定符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&lt; none: default &gt;</td>
+<td>默认使用 in 限定符</td>
+</tr>
+<tr>
+<td>in</td>
+<td>复制到函数中在函数中可读写</td>
+</tr>
+<tr>
+<td>out</td>
+<td>返回时从函数中复制出来</td>
+</tr>
+<tr>
+<td>inout</td>
+<td>复制到函数中并在返回时复制出来</td>
+</tr>
+</tbody></table>
+<p><code>in</code> 是函数参数的默认限定符,最终真正传入函数形参的其实是实参的一份拷贝.在函数中,修改in修饰的形参不会影响到实参变量本身.</p>
+<p><code>out</code> 它的作用是向函数外部传递新值,out模式下传递进来的参数是write-only的(可写不可读).就像是一个”坑位”,坑位中的值需要函数给他赋予.<br>在函数中,修改out修饰的形参会影响到实参本身.</p>
+<p><code>inout</code> inout下,形参可以被理解为是一个带值的”坑位”,及可读也可写,在函数中,修改inout修饰的形参会影响到实参本身.</p>
+<h3 id="glsl的函数"><a href="#glsl的函数" class="headerlink" title="glsl的函数:"></a>glsl的函数:</h3><p>glsl允许在程序的最外部声明函数.函数不能嵌套,不能递归调用,且必须声明返回值类型(无返回值时声明为void) 在其他方面glsl函数与c函数非常类似.</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">vec4 <span class="token function">getPosition</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span> 
+    vec4 v4 <span class="token operator">=</span> <span class="token function">vec4</span><span class="token punctuation">(</span><span class="token number">0.</span><span class="token punctuation">,</span><span class="token number">0.</span><span class="token punctuation">,</span><span class="token number">0.</span><span class="token punctuation">,</span><span class="token number">1.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> v4<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">doubleSize</span><span class="token punctuation">(</span>inout <span class="token keyword">float</span> size<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    size<span class="token operator">=</span> size<span class="token operator">*</span><span class="token number">2.0</span>  <span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">float</span> psize<span class="token operator">=</span> <span class="token number">10.0</span><span class="token punctuation">;</span>
+    <span class="token function">doubleSize</span><span class="token punctuation">(</span>psize<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    gl_Position <span class="token operator">=</span> <span class="token function">getPosition</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    gl_PointSize <span class="token operator">=</span> psize<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数:"></a>构造函数:</h3><p>glsl中变量可以在声明的时候初始化,<code>float pSize = 10.0</code> 也可以先声明然后等需要的时候在进行赋值.</p>
+<p>聚合类型对象如(向量,矩阵,数组,结构) 需要使用其构造函数来进行初始化. <code>vec4 color = vec4(0.0, 1.0, 0.0, 1.0);</code></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//一般类型</span>
+<span class="token keyword">float</span> pSize <span class="token operator">=</span> <span class="token number">10.0</span><span class="token punctuation">;</span>
+<span class="token keyword">float</span> pSize1<span class="token punctuation">;</span>
+pSize1<span class="token operator">=</span><span class="token number">10.0</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+<span class="token comment">//复合类型</span>
+vec4 color <span class="token operator">=</span> <span class="token function">vec4</span><span class="token punctuation">(</span><span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+vec4 color1<span class="token punctuation">;</span>
+color1 <span class="token operator">=</span><span class="token function">vec4</span><span class="token punctuation">(</span><span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+<span class="token comment">//结构</span>
+<span class="token keyword">struct</span> <span class="token class-name">light</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">float</span> intensity<span class="token punctuation">;</span>
+    vec3 position<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+light lightVar <span class="token operator">=</span> <span class="token function">light</span><span class="token punctuation">(</span><span class="token number">3.0</span><span class="token punctuation">,</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token number">3.0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">//数组</span>
+<span class="token keyword">const</span> <span class="token keyword">float</span> c<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">float</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token number">5.0</span><span class="token punctuation">,</span> <span class="token number">7.2</span><span class="token punctuation">,</span> <span class="token number">1.1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换:"></a>类型转换:</h3><p>glsl可以使用构造函数进行显式类型转换,各值如下:</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">bool</span> t<span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token keyword">bool</span> f <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token keyword">int</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//true转换为1或1.0</span>
+<span class="token keyword">int</span> a1 <span class="token operator">=</span> <span class="token keyword">int</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//false转换为0或0.0</span>
+
+<span class="token keyword">float</span> b <span class="token operator">=</span> <span class="token keyword">float</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">float</span> b1 <span class="token operator">=</span> <span class="token keyword">float</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">bool</span> c <span class="token operator">=</span> <span class="token keyword">bool</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//0或0.0转换为false</span>
+<span class="token keyword">bool</span> c1 <span class="token operator">=</span> <span class="token keyword">bool</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//非0转换为true</span>
+
+<span class="token keyword">bool</span> d <span class="token operator">=</span> <span class="token keyword">bool</span><span class="token punctuation">(</span><span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">bool</span> d1 <span class="token operator">=</span> <span class="token keyword">bool</span><span class="token punctuation">(</span><span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="精度限定"><a href="#精度限定" class="headerlink" title="精度限定:"></a>精度限定:</h3><p>glsl在进行光栅化着色的时候,会产生大量的浮点数运算,这些运算可能是当前设备所不能承受的,所以glsl提供了3种浮点数精度,我们可以根据不同的设备来使用合适的精度.</p>
+<p>在变量前面加上 <code>highp</code> <code>mediump</code> <code>lowp</code> 即可完成对该变量的精度声明.</p>
+<pre class="line-numbers language-none"><code class="language-none">lowp float color;
+varying mediump vec2 Coord;
+lowp ivec2 foo(lowp mat3);
+highp mat4 m;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>我们一般在片元着色器(fragment shader)最开始的地方加上 <code>precision mediump float;</code> 便设定了默认的精度.这样所有没有显式表明精度的变量<br>都会按照设定好的默认精度来处理.</p>
+<p><strong>如何确定精度:</strong></p>
+<p>变量的精度首先是由精度限定符决定的,如果没有精度限定符,则要寻找其右侧表达式中,已经确定精度的变量,一旦找到,那么整个表达式都将在该精度下运行.如果找到多个,<br>则选择精度较高的那种,如果一个都找不到,则使用默认或更大的精度类型.</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">uniform highp <span class="token keyword">float</span> h1<span class="token punctuation">;</span>
+highp <span class="token keyword">float</span> h2 <span class="token operator">=</span> <span class="token number">2.3</span> <span class="token operator">*</span> <span class="token number">4.7</span><span class="token punctuation">;</span> <span class="token comment">//运算过程和结果都 是高精度</span>
+mediump <span class="token keyword">float</span> m<span class="token punctuation">;</span>
+m <span class="token operator">=</span> <span class="token number">3.7</span> <span class="token operator">*</span> h1 <span class="token operator">*</span> h2<span class="token punctuation">;</span> <span class="token comment">//运算过程 是高精度</span>
+h2 <span class="token operator">=</span> m <span class="token operator">*</span> h1<span class="token punctuation">;</span> <span class="token comment">//运算过程 是高精度</span>
+m <span class="token operator">=</span> h2 – h1<span class="token punctuation">;</span> <span class="token comment">//运算过程 是高精度</span>
+h2 <span class="token operator">=</span> m <span class="token operator">+</span> m<span class="token punctuation">;</span> <span class="token comment">//运算过程和结果都 是中等精度</span>
+<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span>highp <span class="token keyword">float</span> p<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 形参 p 是高精度</span>
+<span class="token function">f</span><span class="token punctuation">(</span><span class="token number">3.3</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//传入的 3.3是高精度</span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<p><strong>invariant关键字:</strong></p>
+<p>由于shader在编译时会进行一些内部优化,可能会导致同样的运算在不同shader里结果不一定精确相等.这会引起一些问题,尤其是vertx shader向fragmeng shader传值的时候.<br>所以我们需要使用<code>invariant</code> 关键字来显式要求计算结果必须精确一致. 当然我们也可使用 <code>#pragma STDGL invariant(all)</code>来命令所有输出变量必须精确一致,<br>但这样会限制编译器优化程度,降低性能.</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">pragma</span> <span class="token expression">STDGL <span class="token function">invariant</span><span class="token punctuation">(</span>all<span class="token punctuation">)</span> </span><span class="token comment">//所有输出变量为 invariant</span></span>
+invariant varying texCoord<span class="token punctuation">;</span> <span class="token comment">//varying在传递数据的时候声明为invariant</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+<p><strong>限定符的顺序:</strong></p>
+<p>当需要用到多个限定符的时候要遵循以下顺序:</p>
+<p>1.在一般变量中: invariant &gt; storage &gt; precision</p>
+<p>2.在参数中: storage &gt; parameter &gt; precision</p>
+<p>我们来举例说明:</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">invariant varying lowp <span class="token keyword">float</span> color<span class="token punctuation">;</span> <span class="token comment">// invariant > storage > precision</span>
+
+<span class="token keyword">void</span> <span class="token function">doubleSize</span><span class="token punctuation">(</span><span class="token keyword">const</span> in lowp <span class="token keyword">float</span> s<span class="token punctuation">)</span><span class="token punctuation">&#123;</span> <span class="token comment">//storage > parameter > precision</span>
+    <span class="token keyword">float</span> s1<span class="token operator">=</span>s<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+<h3 id="预编译指令"><a href="#预编译指令" class="headerlink" title="预编译指令:"></a>预编译指令:</h3><p>以 # 开头的是预编译指令,常用的有:</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">undef</span> <span class="token expression"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">if</span> <span class="token expression"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifdef</span> <span class="token expression"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifndef</span> <span class="token expression"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">else</span></span></span></span></span></span></span></span></span></span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">elif</span> <span class="token expression"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span> <span class="token expression"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">error</span> <span class="token expression"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">pragma</span> <span class="token expression"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">extension</span> <span class="token expression"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">version</span> <span class="token expression"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">line</span></span></span></span></span></span></span></span></span></span></span></span></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>比如 <strong>#version 100</strong> 他的意思是规定当前shader使用 GLSL ES 1.00标准进行编译,如果使用这条预编译指令,则他必须出现在程序的最开始位置.</p>
+<p><strong>内置的宏:</strong></p>
+<p><code>__LINE__</code> : 当前源码中的行号. </p>
+<p><code>__VERSION__</code> : 一个整数,指示当前的glsl版本 比如 100  ps: 100 = v1.00</p>
+<p><code>GL_ES</code> : 如果当前是在 OPGL ES 环境中运行则 GL_ES 被设置成1,一般用来检查当前环境是不是 OPENGL ES.</p>
+<p><code>GL_FRAGMENT_PRECISION_HIGH</code> : 如果当前系统glsl的片元着色器支持高浮点精度,则设置为1.一般用于检查着色器精度.</p>
+<p>实例:</p>
+<p>1.如何通过判断系统环境,来选择合适的精度:</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifdef</span> <span class="token expression">GL_ES </span><span class="token comment">//</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifdef</span> <span class="token expression">GL_FRAGMENT_PRECISION_HIGH</span></span>
+precision highp <span class="token keyword">float</span><span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">else</span></span>
+precision mediump <span class="token keyword">float</span><span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>2.自定义宏:</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">NUM</span> <span class="token expression"><span class="token number">100</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">if</span> <span class="token expression">NUM<span class="token operator">==</span><span class="token number">100</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="内置的特殊变量"><a href="#内置的特殊变量" class="headerlink" title="内置的特殊变量"></a>内置的特殊变量</h3><p>glsl程序使用一些特殊的内置变量与硬件进行沟通.他们大致分成两种 一种是 <code>input</code>类型,他负责向硬件(渲染管线)发送数据.<br>另一种是<code>output</code>类型,负责向程序回传数据,以便编程时需要.</p>
+<p><strong>在 vertex Shader 中:</strong></p>
+<p>output 类型的内置变量:</p>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>说明</th>
+<th>单位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>highp vec4 <code>gl_Position</code>;</td>
+<td>gl_Position 放置顶点坐标信息</td>
+<td>vec4</td>
+</tr>
+<tr>
+<td>mediump float <code>gl_PointSize</code>;</td>
+<td>gl_PointSize 需要绘制点的大小,(只在gl.POINTS模式下有效)</td>
+<td>float</td>
+</tr>
+</tbody></table>
+<p><strong>在 fragment Shader 中:</strong></p>
+<p>input 类型的内置变量:</p>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>说明</th>
+<th>单位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>mediump vec4 <code>gl_FragCoord</code>;</td>
+<td>片元在framebuffer画面的相对位置</td>
+<td>vec4</td>
+</tr>
+<tr>
+<td>bool <code>gl_FrontFacing</code>;</td>
+<td>标志当前图元是不是正面图元的一部分</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>mediump vec2 <code>gl_PointCoord</code>;</td>
+<td>经过插值计算后的纹理坐标,点的范围是0.0到1.0</td>
+<td>vec2</td>
+</tr>
+</tbody></table>
+<p>output 类型的内置变量:</p>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>说明</th>
+<th>单位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>mediump vec4 <code>gl_FragColor</code>;</td>
+<td>设置当前片点的颜色</td>
+<td>vec4 RGBA color</td>
+</tr>
+<tr>
+<td>mediump vec4 <code>gl_FragData[n]</code></td>
+<td>设置当前片点的颜色,使用glDrawBuffers数据数组</td>
+<td>vec4 RGBA color</td>
+</tr>
+</tbody></table>
+<h3 id="内置的常量"><a href="#内置的常量" class="headerlink" title="内置的常量"></a>内置的常量</h3><p>glsl提供了一些内置的常量,用来说明当前系统的一些特性. 有时我们需要针对这些特性,对shader程序进行优化,让程序兼容度更好.</p>
+<p><strong>在 vertex Shader 中:</strong></p>
+<p>1.const mediump int <code>gl_MaxVertexAttribs</code>&gt;=8</p>
+<p>gl_MaxVertexAttribs 表示在vertex shader(顶点着色器)中可用的最大attributes数.这个值的大小取决于 OpenGL ES 在某设备上的具体实现,<br>不过最低不能小于 8 个.</p>
+<p>2.const mediump int <code>gl_MaxVertexUniformVectors</code> &gt;= 128</p>
+<p>gl_MaxVertexUniformVectors 表示在vertex shader(顶点着色器)中可用的最大uniform vectors数. 这个值的大小取决于 OpenGL ES 在某设备上的具体实现,<br>不过最低不能小于 128 个.</p>
+<p>3.const mediump int <code>gl_MaxVaryingVectors</code> &gt;= 8</p>
+<p>gl_MaxVaryingVectors 表示在vertex shader(顶点着色器)中可用的最大varying vectors数. 这个值的大小取决于 OpenGL ES 在某设备上的具体实现,<br>不过最低不能小于 8 个.</p>
+<p>4.const mediump int <code>gl_MaxVertexTextureImageUnits</code> &gt;= 0</p>
+<p>gl_MaxVaryingVectors 表示在vertex shader(顶点着色器)中可用的最大纹理单元数(贴图). 这个值的大小取决于 OpenGL ES 在某设备上的具体实现,<br>甚至可以一个都没有(无法获取顶点纹理)</p>
+<p>5.const mediump int <code>gl_MaxCombinedTextureImageUnits</code> &gt;= 8</p>
+<p>gl_MaxVaryingVectors 表示在 vertex Shader和fragment Shader总共最多支持多少个纹理单元. 这个值的大小取决于 OpenGL ES 在某设备上的具体实现,<br>不过最低不能小于 8 个.</p>
+<p><strong>在 fragment Shader 中:</strong></p>
+<p>1.const mediump int <code>gl_MaxTextureImageUnits</code> &gt;= 8</p>
+<p>gl_MaxVaryingVectors 表示在 fragment Shader(片元着色器)中能访问的最大纹理单元数,这个值的大小取决于 OpenGL ES 在某设备上的具体实现,<br>不过最低不能小于 8 个.</p>
+<p>2.const mediump int <code>gl_MaxFragmentUniformVectors</code> &gt;= 16</p>
+<p>gl_MaxFragmentUniformVectors 表示在 fragment Shader(片元着色器)中可用的最大uniform vectors数,这个值的大小取决于 OpenGL ES 在某设备上的具体实现,<br>不过最低不能小于 16 个.</p>
+<p>3.const mediump int <code>gl_MaxDrawBuffers</code> = 1</p>
+<p>gl_MaxDrawBuffers 表示可用的drawBuffers数,在OpenGL ES 2.0中这个值为1, 在将来的版本可能会有所变化.</p>
+<p>glsl中还有一种内置的uniform状态变量, <code>gl_DepthRange</code> 它用来表明全局深度范围.</p>
+<p>结构如下:</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">struct</span> <span class="token class-name">gl_DepthRangeParameters</span> <span class="token punctuation">&#123;</span>
+ highp <span class="token keyword">float</span> near<span class="token punctuation">;</span> <span class="token comment">// n</span>
+ highp <span class="token keyword">float</span> far<span class="token punctuation">;</span> <span class="token comment">// f</span>
+ highp <span class="token keyword">float</span> diff<span class="token punctuation">;</span> <span class="token comment">// f - n</span>
+ <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+ uniform gl_DepthRangeParameters gl_DepthRange<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>除了 gl_DepthRange 外的所有uniform状态常量都已在glsl 1.30 中<code>废弃</code>.</p>
+<h3 id="流控制"><a href="#流控制" class="headerlink" title="流控制"></a>流控制</h3><p>glsl的流控制和c语言非常相似,这里不必再做过多说明,唯一不同的是片段着色器中有一种特殊的控制流<code>discard</code>.<br>使用discard会退出片段着色器，不执行后面的片段着色操作。片段也不会写入帧缓冲区。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">for</span> <span class="token punctuation">(</span>l <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> l <span class="token operator">&lt;</span> numLights<span class="token punctuation">;</span> l<span class="token operator">++</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>lightExists<span class="token punctuation">[</span>l<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">continue</span><span class="token punctuation">;</span>
+    color <span class="token operator">+=</span> light<span class="token punctuation">[</span>l<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+<span class="token keyword">while</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> num<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    sum <span class="token operator">+=</span> color<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    i<span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+<span class="token keyword">do</span><span class="token punctuation">&#123;</span>
+    color <span class="token operator">+=</span> light<span class="token punctuation">[</span>lightNum<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    lightNum<span class="token operator">--</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token keyword">while</span> <span class="token punctuation">(</span>lightNum <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
+
+
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span>
+    discard<span class="token punctuation">;</span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h3 id="内置函数库"><a href="#内置函数库" class="headerlink" title="内置函数库"></a>内置函数库</h3><p>glsl提供了非常丰富的函数库,供我们使用,这些功能都是非常有用且会经常用到的. 这些函数按功能区分大改可以分成7类:</p>
+<p><strong>通用函数:</strong></p>
+<p>下文中的 类型 T可以是 float, vec2, vec3, vec4,且可以逐分量操作.</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T abs(T x)</td>
+<td>返回x的绝对值</td>
+</tr>
+<tr>
+<td>T sign(T x)</td>
+<td>比较x与0的值,大于,等于,小于 分别返回 1.0 ,0.0,-1.0</td>
+</tr>
+<tr>
+<td>T floor(T x)</td>
+<td>返回&lt;=x的最大整数</td>
+</tr>
+<tr>
+<td>T ceil(T x)</td>
+<td>返回&gt;=等于x的最小整数</td>
+</tr>
+<tr>
+<td>T fract(T x)</td>
+<td>获取x的小数部分</td>
+</tr>
+<tr>
+<td>T mod(T x, T y) <br/> T mod(T x, float y)</td>
+<td>取x,y的余数</td>
+</tr>
+<tr>
+<td>T min(T x, T y) <br/> T min(T x, float y)</td>
+<td>取x,y的最小值</td>
+</tr>
+<tr>
+<td>T max(T x, T y) <br/> T max(T x, float y)</td>
+<td>取x,y的最大值</td>
+</tr>
+<tr>
+<td>T clamp(T x, T minVal, T maxVal) <br/>T clamp(T x, float minVal,float maxVal)</td>
+<td>min(max(x, minVal), maxVal),返回值被限定在 minVal,maxVal之间</td>
+</tr>
+<tr>
+<td>T mix(T x, T y, T a) <br/>  T mix(T x, T y, float a)</td>
+<td>取x,y的线性混合,x*(1-a)+y*a</td>
+</tr>
+<tr>
+<td>T step(T edge, T x)  <br/> T step(float edge, T x)</td>
+<td>如果 x&lt;edge 返回 0.0 否则返回1.0</td>
+</tr>
+<tr>
+<td>T smoothstep(T edge0, T edge1, T x) <br/> T smoothstep(float edge0,float edge1, T x)</td>
+<td>如果x&lt;edge0 返回 0.0 如果x&gt;edge1返回1.0, 否则返回Hermite插值</td>
+</tr>
+</tbody></table>
+<p><strong>角度&amp;三角函数:</strong></p>
+<p>下文中的 类型 T可以是 float, vec2, vec3, vec4,且可以逐分量操作.</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T radians(T degrees)</td>
+<td>角度转弧度</td>
+</tr>
+<tr>
+<td>T degrees(T radians)</td>
+<td>弧度转角度</td>
+</tr>
+<tr>
+<td>T sin(T angle)</td>
+<td>正弦函数,角度是弧度</td>
+</tr>
+<tr>
+<td>T cos(T angle)</td>
+<td>余弦函数,角度是弧度</td>
+</tr>
+<tr>
+<td>T tan(T angle)</td>
+<td>正切函数,角度是弧度</td>
+</tr>
+<tr>
+<td>T asin(T x)</td>
+<td>反正弦函数,返回值是弧度</td>
+</tr>
+<tr>
+<td>T acos(T x)</td>
+<td>反余弦函数,返回值是弧度</td>
+</tr>
+<tr>
+<td>T atan(T y, T x)<br/>  T atan(T y_over_x)</td>
+<td>反正切函数,返回值是弧度</td>
+</tr>
+</tbody></table>
+<p><strong>指数函数:</strong></p>
+<p>下文中的 类型 T可以是 float, vec2, vec3, vec4,且可以逐分量操作.</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T pow(T x, T y)</td>
+<td>返回x的y次幂 x<sub>y</sub></td>
+</tr>
+<tr>
+<td>T exp(T x)</td>
+<td>返回x的自然指数幂 e<sub>x</sub></td>
+</tr>
+<tr>
+<td>T log(T x)</td>
+<td>返回x的自然对数 ln</td>
+</tr>
+<tr>
+<td>T exp2(T x)</td>
+<td>返回2的x次幂 2<sub>x</sub></td>
+</tr>
+<tr>
+<td>T log2(T x)</td>
+<td>返回2为底的对数 log2</td>
+</tr>
+<tr>
+<td>T sqrt(T x)</td>
+<td>开根号 √x</td>
+</tr>
+<tr>
+<td>T inversesqrt(T x)</td>
+<td>先开根号,在取倒数,就是 1/√x</td>
+</tr>
+</tbody></table>
+<p><strong>几何函数:</strong></p>
+<p>下文中的 类型 T可以是 float, vec2, vec3, vec4,且可以逐分量操作.</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>float length(T x)</td>
+<td>返回矢量x的长度</td>
+</tr>
+<tr>
+<td>float distance(T p0, T p1)</td>
+<td>返回p0  p1两点的距离</td>
+</tr>
+<tr>
+<td>float dot(T x, T y)</td>
+<td>返回x y的点积</td>
+</tr>
+<tr>
+<td>vec3 cross(vec3 x, vec3 y)</td>
+<td>返回x y的叉积</td>
+</tr>
+<tr>
+<td>T normalize(T x)</td>
+<td>对x进行归一化,保持向量方向不变但长度变为1</td>
+</tr>
+<tr>
+<td>T faceforward(T N, T I, T Nref)</td>
+<td>根据 矢量 N 与Nref 调整法向量</td>
+</tr>
+<tr>
+<td>T reflect(T I, T N)</td>
+<td>返回 I - 2 * dot(N,I) * N, 结果是入射矢量 I 关于法向量N的 镜面反射矢量</td>
+</tr>
+<tr>
+<td>T refract(T I, T N, float eta)</td>
+<td>返回入射矢量I关于法向量N的折射矢量,折射率为eta</td>
+</tr>
+</tbody></table>
+<p><strong>矩阵函数:</strong></p>
+<p>mat可以为任意类型矩阵.  </p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>mat matrixCompMult(mat x, mat y)</td>
+<td>将矩阵 x 和 y的元素逐分量相乘</td>
+</tr>
+</tbody></table>
+<p><strong>向量函数:</strong></p>
+<p>下文中的 类型 T可以是 vec2, vec3, vec4, 且可以逐分量操作.</p>
+<p>bvec指的是由bool类型组成的一个向量:</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">vec3 v3<span class="token operator">=</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token number">0.</span><span class="token punctuation">,</span><span class="token number">0.</span><span class="token punctuation">,</span><span class="token number">0.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+vec3 v3_1<span class="token operator">=</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token number">1.</span><span class="token punctuation">,</span><span class="token number">1.</span><span class="token punctuation">,</span><span class="token number">1.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+bvec3 aa<span class="token operator">=</span> <span class="token function">lessThan</span><span class="token punctuation">(</span>v3<span class="token punctuation">,</span>v3_1<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//bvec3(true,true,true)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bvec lessThan(T x, T y)</td>
+<td>逐分量比较x &lt; y,将结果写入bvec对应位置</td>
+</tr>
+<tr>
+<td>bvec lessThanEqual(T x, T y)</td>
+<td>逐分量比较 x &lt;= y,将结果写入bvec对应位置</td>
+</tr>
+<tr>
+<td>bvec  greaterThan(T x, T y)</td>
+<td>逐分量比较 x &gt; y,将结果写入bvec对应位置</td>
+</tr>
+<tr>
+<td>bvec greaterThanEqual(T x, T y)</td>
+<td>逐分量比较  x &gt;= y,将结果写入bvec对应位置</td>
+</tr>
+<tr>
+<td>bvec equal(T x, T y) <br/> bvec equal(bvec x, bvec y)</td>
+<td>逐分量比较 x == y,将结果写入bvec对应位置</td>
+</tr>
+<tr>
+<td>bvec notEqual(T x, T y) <br/> bvec notEqual(bvec x, bvec y)</td>
+<td>逐分量比较 x!= y,将结果写入bvec对应位置</td>
+</tr>
+<tr>
+<td>bool any(bvec x)</td>
+<td>如果x的任意一个分量是true,则结果为true</td>
+</tr>
+<tr>
+<td>bool all(bvec x)</td>
+<td>如果x的所有分量是true,则结果为true</td>
+</tr>
+<tr>
+<td>bvec not(bvec x)</td>
+<td>bool矢量的逐分量取反</td>
+</tr>
+</tbody></table>
+<p><strong>纹理查询函数:</strong></p>
+<p>图像纹理有两种 一种是平面2d纹理,另一种是盒纹理,针对不同的纹理类型有不同访问方法.</p>
+<p>纹理查询的最终目的是从sampler中提取指定坐标的颜色信息. 函数中带有Cube字样的是指 需要传入盒状纹理. 带有Proj字样的是指带投影的版本. </p>
+<p>以下函数只在vertex shader中可用:</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">vec4 <span class="token function">texture2DLod</span><span class="token punctuation">(</span>sampler2D sampler<span class="token punctuation">,</span> vec2 coord<span class="token punctuation">,</span> <span class="token keyword">float</span> lod<span class="token punctuation">)</span><span class="token punctuation">;</span>
+vec4 <span class="token function">texture2DProjLod</span><span class="token punctuation">(</span>sampler2D sampler<span class="token punctuation">,</span> vec3 coord<span class="token punctuation">,</span> <span class="token keyword">float</span> lod<span class="token punctuation">)</span><span class="token punctuation">;</span>
+vec4 <span class="token function">texture2DProjLod</span><span class="token punctuation">(</span>sampler2D sampler<span class="token punctuation">,</span> vec4 coord<span class="token punctuation">,</span> <span class="token keyword">float</span> lod<span class="token punctuation">)</span><span class="token punctuation">;</span>
+vec4 <span class="token function">textureCubeLod</span><span class="token punctuation">(</span>samplerCube sampler<span class="token punctuation">,</span> vec3 coord<span class="token punctuation">,</span> <span class="token keyword">float</span> lod<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<p>以下函数只在fragment shader中可用:</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">vec4 <span class="token function">texture2D</span><span class="token punctuation">(</span>sampler2D sampler<span class="token punctuation">,</span> vec2 coord<span class="token punctuation">,</span> <span class="token keyword">float</span> bias<span class="token punctuation">)</span><span class="token punctuation">;</span>
+vec4 <span class="token function">texture2DProj</span><span class="token punctuation">(</span>sampler2D sampler<span class="token punctuation">,</span> vec3 coord<span class="token punctuation">,</span> <span class="token keyword">float</span> bias<span class="token punctuation">)</span><span class="token punctuation">;</span>
+vec4 <span class="token function">texture2DProj</span><span class="token punctuation">(</span>sampler2D sampler<span class="token punctuation">,</span> vec4 coord<span class="token punctuation">,</span> <span class="token keyword">float</span> bias<span class="token punctuation">)</span><span class="token punctuation">;</span>
+vec4 <span class="token function">textureCube</span><span class="token punctuation">(</span>samplerCube sampler<span class="token punctuation">,</span> vec3 coord<span class="token punctuation">,</span> <span class="token keyword">float</span> bias<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在 vertex shader 与 fragment shader 中都可用:</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">vec4 <span class="token function">texture2D</span><span class="token punctuation">(</span>sampler2D sampler<span class="token punctuation">,</span> vec2 coord<span class="token punctuation">)</span><span class="token punctuation">;</span>
+vec4 <span class="token function">texture2DProj</span><span class="token punctuation">(</span>sampler2D sampler<span class="token punctuation">,</span> vec3 coord<span class="token punctuation">)</span><span class="token punctuation">;</span>
+vec4 <span class="token function">texture2DProj</span><span class="token punctuation">(</span>sampler2D sampler<span class="token punctuation">,</span> vec4 coord<span class="token punctuation">)</span><span class="token punctuation">;</span>
+vec4 <span class="token function">textureCube</span><span class="token punctuation">(</span>samplerCube sampler<span class="token punctuation">,</span> vec3 coord<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h3 id="官方的shader范例"><a href="#官方的shader范例" class="headerlink" title="官方的shader范例:"></a>官方的shader范例:</h3><p>下面的shader如果你可以一眼看懂,说明你已经对glsl语言基本掌握了.</p>
+<p><strong>Vertex Shader:</strong></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">uniform mat4 mvp_matrix<span class="token punctuation">;</span> <span class="token comment">//透视矩阵 * 视图矩阵 * 模型变换矩阵</span>
+uniform mat3 normal_matrix<span class="token punctuation">;</span> <span class="token comment">//法线变换矩阵(用于物体变换后法线跟着变换)</span>
+uniform vec3 ec_light_dir<span class="token punctuation">;</span> <span class="token comment">//光照方向</span>
+attribute vec4 a_vertex<span class="token punctuation">;</span> <span class="token comment">// 顶点坐标</span>
+attribute vec3 a_normal<span class="token punctuation">;</span> <span class="token comment">//顶点法线</span>
+attribute vec2 a_texcoord<span class="token punctuation">;</span> <span class="token comment">//纹理坐标</span>
+varying <span class="token keyword">float</span> v_diffuse<span class="token punctuation">;</span> <span class="token comment">//法线与入射光的夹角</span>
+varying vec2 v_texcoord<span class="token punctuation">;</span> <span class="token comment">//2d纹理坐标</span>
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+ <span class="token comment">//归一化法线</span>
+ vec3 ec_normal <span class="token operator">=</span> <span class="token function">normalize</span><span class="token punctuation">(</span>normal_matrix <span class="token operator">*</span> a_normal<span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token comment">//v_diffuse 是法线与光照的夹角.根据向量点乘法则,当两向量长度为1是 乘积即cosθ值</span>
+ v_diffuse <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span><span class="token function">dot</span><span class="token punctuation">(</span>ec_light_dir<span class="token punctuation">,</span> ec_normal<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ v_texcoord <span class="token operator">=</span> a_texcoord<span class="token punctuation">;</span>
+ gl_Position <span class="token operator">=</span> mvp_matrix <span class="token operator">*</span> a_vertex<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>Fragment Shader:</strong></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">precision mediump <span class="token keyword">float</span><span class="token punctuation">;</span>
+uniform sampler2D t_reflectance<span class="token punctuation">;</span>
+uniform vec4 i_ambient<span class="token punctuation">;</span>
+varying <span class="token keyword">float</span> v_diffuse<span class="token punctuation">;</span>
+varying vec2 v_texcoord<span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+ vec4 color <span class="token operator">=</span> <span class="token function">texture2D</span><span class="token punctuation">(</span>t_reflectance<span class="token punctuation">,</span> v_texcoord<span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token comment">//这里分解开来是 color*vec3(1,1,1)*v_diffuse + color*i_ambient</span>
+ <span class="token comment">//色*光*夹角cos + 色*环境光</span>
+ gl_FragColor <span class="token operator">=</span> color<span class="token operator">*</span><span class="token punctuation">(</span><span class="token function">vec4</span><span class="token punctuation">(</span>v_diffuse<span class="token punctuation">)</span> <span class="token operator">+</span> i_ambient<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>转自：<a target="_blank" rel="noopener" href="https://github.com/wshxbqq/GLSL-Card">https://github.com/wshxbqq/GLSL-Card</a></p>
+
+      </div>
+      <div class="post-tags-categories">
+        
+        <div class="tags">
+          
+            <a href="/tags/Cesium/" class="">
+              Cesium
+            </a>
+          
+            <a href="/tags/GLSL/" class="">
+              GLSL
+            </a>
+          
+        </div>
+        
+      </div>
+      
+        <div class="copyright">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+    <strong>作者:  </strong>Giser</a>
+    </li>
+    <li class="post-copyright-link">
+    <strong>文章链接:  </strong>
+    <a href="/2021/09/09/GLSL中文手册/" target="_blank" title="GLSL中文手册">https://gaochundu.github.io/2021/09/09/GLSL中文手册/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明:   </strong>
+      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+      许可协议。转载请注明出处!
+    </li>
+  </ul>
+<div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      <!-- 文章详情页的上一页和下一页 -->
+<div class="post-nav">
+
+
+
+  
+  <div class="post-nav-prev post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="/medias/8.jpg" class="lazyload placeholder" data-srcset="/medias/8.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+    </div>
+    <a href="/2021/09/14/cesium%E6%B3%9B%E5%85%89%E5%BB%BA%E7%AD%91/" class="post-nav-link">
+      <div class="title">
+        <i class="fas fa-angle-left"></i> 上一篇:
+        <div class="title-text">cesium 建筑泛光动效</div>
+      </div>
+      
+      <!-- <div class="content">
+        指定3dtilesfunction func_1() &#123;
+        // 找到需要光环效果的3dtile
+      </div> -->
+    </a>
+  </div>
+
+
+
+  
+  <div class="post-nav-next post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="/medias/11.jpg" class="lazyload placeholder" data-srcset="/medias/11.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+    </div>
+    <a href="/2021/08/30/cesium%E5%8A%A0%E8%BD%BD%E6%B5%B7%E9%87%8F%E6%A8%A1%E5%9E%8B/" class="post-nav-link">
+      <div class="title">
+        下一篇: <i class="fas fa-angle-right"></i>
+        <div class="title-text">cesium 海量gltf三维模型可视化</div>
+      </div>
+      <!-- <div class="content">
+        cesium 海量gltf三维模型可视化加载海量模型时，除了使用3dtiles，还可以使用ModelInstanceCo
+      </div> -->
+    </a>
+  </div>
+
+</div>
+
+    
+    
+
+    <!-- 打赏 -->
+    
+      <div id="appDonate" class="post-donate">
+  <div id="donate_board" class="donate_bar center" ref="donate">
+    <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏" @click="showDialogDrawer()"></a>
+  </div>
+  <transition name="fade">
+    <div 
+      class="donate-box-mask"
+      v-cloak 
+      v-show="visible"
+      @click="cancelDialogDrawer()"
+    >
+    </div>
+  </transition>
+  <transition name="bounce">
+    <div class="donate-box" v-cloak v-show="visible">
+      <div class="donate-box_close">
+        <i class="fas fa-times" aria-hidden="true" @click="cancelDialogDrawer" pointer></i>
+      </div>
+      <div class="donate-box_title">
+        <h4>
+          你的赏识是我前进的动力
+        </h4>
+      </div>
+      <div class="donate-box_tab">
+        <div class="Alipay" pointer :class="{'active': tabActive === 'Alipay'}" @click="changeTabActive('Alipay')">
+          支付宝
+        </div>
+        <div class="WeChatpay" pointer :class="{'active': tabActive === 'WeChatpay'}" @click="changeTabActive('WeChatpay')">
+          微信
+        </div>
+      </div>
+      <div class="donate-box_img">
+        <div class="AlipayImg" v-show="tabActive === 'Alipay'">
+          <img src="/medias/zfb.png" class="lazyload placeholder" data-srcset="/medias/zfb.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="支付宝打赏" />
+        </div> 
+        <div class="WeChatpayImg" v-show="tabActive === 'WeChatpay'">
+          <img src="/medias/wx.png" class="lazyload placeholder" data-srcset="/medias/wx.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="微信打赏" />
+        </div>
+      </div>
+    </div>
+  </transition>
+</div>
+
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDonate',
+    data: {
+      visible: false,
+      tabActive: 'Alipay',
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        // function getScroll() {
+        //   return {
+        //     left: window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0,
+        //     top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+        //   };
+        // }
+        this.top = $(document).scrollTop() // or getScroll().top
+        // console.log('aa', $('.main-content'));
+        body.style.cssText = 'overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      },
+      changeTabActive(name) {
+        this.tabActive = name;
+      }
+    },
+    created() {}
+  })
+</script>
+    
+
+    <!-- 分享 -->
+    
+      <!-- https://github.com/overtrue/share.js -->
+<!-- 文章详情页的分享 -->
+<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+
+<script src="/js/shareJs/social-share.min.js"></script>
+</script>
+
+<style>
+  .social-share {
+    margin: 20px 0;
+  }
+</style>
+
+
+    
+    
+    <!-- 评论 -->
+    <!-- 评论 -->
+
+  <div id="myComment">
+    
+      
+<section id="comments" style="padding: 1em;"
+	class="animated bounceInUp">
+	<div id="vcomment" class="comment"></div>
+</section>
+<style>
+	#comments {
+		background: rgba(255,255,255,0.9);
+	}
+	#veditor {
+		background-image: url('https://img.zcool.cn/community/01a253594c71cfa8012193a329a77f.gif');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: right;
+		background-color: rgba(255, 255, 255, 0);
+		resize: vertical;
+	}
+	#veditor:focus{
+		background-position-y: 200px;
+		transition: all 0.2s ease-in-out 0s;
+	}
+	#vcomment .vcards .vcard .vh .vhead .vtag.vvisitor {
+		background-color: #42b983;
+	}
+	.v[data-class=v] .vbtn:active, .v[data-class=v] .vbtn:hover {
+		color: #42b983;
+		border-color: #42b983;
+	}
+	#vcomment .vcards .vcard .vhead .vsys i {
+		display: none;
+	}
+	/* 底部valine链接 */
+	#vcomment .vpower {
+		display: none;
+	}
+	
+	/* 底下注释是修改 名称和邮箱和网址输入框的样式 */
+	/* #vcomment .vheader {
+		display: flex;
+		justify-content: space-around;
+	}
+	
+	#vcomment .vheader .vnick {
+		width: 31%;
+		border: 2px solid #dedede;
+		padding-left: 10px;
+		padding-right: 10px;
+		border-radius: 5px
+	}
+
+	#vcomment .vheader .vmail {
+		width: 31%;
+		border: 2px solid #dedede;
+		padding-left: 10px;
+		padding-right: 10px;
+		border-radius: 5px
+	}
+
+	#vcomment .vheader .vlink {
+		width: 31%;
+		border: 2px solid #dedede;
+		padding-left: 10px;
+		padding-right: 10px;
+		border-radius: 5px
+	} */
+
+	img.vimg {
+		transition: all 1s;
+		/* 头像旋转时间为 1s */
+	}
+
+	img.vimg:hover {
+		transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		-ms-transform: rotate(360deg);
+	}
+
+	#vcomment .vcards .vcard {
+		padding: 15px 20px 0 20px;
+		border-radius: 10px;
+		margin-bottom: 15px;
+		box-shadow: 0 0 4px 1px rgba(0, 0, 0, .12);
+		transition: all .3s
+	}
+
+	#vcomment .vcards .vcard:hover {
+		box-shadow: 0 0 8px 3px rgba(0, 0, 0, .12)
+	}
+
+	#vcomment .vcards .vcard .vh .vcard {
+		border: none;
+		box-shadow: none;
+	}
+</style>
+    
+  </div>
+
+<!-- comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
+
+
+  </div>
+
+  <!-- 目录 -->
+  
+<aside id='l_side'>
+  
+    
+      
+        <section class="widget side_blogger">
+  <div class='content'>
+    
+      
+        <a class='avatar flat-box rectangle' href='/about/'>
+          <img src='http://api.btstu.cn/sjtx/api.php?lx=c1&format=images'/>
+        </a>
+      
+    
+    
+      <div class='text'>
+        
+          <h2>GISER</h2>
+        
+        
+          <p>GUI</p>
+
+        
+        
+          <p><span id="jinrishici-sentence">GIS技术部门</span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="mailto:super.gui@qq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+      
+    
+  
+  
+  
+
+  <div class="layout_sticky">    
+    
+      
+<section class="widget side_toc">
+  
+  <header>
+    
+      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+  <div class='content'>
+    <div class="toc-main">
+      <div class="toc-content">
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#GLSL-%E4%B8%AD%E6%96%87%E6%89%8B%E5%86%8C"><span class="toc-text">GLSL 中文手册</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B"><span class="toc-text">基本类型:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%E5%92%8C%E6%95%B0%E7%BB%84"><span class="toc-text">基本结构和数组:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%91%E9%87%8F%E7%9A%84%E5%88%86%E9%87%8F%E8%AE%BF%E9%97%AE"><span class="toc-text">向量的分量访问:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">运算符:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%9E%8B%E9%97%B4%E7%9A%84%E8%BF%90%E7%AE%97"><span class="toc-text">基础类型间的运算:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E9%99%90%E5%AE%9A%E7%AC%A6"><span class="toc-text">变量限定符:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E9%99%90%E5%AE%9A%E7%AC%A6"><span class="toc-text">函数参数限定符:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#glsl%E7%9A%84%E5%87%BD%E6%95%B0"><span class="toc-text">glsl的函数:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-text">构造函数:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">类型转换:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B2%BE%E5%BA%A6%E9%99%90%E5%AE%9A"><span class="toc-text">精度限定:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E7%BC%96%E8%AF%91%E6%8C%87%E4%BB%A4"><span class="toc-text">预编译指令:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E7%9A%84%E7%89%B9%E6%AE%8A%E5%8F%98%E9%87%8F"><span class="toc-text">内置的特殊变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E7%9A%84%E5%B8%B8%E9%87%8F"><span class="toc-text">内置的常量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E6%8E%A7%E5%88%B6"><span class="toc-text">流控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0%E5%BA%93"><span class="toc-text">内置函数库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%98%E6%96%B9%E7%9A%84shader%E8%8C%83%E4%BE%8B"><span class="toc-text">官方的shader范例:</span></a></li></ol></li></ol></li></ol> -->
+        <div class="toc"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 手机端目录按钮 -->
+<div id="toc-mobile-btn">
+  <i class="fas fa-list-ul" aria-hidden="true"></i>
+</div>
+
+      
+  <section class="widget side_recent_post">
+    
+  <header>
+    
+      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      
+      <!-- hash算法 -->
+      
+      <div class="aside-list">
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2022/12/21/%E4%BA%8B%E4%BB%B6/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="/medias/8.jpg" class="lazyload placeholder" data-srcset="/medias/8.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">12-21</span>
+                
+              </div>
+              <a class="post-title" href="/2022/12/21/%E4%BA%8B%E4%BB%B6/">cesium pick和射线的使用（工具篇）</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2021/10/12/%E5%9D%90%E6%A0%87%E7%B3%BB%E7%9A%84%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="/medias/2.jpg" class="lazyload placeholder" data-srcset="/medias/2.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">10-12</span>
+                
+              </div>
+              <a class="post-title" href="/2021/10/12/%E5%9D%90%E6%A0%87%E7%B3%BB%E7%9A%84%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/">坐标系命名规范</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2021/09/29/%E5%8C%BA%E5%88%ABclientX%E3%80%81offsetX%E3%80%81screenX%E3%80%81pageX/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="/medias/5.jpg" class="lazyload placeholder" data-srcset="/medias/5.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">09-29</span>
+                
+              </div>
+              <a class="post-title" href="/2021/09/29/%E5%8C%BA%E5%88%ABclientX%E3%80%81offsetX%E3%80%81screenX%E3%80%81pageX/">区别了 clientX、offsetX、screenX、pageX等</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2021/09/29/Zerotier%20Moon%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="/medias/7.jpg" class="lazyload placeholder" data-srcset="/medias/7.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">09-29</span>
+                
+              </div>
+              <a class="post-title" href="/2021/09/29/Zerotier%20Moon%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/">安装 zerotier-one</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2021/09/14/cesium%E6%B3%9B%E5%85%89%E5%BB%BA%E7%AD%91/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="/medias/8.jpg" class="lazyload placeholder" data-srcset="/medias/8.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">09-14</span>
+                
+              </div>
+              <a class="post-title" href="/2021/09/14/cesium%E6%B3%9B%E5%85%89%E5%BB%BA%E7%AD%91/">cesium 建筑泛光动效</a>
+            </div>
+          </div>
+        
+      </div>
+    </div>
+  </section>
+
+    
+  </div>
+</aside>
+
+
+  <!-- 图片放大 Wrap images with fancybox support -->
+  <script src="/js/wrapImage.js"></script>
+</div>
+
+<!-- 文章详情页背景图 -->
+<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
+	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
+	<transition-group tag="ul" :name="names">
+		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
+			<img :src="image" class="bg-swiper-img no-lazy">
+		</li>
+	</transition-group>
+</div>
+<script>
+	var vm = new Vue({
+		el: '#appBgSwiper',
+		data: {
+			names: '' || 'fade' || 'fade', // translate-fade fade
+			mark: 0,
+			img: [],
+			bgColor: '',
+			time: null
+		},
+		methods: {   //添加方法
+			change(i, m) {
+				if (i > m) {
+					// this.names = 'fade';
+				} else if (i < m) {
+					// this.names = 'fade';
+				} else {
+					return;
+				}
+				this.mark = i;
+			},
+			prev() {
+				// this.names = 'fade';
+				this.mark--;
+				if (this.mark === -1) {
+					this.mark = 3;
+					return
+				}
+			},
+			next() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			autoPlay() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			play() {
+				let bgImgDelay = '' || '180000'
+				let delay = parseInt(bgImgDelay) || 180000;
+				this.time = setInterval(this.autoPlay, delay);
+			},
+			enter() {
+				clearInterval(this.time);
+			},
+			leave() {
+				this.play();
+			}
+		},
+		created() {
+			this.play()
+		},
+		beforeDestroy() {
+			clearInterval(this.time);
+		},
+		mounted() {
+			let prop = '' || '';
+			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
+			if (isImg) {
+				let img = prop.split(',');
+				let configRoot = '/'
+				let arrImg = [];
+				img.forEach(el => {
+					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+					var objExp = new RegExp(Expression);
+
+					if (objExp.test(el)) {
+						// http or https
+						arrImg.push(el);
+					} else {
+						// 非http or https开头
+						// 本地文件
+						let firstStr = el.charAt(0);
+						if (firstStr == '/') {
+							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
+						}
+						el = configRoot + el;
+						arrImg.push(el);
+					}
+				})
+				this.img = arrImg;
+			} else {
+				this.bgColor = prop;
+			}
+		}
+	})
+</script>
+
+<style>
+	.bg-swiper-box {
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.bg-swiper-img {
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
+
+
+
+  <script>
+  function loadMermaid() {
+    if (document.getElementsByClassName('mermaid').length) {
+      if (window.mermaidJsLoad) mermaid.init()
+      else {
+        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
+          window.mermaidJsLoad = true
+          mermaid.initialize({
+            theme: 'default',
+          })
+          if ('true') {
+            mermaid.init();
+          }
+        })
+      }
+    }
+  };
+  document.addEventListener("DOMContentLoaded", function () {
+    loadMermaid();
+  })
+
+  document.addEventListener('pjax:complete', function () {
+    loadMermaid();
+  })
+  
+</script>
+
+
+      </main>
+    </div>
+
+    <!-- 页脚 -->
+    
+  
+  
+    <!-- 底部鱼儿跳动效果，依赖于jquery-->
+<div id="j-fish-skip" style=" position: relative;height: 153px;width: auto;"></div>
+<script>
+  var RENDERER = {
+    POINT_INTERVAL: 5,
+    FISH_COUNT: 3,
+    MAX_INTERVAL_COUNT: 50,
+    INIT_HEIGHT_RATE: .5,
+    THRESHOLD: 50,
+    FISH_COLOR: '',
+    init: function () {
+      this.setFishColor(); this.setParameters(), this.reconstructMethods(), this.setup(), this.bindEvent(), this.render()
+    },
+    setFishColor: function () {
+      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+      if (isDark) {
+        this.FISH_COLOR = '#222'; // 暗黑色，有时间把这整成一个变量
+      } else {
+        this.FISH_COLOR = '' || '#42b983';
+      }
+    },
+    setParameters: function () {
+      this.$window = $(window), this.$container = $("#j-fish-skip"), this.$canvas = $("<canvas />"), this.context = this.$canvas.appendTo(this.$container).get(0).getContext("2d"), this.points = [], this.fishes = [], this.watchIds = []
+    },
+    createSurfacePoints: function () {
+      var t = Math.round(this.width / this.POINT_INTERVAL);
+      this.pointInterval = this.width / (t - 1), this.points.push(new SURFACE_POINT(this, 0));
+      for (var i = 1; i < t; i++) {
+        var e = new SURFACE_POINT(this, i * this.pointInterval),
+          h = this.points[i - 1];
+        e.setPreviousPoint(h), h.setNextPoint(e), this.points.push(e)
+      }
+    },
+    reconstructMethods: function () {
+      this.watchWindowSize = this.watchWindowSize.bind(this), this.jdugeToStopResize = this.jdugeToStopResize.bind(this), this.startEpicenter = this.startEpicenter.bind(this), this.moveEpicenter = this.moveEpicenter.bind(this), this.reverseVertical = this.reverseVertical.bind(this), this.render = this.render.bind(this)
+    },
+    setup: function () {
+      this.points.length = 0, this.fishes.length = 0, this.watchIds.length = 0, this.intervalCount = this.MAX_INTERVAL_COUNT, this.width = this.$container.width(), this.height = this.$container.height(), this.fishCount = this.FISH_COUNT * this.width / 500 * this.height / 500, this.$canvas.attr({
+        width: this.width,
+        height: this.height
+      }), this.reverse = !1, this.fishes.push(new FISH(this)), this.createSurfacePoints()
+    },
+    watchWindowSize: function () {
+      this.clearTimer(), this.tmpWidth = this.$window.width(), this.tmpHeight = this.$window.height(), this.watchIds.push(setTimeout(this.jdugeToStopResize, this.WATCH_INTERVAL))
+    },
+    clearTimer: function () {
+      for (; this.watchIds.length > 0;) clearTimeout(this.watchIds.pop())
+    },
+    jdugeToStopResize: function () {
+      var t = this.$window.width(),
+        i = this.$window.height(),
+        e = t == this.tmpWidth && i == this.tmpHeight;
+      this.tmpWidth = t, this.tmpHeight = i, e && this.setup()
+    },
+    bindEvent: function () {
+      this.$window.on("resize", this.watchWindowSize), this.$container.on("mouseenter", this.startEpicenter), this.$container.on("mousemove", this.moveEpicenter)
+    },
+    getAxis: function (t) {
+      var i = this.$container.offset();
+      return {
+        x: t.clientX - i.left + this.$window.scrollLeft(),
+        y: t.clientY - i.top + this.$window.scrollTop()
+      }
+    },
+    startEpicenter: function (t) {
+      this.axis = this.getAxis(t)
+    },
+    moveEpicenter: function (t) {
+      var i = this.getAxis(t);
+      this.axis || (this.axis = i), this.generateEpicenter(i.x, i.y, i.y - this.axis.y), this.axis = i
+    },
+    generateEpicenter: function (t, i, e) {
+      if (!(i < this.height / 2 - this.THRESHOLD || i > this.height / 2 + this.THRESHOLD)) {
+        var h = Math.round(t / this.pointInterval);
+        h < 0 || h >= this.points.length || this.points[h].interfere(i, e)
+      }
+    },
+    reverseVertical: function () {
+      this.reverse = !this.reverse;
+      for (var t = 0, i = this.fishes.length; t < i; t++) this.fishes[t].reverseVertical()
+    },
+    controlStatus: function () {
+      for (var t = 0, i = this.points.length; t < i; t++) this.points[t].updateSelf();
+      for (t = 0, i = this.points.length; t < i; t++) this.points[t].updateNeighbors();
+      this.fishes.length < this.fishCount && 0 == --this.intervalCount && (this.intervalCount = this.MAX_INTERVAL_COUNT, this.fishes.push(new FISH(this)))
+    },
+    render: function () {
+      requestAnimationFrame(this.render), this.controlStatus(), this.context.clearRect(0, 0, this.width, this.height), this.context.fillStyle = this.FISH_COLOR;
+      for (var t = 0, i = this.fishes.length; t < i; t++) this.fishes[t].render(this.context);
+      this.context.save(), this.context.globalCompositeOperation = "xor", this.context.beginPath(), this.context.moveTo(0, this.reverse ? 0 : this.height);
+      for (t = 0, i = this.points.length; t < i; t++) this.points[t].render(this.context);
+      this.context.lineTo(this.width, this.reverse ? 0 : this.height), this.context.closePath(), this.context.fill(), this.context.restore()
+    }
+  },
+  SURFACE_POINT = function (t, i) {
+    this.renderer = t, this.x = i, this.init()
+  };
+  SURFACE_POINT.prototype = {
+    SPRING_CONSTANT: .03,
+    SPRING_FRICTION: .9,
+    WAVE_SPREAD: .3,
+    ACCELARATION_RATE: .01,
+    init: function () {
+      this.initHeight = this.renderer.height * this.renderer.INIT_HEIGHT_RATE, this.height = this.initHeight, this.fy = 0, this.force = {
+        previous: 0,
+        next: 0
+      }
+    },
+    setPreviousPoint: function (t) {
+      this.previous = t
+    },
+    setNextPoint: function (t) {
+      this.next = t
+    },
+    interfere: function (t, i) {
+      this.fy = this.renderer.height * this.ACCELARATION_RATE * (this.renderer.height - this.height - t >= 0 ? -1 : 1) * Math.abs(i)
+    },
+    updateSelf: function () {
+      this.fy += this.SPRING_CONSTANT * (this.initHeight - this.height), this.fy *= this.SPRING_FRICTION, this.height += this.fy
+    },
+    updateNeighbors: function () {
+      this.previous && (this.force.previous = this.WAVE_SPREAD * (this.height - this.previous.height)), this.next && (this.force.next = this.WAVE_SPREAD * (this.height - this.next.height))
+    },
+    render: function (t) {
+      this.previous && (this.previous.height += this.force.previous, this.previous.fy += this.force.previous), this.next && (this.next.height += this.force.next, this.next.fy += this.force.next), t.lineTo(this.x, this.renderer.height - this.height)
+    }
+  };
+  var FISH = function (t) {
+    this.renderer = t, this.init()
+  };
+  FISH.prototype = {
+    GRAVITY: .4,
+    init: function () {
+      this.direction = Math.random() < .5, this.x = this.direction ? this.renderer.width + this.renderer.THRESHOLD : -this.renderer.THRESHOLD, this.previousY = this.y, this.vx = this.getRandomValue(4, 10) * (this.direction ? -1 : 1), this.renderer.reverse ? (this.y = this.getRandomValue(1 * this.renderer.height / 10, 4 * this.renderer.height / 10), this.vy = this.getRandomValue(2, 5), this.ay = this.getRandomValue(.05, .2)) : (this.y = this.getRandomValue(6 * this.renderer.height / 10, 9 * this.renderer.height / 10), this.vy = this.getRandomValue(-5, -2), this.ay = this.getRandomValue(-.2, -.05)), this.isOut = !1, this.theta = 0, this.phi = 0
+    },
+    getRandomValue: function (t, i) {
+      return t + (i - t) * Math.random()
+    },
+    reverseVertical: function () {
+      this.isOut = !this.isOut, this.ay *= -1
+    },
+    controlStatus: function (t) {
+      this.previousY = this.y, this.x += this.vx, this.y += this.vy, this.vy += this.ay, this.renderer.reverse ? this.y > this.renderer.height * this.renderer.INIT_HEIGHT_RATE ? (this.vy -= this.GRAVITY, this.isOut = !0) : (this.isOut && (this.ay = this.getRandomValue(.05, .2)), this.isOut = !1) : this.y < this.renderer.height * this.renderer.INIT_HEIGHT_RATE ? (this.vy += this.GRAVITY, this.isOut = !0) : (this.isOut && (this.ay = this.getRandomValue(-.2, -.05)), this.isOut = !1), this.isOut || (this.theta += Math.PI / 20, this.theta %= 2 * Math.PI, this.phi += Math.PI / 30, this.phi %= 2 * Math.PI), this.renderer.generateEpicenter(this.x + (this.direction ? -1 : 1) * this.renderer.THRESHOLD, this.y, this.y - this.previousY), (this.vx > 0 && this.x > this.renderer.width + this.renderer.THRESHOLD || this.vx < 0 && this.x < -this.renderer.THRESHOLD) && this.init()
+    },
+    render: function (t) {
+      t.save(), t.translate(this.x, this.y), t.rotate(Math.PI + Math.atan2(this.vy, this.vx)), t.scale(1, this.direction ? 1 : -1), t.beginPath(), t.moveTo(-30, 0), t.bezierCurveTo(-20, 15, 15, 10, 40, 0), t.bezierCurveTo(15, -10, -20, -15, -30, 0), t.fill(), t.save(), t.translate(40, 0), t.scale(.9 + .2 * Math.sin(this.theta), 1), t.beginPath(), t.moveTo(0, 0), t.quadraticCurveTo(5, 10, 20, 8), t.quadraticCurveTo(12, 5, 10, 0), t.quadraticCurveTo(12, -5, 20, -8), t.quadraticCurveTo(5, -10, 0, 0), t.fill(), t.restore(), t.save(), t.translate(-3, 0), t.rotate((Math.PI / 3 + Math.PI / 10 * Math.sin(this.phi)) * (this.renderer.reverse ? -1 : 1)), t.beginPath(), this.renderer.reverse ? (t.moveTo(5, 0), t.bezierCurveTo(10, 10, 10, 30, 0, 40), t.bezierCurveTo(-12, 25, -8, 10, 0, 0)) : (t.moveTo(-5, 0), t.bezierCurveTo(-10, -10, -10, -30, 0, -40), t.bezierCurveTo(12, -25, 8, -10, 0, 0)), t.closePath(), t.fill(), t.restore(), t.restore(), this.controlStatus(t)
+    }
+  }, $(function () {
+    RENDERER.init()
+    $('.dark').click(function () {
+      setTimeout(() => {
+        RENDERER.setFishColor();
+        RENDERER.context.fill();
+      });
+    })
+  });
+</script>
+  
+  <div class="footer bg-color">
+    <div class="footer-main">
+      
+        
+          <div class="link">
+            
+          </div>
+        
+      
+        
+          <div class="footer-copyright">
+            <p>Copyright © 2019 - 2020 <a target="_blank" rel="noopener" href="https://github.com/yuang01">yuang01</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/yuang01/theme">Bamboo</a> </p>
+
+          </div>
+        
+      
+        
+          
+            <!-- 不蒜子统计 -->
+            <!-- 不蒜子统计 -->
+<span id="busuanzi_container_site_pv">
+      <i class="fas fa-eye" aria-hidden="true"></i>本站总访问量：<span id="busuanzi_value_site_pv"></span> 次
+</span>
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_uv" style='display:none'>
+      <i class="fas fa-users" aria-hidden="true"></i>本站访客数：<span id="busuanzi_value_site_uv"></span> 人
+</span>
+
+          
+        
+      
+        
+          <div class="footer-custom">
+            
+          </div>
+        
+      
+    </div>
+  </div>
+
+
+
+    <!-- 渲染暗黑按钮 -->
+    
+      <div class="dark">
+  <div class="dark-content">
+    <i class="fas fa-moon" aria-hidden="true"></i>
+    <!-- <span>关灯</span> -->
+  </div>
+  
+</div>
+
+<script>
+  $(function() {
+    let isDark = JSON.parse(localStorage.getItem('dark'))  || JSON.parse('false');
+    if (isDark) {
+      $(".dark-content").replaceWith(
+          `
+          <div class='dark-content'>
+            <i class="fas fa-lightbulb" aria-hidden="true"></i>
+          </div>
+          `
+        );
+    }
+    $('.dark').click(function() {
+      if ($(document.body).is('.darkModel')) {
+        $(document.body).removeClass('darkModel');
+        localStorage.setItem('dark', false);
+        $(".dark-content").replaceWith(
+          `
+          <div class='dark-content'>
+            <i class="fas fa-moon" aria-hidden="true"></i>
+          </div>
+          `
+        );
+      } else {
+        $(document.body).addClass('darkModel');
+        localStorage.setItem('dark', true);
+        $(".dark-content").replaceWith(
+          `
+          <div class='dark-content'>
+            <i class="fas fa-lightbulb" aria-hidden="true"></i>
+          </div>
+          `
+        );
+      }
+    })
+  })
+</script>
+    
+    <!-- 渲染回到顶部按钮 -->
+    
+      <div class="goTop top-btn-color" pointer>
+  <i class="fas fa-arrow-up" aria-hidden="true"></i>
+</div>
+<script src="/js/goTop.js"></script>
+
+    
+    <!-- 渲染左下角音乐播放器 -->
+    
+      <link rel="stylesheet" href="/js/aplayer/APlayer@1.10.1.min.css">
+<style>
+.aplayer .aplayer-lrc p {
+  
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px !important;
+}
+
+.aplayer .aplayer-lrc p.aplayer-lrc-current {
+  
+  font-size: 15px;
+  color: #42b983;
+}
+
+
+.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+  left: -66px !important;
+}
+
+.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+  left: 0px !important;
+}
+
+
+</style>
+<meting-js  
+  class=""
+  server="tencent"
+  type="playlist"
+  id="8062553743"
+  fixed='true'
+  autoplay='false'
+  theme='#42b983'
+  loop='all'
+  order='random'
+  preload='auto'
+  volume='0.7'
+  list-folded='true'
+>
+</meting-js>
+
+<!-- <style>
+  #aplayer {
+    position: fixed;
+    left: 0;
+    bottom: 300px;
+  }
+</style> -->
+<script src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<script src="https://unpkg.com/meting@2/dist/Meting.min.js"></script>
+    
+
+    <!-- 图片放大 -->
+    
+      <script src="/js/fancybox/jquery.fancybox.min.js"></script>
+    
+
+    <!-- 百度解析 -->
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <!-- 背景彩带 -->
+    
+      <script type="text/javascript" size="100" alpha='0.4' zIndex="-1" src="/js/ribbon.min.js"></script>
+    
+
+    <script src="/js/utils/index.js"></script>
+    <script src="/js/app.js"></script>
+    
+    <!-- 文章目录所需js -->
+<!-- <link href="/js/tocbot/tocbot.css" rel="stylesheet">
+<script src="/js/tocbot/tocbot.min.js"></script> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.css">
+
+<script>
+  var headerEl = 'h2, h3, h4',  //headers 
+    content = '.post-detail',//文章容器
+    idArr = {};  //标题数组以确定是否增加索引id
+  //add #id
+  var option = {
+    // Where to render the table of contents.
+    tocSelector: '.toc',
+    // Where to grab the headings to build the table of contents.
+    contentSelector: content,
+    // Which headings to grab inside of the contentSelector element.
+    headingSelector: headerEl,
+    scrollSmooth: true,
+    scrollSmoothOffset: -70,
+    // headingsOffset: -($(window).height() * 0.4 - 45),
+    headingsOffset: -($(window).height() * 0.6 - 70),
+    // positionFixedSelector: '.toc-main',
+    // positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    activeLinkClass: 'is-active-link',
+    orderedList: true,
+    collapseDepth: 20,
+    // onClick: function (e) {},
+  }
+  if ($('.toc').length > 0) {
+
+    $(content).children(headerEl).each(function () {
+      //去除空格以及多余标点
+      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
+
+      headerId = headerId.toLowerCase();
+      if (idArr[headerId]) {
+        //id已经存在
+        $(this).attr('id', headerId + '-' + idArr[headerId]);
+        idArr[headerId]++;
+      }
+      else {
+        //id未存在
+        idArr[headerId] = 1;
+        $(this).attr('id', headerId);
+      }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      tocbot.init(option);
+      mobileTocClick();
+    });
+
+  }
+
+  window.tocScrollFn = function () {
+    return bamboo.throttle(function () {
+      findHeadPosition();
+    }, 100)()
+  }
+  window.addEventListener('scroll', tocScrollFn);
+
+  const findHeadPosition = function (top) {
+    if ($('.toc-list').length <= 0) {
+      return false;
+    }
+    setTimeout(() => {  // or DOMContentLoaded 
+      autoScrollToc();
+    }, 0);
+  }
+
+  const autoScrollToc = function () {
+    const $activeItem = document.querySelector('.is-active-link');
+    const $cardToc = document.querySelector('.toc-content');
+    const activePosition = $activeItem.getBoundingClientRect().top
+    const sidebarScrollTop = $cardToc.scrollTop
+    if (activePosition > (document.documentElement.clientHeight - 100)) {
+      $cardToc.scrollTop = sidebarScrollTop + 150
+    }
+    if (activePosition < 150) {
+      $cardToc.scrollTop = sidebarScrollTop - 150
+    }
+  }
+
+  document.addEventListener('pjax:send', function () {
+    if ($('.toc').length) {
+      tocbot.destroy();
+    }
+  });
+
+  document.addEventListener('pjax:complete', function () {
+    if ($('.toc').length) {
+      tocbot.init(option);
+      mobileTocClick();
+    }
+  });
+  
+  // 手机端toc按钮点击出现目录
+  const mobileTocClick = function () {
+    const $cardTocLayout = document.getElementsByClassName('side_toc')[0];
+    const $cardToc = $cardTocLayout.getElementsByClassName('toc-content')[0];
+    let right = '45px';
+    if (window.innerWidth >= 551 && window.innerWidth <= 992) {
+      right = '100px'
+    }
+    const mobileToc = {
+      open: () => {
+        $cardTocLayout.style.cssText = 'animation: toc-open .3s; opacity: 1; right: ' + right
+      },
+
+      close: () => {
+        $cardTocLayout.style.animation = 'toc-close .2s'
+        setTimeout(() => {
+          $cardTocLayout.style.cssText = "opacity:''; animation: ''; right: ''"
+        }, 100)
+      }
+    }
+    document.getElementById('toc-mobile-btn').addEventListener('click', () => {
+      if (window.getComputedStyle($cardTocLayout).getPropertyValue('opacity') === '0') mobileToc.open()
+      else mobileToc.close()
+    })
+
+    $cardToc.addEventListener('click', (e) => {
+      if (window.innerWidth < 992) { // 小于992px的时候
+        mobileToc.close()
+      }
+    })
+  }
+</script>
+
+<style>
+  /* .is-position-fixed {
+    position: sticky !important;
+    top: 74px;
+  }
+
+  .toc-main ul {
+    counter-reset: show-list;
+  }
+
+  .toc-main ul li::before {
+    content: counter(item)".";
+    display: block;
+    position: absolute;
+    left: 12px;
+    top: 0;
+  } */
+</style>
+ 
+
+<!-- 设置导航背景 -->
+<script>
+  let setHeaderClass = () => {
+    const headerMenuTransparent = true;
+    if (!headerMenuTransparent) { return; }
+    const nav = $('#navHeader');
+    const navTop = nav.outerHeight();
+    const winTop = $(window).scrollTop();
+    if(winTop > navTop) {
+      nav.addClass('header-bg-color');
+    }
+    else {
+      nav.removeClass('header-bg-color');
+    }
+  };
+
+  let scrollCollect = () => {
+    return bamboo.throttle(function (e) {
+      setHeaderClass();
+    }, 200)()
+  }
+
+  let initHeaderBg = () => {
+    setHeaderClass();
+  }
+
+  setHeaderClass();
+  window.addEventListener('scroll', scrollCollect);
+
+  document.addEventListener('pjax:send', function () {
+    window.removeEventListener('scroll', scrollCollect)
+  })
+  document.addEventListener('pjax:complete', function () {
+    window.addEventListener('scroll', scrollCollect);
+    setHeaderClass();
+  })
+</script> 
+
+<!-- 渲染issues标签里的内容 -->
+<script>
+  function loadIssuesJS() {
+    if ($(".post-detail").find(".issues-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/issues/index.js');
+  };
+  $(function () {
+    loadIssuesJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof IssuesAPI == "undefined") {
+      loadIssuesJS();
+    }
+  })
+</script>
+
+<!-- 输入框打字特效 -->
+<!-- 输入框打字特效 -->
+
+  <script src="/js/activate-power-mode.js"></script>
+  <script>
+    POWERMODE.colorful = true;  // 打开随机颜色特效
+    POWERMODE.shake = false;    // 关闭输入框抖动
+    document.body.addEventListener('input', POWERMODE);//监听打字事件
+  </script>
+
+
+<!-- markdown代码一键复制功能 -->
+
+  <link rel="stylesheet" href="https://unpkg.com/v-plugs-ayu/lib/ayu.css">
+  <script src="https://unpkg.com/v-plugs-ayu/lib/ayu.umd.min.js"></script>
+  <script src="/js/clipboard/clipboard.min.js"></script>
+  <div id="appCopy">
+  </div>
+  <script data-pjax>
+    var vm = new Vue({
+      el: '#appCopy',
+      data: {
+      },
+      computed: {
+      },
+      mounted() {
+        const that = this;
+        var copy = '复制';
+        /* code */
+        var initCopyCode = function () {
+          var copyHtml = '';
+          copyHtml += '<button class="btn-copy" data-clipboard-snippet="" style="position:absolute;top:0;right:0;z-index:1;">';
+          copyHtml += '<i class="fas fa-copy"></i><span>' + copy + '</span>';
+          copyHtml += '</button>';
+          $(".post-detail pre").not('.gutter pre').wrap("<div class='codeBox' style='position:relative;width:100%;'></div>")
+          $(".post-detail pre").not('.gutter pre').before(copyHtml);
+          new ClipboardJS('.btn-copy', {
+            target: function (trigger) {
+              return trigger.nextElementSibling;
+            }
+          });
+        }
+        initCopyCode();
+        $('.btn-copy').unbind('click').bind('click', function () {
+          doSomething();
+        })
+        $(document).unbind('keypress').bind('keypress', function (e) {
+          if (e.ctrlKey && e.keyCode == 67) {
+            doSomething();
+          }
+        })
+
+        function doSomething() {
+          that.$notify({
+            title: "成功",
+            content: "代码已复制，请遵守相关授权协议。",
+            type: 'success'
+          })
+        }
+      },
+      methods: {
+      },
+      created() { }
+    })
+  </script>
+  
+
+<!-- 图片懒加载 -->
+<script defer src="https://unpkg.com/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
+
+
+<!-- 卡片滚动动画 -->
+   
+
+<!-- 评论所需js -->
+
+  
+    <!-- 弹幕所需的css和js -->
+    
+<!-- 具体js，请前往valine/script.ejs查看 -->
+
+    <script>
+  var requiredFields = '';
+  requiredFields = requiredFields.split(',');
+  comment_el = '.comment';
+  let looperValine = null;
+  load_valine = function () {
+    if ($(comment_el).length) {
+      var valine = new Valine({
+        el: '#vcomment',
+        path: window.location.pathname,
+        notify: false,
+        verify: false,
+        app_id: "CcXapJrmuMu1xAoWycpH2hzt-gzGzoHsz",
+        app_key: "devoQ3DWkTXSld7UoTrY0Pxk",
+        placeholder: "客官，说点什么吧",
+        avatar: "",
+        master: "",   //博主邮箱md5
+        tagMeta: ["博主","小伙伴","访客"],     //标识字段名
+        friends: "",
+        metaPlaceholder: { "nick": "昵称/QQ号", "mail": "邮箱" },
+        requiredFields: requiredFields,
+        enableQQ: true,
+      });
+      function debounce(fn) {
+        var timerID = null
+        return function () {
+          var arg = arguments[0]   //获取事件
+          if (timerID) {
+            clearTimeout(timerID)
+          }
+          timerID = setTimeout(function () {
+            fn(arg)              //事件传入函数
+          }, 200)
+        }
+      }
+      //查询评论 valine.Q('*').limit(7) -- 查询所有，限制7条, 下面的的代码是查询当前页面
+      var themeDanmu = eval('false');
+      var themeLoop = eval('false');
+      var themeLooperTime = '5000' || 5000;
+      var speed = '40' || 20;
+      var isBarrager = true;
+      if (themeDanmu == true) {
+        do_barrager();
+        if ($('.danmuBox').length <= 0) {
+          $('.navbar').append('<div class="danmuBox"><div class="danmuBtn open"><span class="danmuCircle"></span><span class="danmuText">弹幕</span></div></div>');
+        }
+        $('.danmuBtn').on('click', debounce(
+          function () {
+            if ($('.danmuBtn').hasClass('open')) {
+              $('.danmuBtn').removeClass('open')
+              clearInterval(looperValine);
+              $.fn.barrager.removeAll();
+            } else {
+              $('.danmuBtn').addClass("open");
+              do_barrager();
+            }
+          }
+        ))
+      }
+      function do_barrager() {
+        isBarrager && valine.Q(window.location.pathname).find().then(function (comments) {
+          // var num = 0; // 可以记录条数，循环调用的时候只取最新的评论放入弹幕中
+          var run_once = true;
+          var looper_time = themeLooperTime;
+          var total = comments.length;
+          // var looper = null;
+          var index = 0;
+          if (total > 0) {
+            barrager();
+          } else {
+            // 当评论数为0的时候，自动关闭弹幕
+            // $('.danmuBtn').removeClass('open');
+          }
+          function barrager() {
+            if (run_once) {
+              //如果是首次执行,则设置一个定时器,并且把首次执行置为false
+              looperValine = setInterval(barrager, looper_time);
+              run_once = false;
+            }
+            var content = comments[index]._serverData.comment;
+            var email = comments[index]._serverData.mail;
+            var link = comments[index]._serverData.link;
+            var newcontent = content.substring(0, 50).replace(/<[^>]+>/g, "");
+            //发布一个弹幕
+            const item = {
+              img: `https://q1.qlogo.cn/g?b=qq&nk=${email}&s=640`, //图片 
+              info: newcontent, //文字 
+              href: link, //链接 
+              close: true, //显示关闭按钮 
+              speed: speed, //延迟,单位秒,默认6 
+              color: '#fff', //颜色,默认白色 
+              old_ie_color: '#000000', //ie低版兼容色,不能与网页背景相同,默认黑色
+            }
+            $('body').barrager(item);
+            //索引自增
+            index++;
+            //所有弹幕发布完毕，清除计时器。
+            if (index == total) {
+              clearInterval(looperValine);
+              if (themeLoop === true) {
+                setTimeout(function () {
+                  do_barrager();
+                }, 5000);
+              } else {
+                $('.danmuBtn').removeClass('open');
+              }
+              return false;
+            }
+
+          }
+        })
+      }
+    }
+  };
+  $(document).ready(load_valine);
+  document.addEventListener('pjax:send', function (e) {
+    
+  })
+  document.addEventListener('pjax:complete', function () {
+    load_valine();
+  });
+</script>
+
+  
+
+
+<!-- 鼠标点击特效 -->
+<!-- 爱心点击 -->
+
+  
+    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 999; pointer-events: none;" ></canvas>
+    <script src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+    <script src="/js/cursor/explosion.min.js"></script>
+  
+
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" data-pjax></script>
+
+
+<!-- 轮播图标签 -->
+<script>
+  var bambooSwiperTag = {};
+  function load_swiper() {
+    if (!document.querySelectorAll(".post-swiper-container")[0]) return;
+    loadCSS("https://unpkg.com/swiper@6/swiper-bundle.min.css")
+    loadScript("https://unpkg.com/swiper@6/swiper-bundle.min.js").then(() => {
+      pjax_swiper();
+    });
+  }
+
+  load_swiper();
+
+  function pjax_swiper() {
+    bambooSwiperTag.swiper = new Swiper('.post-swiper-container', {
+      slidesPerView: 'auto',
+      spaceBetween: 8,
+      centeredSlides: true,
+      loop: true,
+      autoplay: true ? {
+        delay: 3000,
+        stopOnLastSlide: false,
+        disableOnInteraction: false,
+      } : false,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      on:{
+        init: function(){
+          swiperAnimateCache(this); //隐藏动画元素 
+          swiperAnimate(this); //初始化完成开始动画
+        }, 
+        slideChangeTransitionEnd: function(){ 
+          swiperAnimate(this); //每个slide切换结束时也运行当前slide动画
+          //this.slides.eq(this.activeIndex).find('.ani').removeClass('ani'); 动画只展现一次，去除ani类名
+        } 
+      }
+    });
+  }
+
+  document.addEventListener('pjax:complete', function () {
+    if (!document.querySelectorAll(".post-swiper-container")[0]) return;
+    if (typeof bambooSwiperTag.swiper === "undefined") {
+      load_swiper();
+    } else {
+      pjax_swiper();
+    }
+  });
+</script>
+    <!-- pjax -->
+    
+
+<!-- pjax -->
+
+
+  <script src="/js/pjax@0.2.8/index.js"></script>
+  
+    <!-- 样式位于：source/css/_third-party/pjaxanimate.styl -->
+
+<div class="pjax-animate">
+  
+    <div class="loading-circle"><div id="loader-circle"></div></div>
+    <script>
+      window.ShowLoading = function() {
+        $(".loading-circle").css("display", "block");
+      };
+      window.HideLoading = function() {
+        $(".loading-circle").css("display", "none");
+      }
+    </script>
+  
+	<script>
+    document.addEventListener('pjax:complete', function () {
+      window.HideLoading();
+    })
+    document.addEventListener('pjax:send', function () {
+      window.ShowLoading();
+    })
+    document.addEventListener('pjax:error', function () {
+      window.HideLoading();
+    })
+	</script>
+</div>
+
+  
+
+  <script>
+    var pjax = new Pjax({
+      elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([no-pjax])',   // 拦截正常带链接的 a 标签
+      selectors: ["#pjax-container","title"],                                   // 根据实际需要确认重载区域
+      cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+      timeout: 5000
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+
+    })
+    
+    document.addEventListener('pjax:complete', function () {
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+      window.location.href = e.triggerElement.href;
+    })
+    
+    // 刷新不从顶部开始
+    document.addEventListener("DOMContentLoaded", function () {
+      history.scrollRestoration = 'auto';
+    })
+  </script>
+
+
+
+  </body>
+</html>
