@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>gltf数据格式</title>
+      <link href="/2023/06/19/gltf%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F/"/>
+      <url>/2023/06/19/gltf%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[<ol><li><p><code>accessors</code>: 包含访问器（accessor）的数组。访问器定义了访问和解释二进制数据的方式，例如顶点坐标、法线、纹理坐标等。</p><blockquote><ul><li><p><code>bufferView</code>: 表示该访问器使用的缓冲区视图（buffer view）的索引。缓冲区视图定义了对应的二进制数据的切片和偏移。</p></li><li><p><code>componentType</code>: 表示存储每个坐标分量的数据类型。在这个例子中，<code>5126</code> 对应的是浮点型数据类型，即 <code>FLOAT</code>。</p></li><li><p><code>count</code>: 表示顶点坐标的数量。在这个例子中，有 4502 个顶点坐标。</p></li><li><p><code>max</code>: 表示顶点坐标的最大值。这是一个包含三个分量的数组，分别代表 x、y、z 坐标轴上的最大值。</p></li><li><p><code>min</code>: 表示顶点坐标的最小值。同样是一个包含三个分量的数组，分别代表 x、y、z 坐标轴上的最小值。</p></li><li><p><code>type</code>: 表示每个顶点坐标的数据类型。</p><ul><li>1、如果字段中的<code>type</code>为<code>&quot;SCALAR&quot;</code>，那么这表示顶点坐标的数据类型为标量（Scalar）。标量表示每个顶点只有一个分量，即只有一个值。</li><li>2、”VEC3” 表示每个顶点坐标由三个分量组成，即 x、y、z。</li></ul></li></ul></blockquote></li><li><p><code>buffers</code>: 包含缓冲区（buffer）的数组。缓冲区存储模型的二进制数据，例如顶点数据、纹理数据等。</p></li><li><p><code>bufferViews</code>: 包含缓冲区视图（buffer view）的数组。缓冲区视图定义了对缓冲区的切片和偏移，以便访问特定的数据。</p><blockquote><ul><li><code>&quot;buffer&quot;</code>：指定使用的缓冲区索引。在这种情况下，<code>0</code>表示使用索引为<code>0</code>的缓冲区。</li><li><code>&quot;byteLength&quot;</code>：指定缓冲区视图的字节长度。在这种情况下，缓冲区视图的字节长度为<code>30012</code>字节。</li><li><code>&quot;byteOffset&quot;</code>：指定缓冲区视图的字节偏移量。在这种情况下，缓冲区视图的字节偏移量为<code>0</code></li></ul></blockquote></li><li><p><code>meshes</code>: 包含网格（mesh）的数组。网格定义了模型的几何形状，由一个或多个网格原语（primitives）组成，如三角形或线段。</p><blockquote><ul><li>“name”：指定网格对象的名称，这里是”Mesh_1”。</li><li>“primitives”：是一个数组，包含一个或多个图元（primitive）。在这种情况下，只有一个图元。<ul><li><code>&quot;attributes&quot;</code>：是一个对象，指定图元的属性。属性包括顶点位置（POSITION）、法线（NORMAL）和纹理坐标（TEXCOORD_0）。这些属性与缓冲区视图的索引相关联。例如，属性”POSITION”的值为<code>0</code>，表示与索引为<code>0</code>的缓冲区视图相关联的顶点位置数据。</li><li><code>&quot;indices&quot;</code>：指定与该图元关联的索引缓冲区的索引。在这种情况下，索引缓冲区的索引为<code>3</code>。</li><li><code>&quot;material&quot;</code>：指定与该图元关联的材质的索引。在这种情况下，材质的索引为<code>0</code>。</li></ul></li></ul></blockquote></li><li><p><code>materials</code>: 包含材质（material）的数组。材质定义了模型表面的外观和属性，如颜色、纹理等。</p><ul><li>“name”：材质的名称。</li><li>“pbrMetallicRoughness”：基于物理的金属粗糙度材质的属性。<ul><li><code>&quot;baseColorFactor&quot;</code>：基础颜色的因子，表示为RGBA数组。</li><li><code>&quot;baseColorTexture&quot;</code>：基础颜色纹理的索引。</li><li><code>&quot;metallicFactor&quot;</code>：金属度的因子。</li><li><code>&quot;roughnessFactor&quot;</code>：粗糙度的因子。</li><li><code>&quot;metallicRoughnessTexture&quot;</code>：金属粗糙度纹理的索引。</li></ul></li><li>“normalTexture”：法线纹理的属性。<ul><li><code>&quot;scale&quot;</code>：法线纹理的缩放因子。</li><li><code>&quot;index&quot;</code>：法线纹理的索引。</li></ul></li><li><code>&quot;emissiveFactor&quot;</code>：自发光的因子，表示为RGB数组。</li><li><code>&quot;emissiveTexture&quot;</code>：自发光纹理的索引。</li><li>“occlusionTexture”：遮挡纹理的属性。<ul><li><code>&quot;strength&quot;</code>：遮挡强度的因子。</li><li><code>&quot;index&quot;</code>：遮挡纹理的索引。</li></ul></li><li><code>&quot;alphaMode&quot;</code>：透明度的模式。</li><li><code>&quot;alphaCutoff&quot;</code>：透明度的截断值。</li><li><code>&quot;doubleSided&quot;</code>：指示材质是否双面渲染的布尔值。</li></ul></li><li><p><code>textures</code>: 包含纹理（texture）的数组。纹理定义了模型表面的图像或图案。</p><ul><li><code>&quot;name&quot;</code>：纹理的名称。</li><li><code>&quot;sampler&quot;</code>：纹理采样器的索引。</li><li><code>&quot;source&quot;</code>：纹理图像的索引。</li><li><code>&quot;extensions&quot;</code>：纹理的扩展属性。</li><li><code>&quot;extras&quot;</code>：自定义的附加属性。</li></ul></li><li><p><code>images</code>: 包含图像（image）的数组。图像定义了纹理的实际图像数据，可以是嵌入的图像数据或引用外部图像文件。</p></li><li><p> samplers：是 GLTF 文件中用于定义纹理采样器的部分。它是一个包含多个采样器对象的数组。</p></li></ol><ul><li><code>&quot;magFilter&quot;</code>: 定义纹理在放大时的过滤方式。可能的值包括：<ul><li><code>9728</code>：<code>NEAREST</code>，最近点采样。</li><li><code>9729</code>：<code>LINEAR</code>，线性过滤。</li></ul></li><li><code>&quot;minFilter&quot;</code>: 定义纹理在缩小时的过滤方式。可能的值包括：<ul><li><code>9728</code>：<code>NEAREST</code>，最近点采样。</li><li><code>9729</code>：<code>LINEAR</code>，线性过滤。</li><li><code>9984</code>：<code>NEAREST_MIPMAP_NEAREST</code>，使用最近点采样从最近的 mipmap 级别中获取纹理颜色。</li><li><code>9985</code>：<code>LINEAR_MIPMAP_NEAREST</code>，使用线性过滤从最近的 mipmap 级别中获取纹理颜色。</li><li><code>9986</code>：<code>NEAREST_MIPMAP_LINEAR</code>，使用最近点采样从两个最近的 mipmap 级别之间进行插值获取纹理颜色。</li><li><code>9987</code>：<code>LINEAR_MIPMAP_LINEAR</code>，使用线性过滤从两个最近的 mipmap 级别之间进行插值获取纹理颜色。</li></ul></li><li><code>&quot;wrapS&quot;</code>: 定义纹理在 S (水平) 方向上的环绕方式。可能的值包括：<ul><li><code>33071</code>：<code>CLAMP_TO_EDGE</code>，超出纹理边界的坐标将被夹紧到边界。</li><li><code>33648</code>：<code>MIRRORED_REPEAT</code>，纹理将在超出范围的坐标上进行镜像重复。</li><li><code>10497</code>：<code>REPEAT</code>，纹理将在超出范围的坐标上进行重复。</li></ul></li><li><code>&quot;wrapT&quot;</code>: 定义纹理在 T (垂直) 方向上的环绕方式。可能的值和 <code>&quot;wrapS&quot;</code> 相同。</li><li><code>&quot;extensions&quot;</code>: 采样器的扩展属性。</li><li><code>&quot;extras&quot;</code>: 自定义的附加属性。</li></ul><ol start="9"><li><p><code>nodes</code>: 包含节点（node）的数组。节点是模型的层次结构中的元素，可以包含几何信息、变换信息以及其他节点的引用。</p></li><li><p><code>scenes</code>: 包含场景（scene）的数组。场景定义了一组节点的集合，表示完整的场景层次结构。</p><ul><li><code>&quot;name&quot;: &quot;Scene&quot;</code>：场景的名称为 “Scene”。</li><li><code>&quot;nodes&quot;: [3]</code>：场景中包含一个节点，该节点的索引为 3。</li></ul></li><li><p><code>scene</code>: 表示默认场景的索引。在 GLTF 文件中，可以定义多个场景，但只能指定一个默认场景。</p></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> gltf </category>
+          
+          <category> webGL </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> threejs </tag>
+            
+            <tag> gltf </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>cesium pick和射线的使用（工具篇）</title>
       <link href="/2022/12/21/%E4%BA%8B%E4%BB%B6/"/>
       <url>/2022/12/21/%E4%BA%8B%E4%BB%B6/</url>
