@@ -11,7 +11,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>树莓派安装系统 | GIS技术部门</title>
+  <title>GIS技术部门</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -513,418 +513,704 @@
 </header>
         <!-- 内容区域 -->
         
- <!-- prismjs 代码高亮 -->
- 
-    
-    <link href="/js/prism/prism-line-numbers.css" rel="stylesheet">
-    
-        <link href="/js/prism/prism.min.css" rel="stylesheet">
-    
-
-    <style>
-        pre[class*="language-"] {
-            overflow-y: hidden;
-        }
-        .line-numbers .line-numbers-rows {
-            border: none;
-        }
-    </style>
+  <!-- 首页轮播 -->
   
 
-
-<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
-
-
-  <!-- 文章详情页顶部图片和标题 -->
+  <link href="/js/vue-typed-js/index.css" rel="stylesheet">
 
 
 
 
-<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('/medias/4.jpg')">
-  <div class="post-detail-header-mask"></div>
-  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
+
+
+<div class="swiper-length" style="display: none;">0</div>
+<div id="appSwiper"
+  class="swiper-no-swiping"
+  @mouseenter="stopAutoPlay()" 
+  @mouseleave="startAutoPlay()"
+>
+  <swiper v-cloak ref="mySwiper" :options="swiperOptions" @slideChangeTransitionEnd="slideChangeTransitionEnd">
+    
+      <swiper-slide>
+        <div class="item swiper-lazy" data-background="http://tva1.sinaimg.cn/large/8e96ea1fgy1h9b7y4obe8j22yo1o0qh7.jpg" style="background-size: 300000px; 
+          background-position: left center;" style="position: relative;">
+          <div class="swiper-bgmask" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;"></div>
+            <div class="flag">
+              
+              <div class="img-mask swiper-lazy swiper-default-bgImg" data-background="http://tva1.sinaimg.cn/large/8e96ea1fgy1h9b7y4obe8j22yo1o0qh7.jpg" style="height: 100%; background-size: cover; 
+                background-position: center center;">
+                <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>   
+              </div>
+              <div class="flag-text">
+                <div class="flag-text-content">
+                  <div class="title ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">GISER天地</div>
+                  
+                      <div class="excerpt ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s"></div>
+                    
+                </div>
+                <div style="display: flex;" class="flag-text-btns">
+                  
+                  
+                    <div class="ani animated" style="margin-left: 10px;" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s"><a target="_blank" rel="noopener" href="http://demo.guimap.cn" class="read-more swiper-btn-color2" style="display: inline-block; z-index:1;border: 1px solid white;">DEMO示例</a></div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+      </swiper-slide>
+    
+  </swiper>
   
-  <div class="post-detail-header_info-box">
-    <div class="title-box">
-      <span class="title">
-        树莓派安装系统
-      </span>
+    <div id="scroll-down" @click="toPostContent()">
+      <a href="javascript:;">
+        <i class="fas fa-angle-down scroll-down-effects"></i>
+      </a>
     </div>
-    
-    
-      
-        <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> 发表于：2021-08-08 |
-        </span>
-      
-
-      
-        <span class="post-detail-header_categories">
-          <i class="iconfont iconbookmark1"></i> 分类：
-          
-            <a href="/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/" class="post-detail-header_category">
-              树莓派
-            </a>
-          
-        </span>
-      
-
-      
-    
-  </div>
   
-  
-    <script src="/js/bubble/bubble.js"></script>
-  
+  <canvas id="header_canvas"style="position:absolute;bottom:0;width:100%;pointer-events:none;"></canvas>
+    
 </div>
 
 
-
-
-
-<div class="post-detail-content post-row" 
-  style="padding-top: 0px;">
-  <div class="main-content">
-    <article class="post post-detail">
-      <div class="post-content">
-        <h2 id="1-安装系统"><a href="#1-安装系统" class="headerlink" title="1.安装系统"></a>1.安装系统</h2><p><strong>系统文件可去官网下载适合自己的：</strong><br><strong>PS：文章下方有操作系统介绍</strong><br>官网：<a target="_blank" rel="noopener" href="https://www.raspberrypi.org/software/operating-systems/#raspberry-pi-os-32-bit">https://www.raspberrypi.org/software/operating-systems/#raspberry-pi-os-32-bit</a></p>
-<blockquote>
-<p>链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1CP4ORh6p2b0uolO1oxrPDA">https://pan.baidu.com/s/1CP4ORh6p2b0uolO1oxrPDA</a><br>提取码：mcm3 </p>
-</blockquote>
-<h2 id="2-配置开机自动连接wife"><a href="#2-配置开机自动连接wife" class="headerlink" title="2.配置开机自动连接wife"></a>2.配置开机自动连接wife</h2><p>打开SD卡，在boot区新建一个名为wpa_supplicant.conf空白文件，用记事本打开，例如写入</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js">country<span class="token operator">=</span><span class="token constant">GB</span>
-ctrl_interface<span class="token operator">=</span><span class="token constant">DIR</span><span class="token operator">=</span><span class="token operator">/</span><span class="token keyword">var</span><span class="token operator">/</span>run<span class="token operator">/</span>wpa_supplicant <span class="token constant">GROUP</span><span class="token operator">=</span>netdev
-update_config<span class="token operator">=</span><span class="token number">1</span>
-network<span class="token operator">=</span><span class="token punctuation">&#123;</span>
-	ssid<span class="token operator">=</span><span class="token string">"Wifi222"</span> 
-	psk<span class="token operator">=</span><span class="token string">"dferwrwe"</span>
-	priority<span class="token operator">=</span><span class="token number">2</span>
-<span class="token punctuation">&#125;</span>
-network<span class="token operator">=</span><span class="token punctuation">&#123;</span>
-	ssid<span class="token operator">=</span><span class="token string">"Wifigerger"</span>
-	psk<span class="token operator">=</span><span class="token string">"rwerwerwer"</span>
-	priority<span class="token operator">=</span><span class="token number">1</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<hr>
-<p>ssid=“WiFi名字，不删除引号,不能有中文”<br>psk=“WiFi密码，不删除引号”<br>priority=替换成数字，数字越大代表则优先连接</p>
-<hr>
-<h2 id="3-打开SSH"><a href="#3-打开SSH" class="headerlink" title="3.打开SSH"></a>3.打开SSH</h2><p>在boot区新建一个名为ssh的空白文件，不加后缀</p>
-<h2 id="4-操作系统"><a href="#4-操作系统" class="headerlink" title="4.操作系统"></a>4.操作系统</h2><p>根据偏好选择下列之一。</p>
-<p><strong>Raspbian</strong><br>树莓派官方深度定制的硬件驱动与软件程序，官方推荐系统。如果你第一次使用树莓派，请下载这个。Debian的软件策略偏保守，稳定第一，升级是次要的。<br>桌面版下载链接：<a target="_blank" rel="noopener" href="http://downloads.raspberrypi.org/raspbian_latest">http://downloads.raspberrypi.org/raspbian_latest</a><br>Lite 版（无桌面）下载链接：<a target="_blank" rel="noopener" href="https://downloads.raspberrypi.org/raspbian_lite_latest">https://downloads.raspberrypi.org/raspbian_lite_latest</a><br>默认帐号：Username: pi Password: raspberry</p>
-<p><strong>OpenELEC</strong><br>运行快、且用户体验友好的一款XBMC媒体中心。<br>下载链接：<a target="_blank" rel="noopener" href="http://downloads.raspberrypi.org/openelec_latest">http://downloads.raspberrypi.org/openelec_latest</a></p>
-<p><strong>Pidora</strong><br>Pidora是社区对Fedora在树莓派上的移植。不是Fedora官方版，但被Fedora官网推荐用于树莓派。Pidora基于Fedora 18，采用另一个轻量桌面环境XFCE。Fedora的软件策略相比于Debian，是略偏向先锋的。Fedora能用到版本稍新，但也经受过实测调试的软件包。<br>下载链接：<a target="_blank" rel="noopener" href="http://downloads.raspberrypi.org/pidora_latest">http://downloads.raspberrypi.org/pidora_latest</a><br>默认帐号：Username: root Password: raspberrypi</p>
-<p><strong>Arch Linux ARM</strong><br>著名轻量系统Arch Linux在ARM架构上的移植。注重对于开发者的简洁，任何可有可无的软件一律不自带。仅有命令行界面，不建议初学者使用。Arch Linux的软件策略是相当激进的，使用Arch Linux能用到最新的软件包，但也需要承担尝鲜可能的风险。<br>下载链接：<a target="_blank" rel="noopener" href="http://downloads.raspberrypi.org/arch_latest">http://downloads.raspberrypi.org/arch_latest</a><br>默认帐号：Username: root Password: root</p>
-<p><strong>RISC OS</strong><br>非Linux系统。<br>下载链接：<a target="_blank" rel="noopener" href="http://downloads.raspberrypi.org/riscos_latest">http://downloads.raspberrypi.org/riscos_latest</a><br>默认帐号：无需</p>
-<p><strong>Raspbmc</strong><br>下载链接：<a target="_blank" rel="noopener" href="http://downloads.raspberrypi.org/raspbmc_latest">http://downloads.raspberrypi.org/raspbmc_latest</a><br>多媒体中心、DIY电视盒专用系统。将媒体中心软件XBMC与Raspbian系统结合的衍生系统之一。中文支持良好，建议使用。<br>默认帐号：Username: pi Password: raspberry</p>
-<p><strong>XBian</strong><br>下载链接：<a target="_blank" rel="noopener" href="http://jaist.dl.sourceforge.net/project/xbian/release/XBian_1.0_Beta_1.1.7z">XBian_1.0_Beta_1.1.7z</a><br>与Raspbmc一样，是Raspbian+XBMC的媒体中心。注重性能优化。（存在中文文件名乱码问题）<br>默认帐号：Username: root Password: raspberry</p>
-<p><strong>RetroPie</strong><br>下载链接：<a target="_blank" rel="noopener" href="http://florian.jdc.se/RetroPieImage_v1.7.zip">RetroPieImage_v1.7.zip</a><br>这是一个基于Raspbian构建的家用机模拟器系统，内置了FC、SFC、GB、GBA、DOS等游戏平台的模拟器软件，可以将树莓派快速配置成多功能老游戏主机。<br>默认帐号：Username: pi Password: raspberry</p>
-<p><strong>FreeBSD</strong><br>下载链接：<a target="_blank" rel="noopener" href="http://downloads.raspberrypi.org/images/freebsd/freebsd-pi-r245446/freebsd-pi-r245446.img.gz">freebsd-pi-r245446.img.gz</a><br>BSD系列。<br>默认帐号：Username: pi Password: freebsdarm</p>
-<p><strong>Kali Linux</strong><br>下载链接：<a target="_blank" rel="noopener" href="https://www.offensive-security.com/kali-linux-vmware-arm-image-download/">Kali Linux</a><br>Kali Linux。</p>
-<p><strong>Ubuntu MATE for the Raspberry Pi 2</strong><br>下载链接：<a target="_blank" rel="noopener" href="https://downloads.raspberrypi.org/raspbian_latest">Ubuntu MATE for the Raspberry Pi 2</a><br>Ubuntu MATE是桌面Linux发行，其宗旨是通过MATE这个经典、传统的桌面环境来提供Ubuntu操作系统的简介和典雅。MATE是GNOME 2桌面环境的继续，曾经作为Ubuntu的缺省桌面，直到10.10版中被Unity所取代。<br>Ubuntu MATE适合树莓派新手使用，界面是最好看的，但是在CPU优化方面不如官方的系统做得好。</p>
-<p><strong>Snappy Ubuntu Core</strong><br>下载链接：<a target="_blank" rel="noopener" href="http://people.canonical.com/~platform/snappy/raspberrypi2/ubuntu-15.04-snappy-armhf-rpi2.img.xz">Snappy Ubuntu Core</a><br>非官方系统 Snappy Ubuntu Core。</p>
-<p><strong>Windows 10 IoT（物联网版）</strong><br>RTM版下载：<a target="_blank" rel="noopener" href="http://go.microsoft.com/fwlink/?LinkId=619755">Download RTM Release for Raspberry Pi 2</a><br>预览版下载：<a target="_blank" rel="noopener" href="http://go.microsoft.com/fwlink/?LinkID=625104">Download Insider Preview for Raspberry Pi 2</a><br>微软在Build 2015大会上宣布推出一个独立的Windows 10开发者预览版， 这个版本名称是Windows 10 IoT Core Insider Preview（Windows 10物联网核心内幕预览版），现在可供开发人员下载和研究，它支持树莓派2和英特尔Minnowboard MAX设备，使设备制造商能够充分利用这些产品有限的硬件资源。<br>据微软表示，Windows 10 IoT Core Insider Preview为设备制造商提供了世界一流的开发工具，通用Windows平台的力量，直接访问硬件的能力，并能在树莓派2等硬件设备上进行远程调试，更新和管理软件。</p>
-<p><strong>PiNet</strong><br>安装介绍链接：<a target="_blank" rel="noopener" href="http://pinet.org.uk/articles/installation/installing-ubuntu.html">PiNet</a><br>PiNet 是一个自由和开放源码的项目，为帮助学校建立和管理一个Raspberry Pi的课堂。<br>其主要特点包括<br>基于网络的用户帐户<br>基于网络的操作系统-所有树莓PIS启动一个主Raspbian操作系统。<br>共享文件夹-易于使用共享文件夹系统的教师和学生。<br>工作收集系统简单的工作收集和提交系统，让学生在工作。<br>自动备份-自动备份所有学生的工作，定期向外部驱动器。<br>多个小的功能，如批量用户导入，课堂管理软件集成等<br>服务器软件安装在运行Ubuntu Linux 14.04计算机（这也完全是免费的）。你必须再连接服务器和覆盆子PIS通过有线网络。</p>
-<p><strong>CentOS 7 ARM for the Raspberry Pi 2</strong><br>下载链接：<a target="_blank" rel="noopener" href="http://mirror.centos.org/altarch/7/isos/armhfp/">CentOS 7 ARM</a><br>面向ARM硬件架构的 CentOS 7 Linux。包含各种各样的新特性、以及软件更新与增强，比如面向身份认证管理的Kerberos HTTP代理、OpenJDK7中TLS连接的ECC支持、网络堆栈改进、以及Atomic包的更新等。<br>默认帐号：Username: root Password: centos</p>
-
-      </div>
-      <div class="post-tags-categories">
-        
-        <div class="tags">
-          
-            <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" class="">
-              树莓派
-            </a>
-          
-            <a href="/tags/%E7%B3%BB%E7%BB%9F/" class="">
-              系统
-            </a>
-          
-        </div>
-        
-      </div>
-      
-        <div class="copyright">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-    <strong>作者:  </strong>Giser</a>
-    </li>
-    <li class="post-copyright-link">
-    <strong>文章链接:  </strong>
-    <a href="/2021/08/08/树莓派安装系统/" target="_blank" title="树莓派安装系统">https://gaochundu.github.io/2021/08/08/树莓派安装系统/</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>版权声明:   </strong>
-      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
-      许可协议。转载请注明出处!
-    </li>
-  </ul>
-<div>
-      
-    </article>
-    <!-- 上一篇文章和下一篇文章 -->
-    
-      <!-- 文章详情页的上一页和下一页 -->
-<div class="post-nav">
-
-
-
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="/medias/5.jpg" class="lazyload placeholder" data-srcset="/medias/5.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-    </div>
-    <a href="/2021/08/08/java%E7%BB%8F%E7%BA%AC%E5%BA%A6%E6%8A%BD%E7%A8%80%E7%AE%97%E6%B3%95/" class="post-nav-link">
-      <div class="title">
-        <i class="fas fa-angle-left"></i> 上一篇:
-        <div class="title-text">java经纬度抽稀算法</div>
-      </div>
-      
-      <!-- <div class="content">
-        java经纬度抽稀算法 (拉默–道格拉斯–普克算法)public static List&lt;LatLng> simp
-      </div> -->
-    </a>
-  </div>
-
-
-
-  
-  <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="/medias/3.jpg" class="lazyload placeholder" data-srcset="/medias/3.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
-    </div>
-    <a href="/2021/08/08/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85OpenMediaVault/" class="post-nav-link">
-      <div class="title">
-        下一篇: <i class="fas fa-angle-right"></i>
-        <div class="title-text">树莓派安装OpenMediaVault</div>
-      </div>
-      <!-- <div class="content">
-        2 安装OpenMediaVault1 换源sudo nano &#x2F;etc&#x2F;apt&#x2F;sour
-      </div> -->
-    </a>
-  </div>
-
-</div>
-
-    
-    
-
-    <!-- 打赏 -->
-    
-      <div id="appDonate" class="post-donate">
-  <div id="donate_board" class="donate_bar center" ref="donate">
-    <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏" @click="showDialogDrawer()"></a>
-  </div>
-  <transition name="fade">
-    <div 
-      class="donate-box-mask"
-      v-cloak 
-      v-show="visible"
-      @click="cancelDialogDrawer()"
-    >
-    </div>
-  </transition>
-  <transition name="bounce">
-    <div class="donate-box" v-cloak v-show="visible">
-      <div class="donate-box_close">
-        <i class="fas fa-times" aria-hidden="true" @click="cancelDialogDrawer" pointer></i>
-      </div>
-      <div class="donate-box_title">
-        <h4>
-          你的赏识是我前进的动力
-        </h4>
-      </div>
-      <div class="donate-box_tab">
-        <div class="Alipay" pointer :class="{'active': tabActive === 'Alipay'}" @click="changeTabActive('Alipay')">
-          支付宝
-        </div>
-        <div class="WeChatpay" pointer :class="{'active': tabActive === 'WeChatpay'}" @click="changeTabActive('WeChatpay')">
-          微信
-        </div>
-      </div>
-      <div class="donate-box_img">
-        <div class="AlipayImg" v-show="tabActive === 'Alipay'">
-          <img src="/medias/zfb.png" class="lazyload placeholder" data-srcset="/medias/zfb.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="支付宝打赏" />
-        </div> 
-        <div class="WeChatpayImg" v-show="tabActive === 'WeChatpay'">
-          <img src="/medias/wx.png" class="lazyload placeholder" data-srcset="/medias/wx.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="微信打赏" />
-        </div>
-      </div>
-    </div>
-  </transition>
-</div>
 
 <script>
-  var body = document.body || document.documentElement || window;
+  var autoplay = JSON.parse('false');
+  var delay = '5000';
+  var loop = JSON.parse('true') ? false : JSON.parse('true');
+  var effect = 'slide';
+  var swiperLength = parseInt(document.querySelector(".swiper-length").innerText);
+  var defaultDesc = '';
+  defaultDesc = defaultDesc.split(',');
+  var defaultDescTypedLoop = JSON.parse('true');
   var vm = new Vue({
-    el: '#appDonate',
+    el: '#appSwiper',
     data: {
-      visible: false,
-      tabActive: 'Alipay',
-      top: 0,
+      defaultDesc: defaultDesc,
+      defaultDescTypedLoop,
+      swiperOptions: {
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true // 允许点击小圆点跳转
+        },
+        loop: loop ? true : false,
+        effect, // fade
+        autoplay: (autoplay && swiperLength > 1) ? {
+  　　　　delay,
+  　　　　disableOnInteraction: false // 手动切换之后继续自动轮播
+    　　} : false,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        lazy: {
+          loadPrevNext: true,
+        },
+        on:{
+          init: function() {
+            swiperAnimateCache(this); //隐藏动画元素 
+            swiperAnimate(this); //初始化完成开始动画
+          }, 
+          slideChangeTransitionEnd: function(){ 
+            swiperAnimate(this); //每个slide切换结束时也运行当前slide动画
+          } 
+        }
+        // Some Swiper option/callback...
+      }
     },
     computed: {
+      swiper() {
+        return this.$refs.mySwiper.$swiper
+      }
     },
     mounted() {
+      // console.log('Current Swiper instance object', this.swiper)
+      // this.swiper.slideTo(0, 1000, false)
     },
     methods: {
-      showDialogDrawer() {
-        this.visible = true;
-        // 防止页面滚动，只能让弹框滚动
-        // function getScroll() {
-        //   return {
-        //     left: window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0,
-        //     top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
-        //   };
-        // }
-        this.top = $(document).scrollTop() // or getScroll().top
-        // console.log('aa', $('.main-content'));
-        body.style.cssText = 'overflow: hidden;';
+      stopAutoPlay() {
+        (autoplay && swiperLength > 1) && this.swiper.autoplay.stop();
       },
-      cancelDialogDrawer() {
-        this.visible = false;
-        body.removeAttribute('style');
-        $(document).scrollTop(this.top)
+      startAutoPlay() {
+        (autoplay && swiperLength > 1) && this.swiper.autoplay.start();
       },
-      changeTabActive(name) {
-        this.tabActive = name;
+      slideChangeTransitionEnd() {
+        console.log('1');
+      },
+      toPostContent() {
+        const fullHeight = $(window).height() - 60;
+        $('html,body').animate({scrollTop: fullHeight},500);
       }
     },
     created() {}
   })
 </script>
-    
 
-    <!-- 分享 -->
-    
-      <!-- https://github.com/overtrue/share.js -->
-<!-- 文章详情页的分享 -->
-<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-
-<script src="/js/shareJs/social-share.min.js"></script>
-</script>
+  <script src="/js/bubble/homeBubble.js"></script>
 
 <style>
-  .social-share {
-    margin: 20px 0;
+#appSwiper {
+  position: relative;
+  user-select: none;
+  overflow: hidden;
+}
+.default-excerpt {
+  font-size: 1.6rem;
+  margin-top: 1rem;
+  font-family: Titillium Web,'PingFang SC','Hiragino Sans GB','Microsoft JhengHei','Microsoft YaHei',sans-serif;
+}
+.bottom-one-btn {
+  margin-top: 15px;
+}
+.swiper-container {
+  overflow: hidden;
+  z-index: 0;
+}
+.swiper-slide {
+  height: 350px;
+  position: relative;
+}
+.swiper-button-prev,
+.swiper-button-next {
+  padding: 10px 10px;
+  transition: background 0.2s;
+}
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+.swiper-slide .item {
+  width: 100%;
+  height: 100%;
+}
+.flag {
+  position: relative;
+  width: 70%;
+  margin: 0 auto;
+  color: #ffffff;
+  height: 100%;
+  background: #000;
+}
+.flag img {
+  min-height: 100%;
+}
+.flag-text {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  width: 80%;
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 9999;
+}
+.flag-text .title {
+  font-size: 1.8rem;
+  font-family: Long Cang,cursive;
+}
+.flag-text .title a {
+  color: #fff;
+  transition: color 0.3s;
+}
+.flag-text .title a:hover {
+  color: #42b983;
+}
+.flag-text .excerpt {
+  color: #eee;
+  font-family: Ubuntu,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  width: 70%;
+  line-height: 30px;
+  height: 150px;
+  margin-top: 2%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  overflow: hidden;
+}
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background-color: #42b983;
+}
+.img-mask {
+  opacity:0.6; filter: alpha(opacity=60);
+}
+.flag-text .read-more {
+  margin-bottom: 30px;
+  padding: 5px 15px;
+  color: #ffffff;
+  border-radius: 20px;
+}
+#scroll-down {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2.5rem;
+  color: #fff;
+  cursor: pointer;
+  z-index: 2;
+}
+#scroll-down a {
+  color: #fff;
+}
+@-webkit-keyframes rightan
+  {
+  
+  0%
+  {
+    transform: translateY(0);
+    opacity: 0.5;
   }
+  50% {
+    transform: translateY(-30px);
+    opacity: 1;
+  }
+  100%
+  {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+}
+.scroll-down-effects {
+  animation: rightan 1.5s infinite;
+}
+/* 当头部导航设置为背景透明的时候 */
+
+  .swiper-slide {
+    height: 400px;
+  }
+  .flag-text {
+    top: 80px;
+  }
+
+
+@media (min-width: 992px) {
+  .swiper-button-prev {
+    margin-left: 15%;
+    transform: translateX(-180%);
+  }
+  .swiper-button-next {
+    margin-right: 15%;
+    transform: translateX(180%);
+  }
+  .flag-text .title {
+    width: 80%;
+    line-height: 35px;
+    max-height: 70px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+}
+@media screen and (max-width: 1200px) { 
+  .flag {
+    width: 80%;
+  }
+  .swiper-button-prev {
+    margin-left: 10%;
+    transform: translateX(-180%);
+  }
+  .swiper-button-next {
+    margin-right: 10%;
+    transform: translateX(180%);
+  }
+}
+@media (max-width: 992px) {
+  .flag {
+    width: 100%;
+  }
+  .flag-text .title {
+    font-size: 1.5rem;
+    margin-top: 50px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+  .flag-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80%;
+    height: 100%;
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+  .flag-text .excerpt {
+    width: 100%;
+    line-height: 25px;
+    height: 125px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    overflow: hidden;
+  }
+  .flag-text .read-more {
+    margin-bottom: 80px;
+  }
+}
+@media (max-width: 992px) and (min-width: 551px) {
+  .flag-text .excerpt {
+    width: 70%;
+  }
+}
+@media (max-width: 551px) {
+  .swiper-slide {
+    height: 250px;
+  }
+  .flag-text .title {
+    line-height: 30px;
+    max-height: 60px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    margin-top: 20px;
+  }
+  .flag-text .excerpt {
+    font-size: 1rem;
+    line-height: 20px;
+    height: 80px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+  }
+  .flag-text .excerpt { 
+    margin-top: 10px;
+  }
+  .flag-text .read-more {
+    margin-top: 10px;
+    margin-bottom: 50px;
+  }
+  .swiper-button-prev,
+  .swiper-button-next {
+    transform: scale(0.5);
+  }
+  .swiper-button-prev {
+    left: 0;
+  }
+  .swiper-button-next {
+    right: 0;
+  }
+}
+/* 当头部导航设置为背景透明的时候 */
+
+  @media (max-width: 992px) {
+    .flag-text {
+      top: 60px;
+      height: 80%;
+    }
+  }
+  @media (max-width: 551px) {
+    .swiper-slide {
+      height: 310px;
+    }
+  }
+
+
+/* 文字或者按钮居中显示 */
+
+  .flag-text {
+    left: 10%;
+  }
+  .flag-text .flag-text-content {
+    width: 100%;
+    text-align: center;
+  }
+  .flag-text .title {
+    width: 100%;
+    text-align: center;
+  }
+  .flag-text .excerpt { 
+    width: 100%;
+    text-align: center;
+  }
+  .bottom-one-btn {
+    display: flex;
+    justify-content: center;
+  }
+  .default-excerpt {
+    display: flex;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-family: Titillium Web,'PingFang SC','Hiragino Sans GB','Microsoft JhengHei','Microsoft YaHei',sans-serif;
+  }
+  .flag-text-btns {
+    justify-content: center;
+  }
+  @media (min-width: 992px) {
+    .flag-text .excerpt {
+      line-height: 30px;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 5;
+      overflow: hidden;
+    }
+  }
+  @media (max-width: 992px) {
+    .flag-text {
+      margin-left: 0;
+      transform: translateX(0);
+    }
+  }
+
+
+
+
+/* 全屏显示 */
+
+  .flag {
+    width: 100%;
+  }
+  .swiper-slide {
+    height: calc(100vh - 60px);
+    
+      height: 100vh;
+    
+  }
+  .flag-text {
+    top: 50%;
+    left: 15%;
+    transform: translateY(-50%);
+    width: 70%;
+    height: auto;
+  }
+  .flag-text .title {
+    font-size: 2.8rem;
+    line-height: 1.5em;
+    max-height: none;
+    /* overflow: visible; */
+  }
+  .flag-text .excerpt {
+    font-size: 1.25rem;
+    height: 150px;
+  }
+  .flag-text .read-more {
+    margin-top: 10px;
+  }
+  .swiper-button-prev,
+  .swiper-button-next {
+    margin-top: -60px!important;
+  }
+  .swiper-btn-color,
+  .swiper-btn-color2 {
+    background-color: transparent;
+    border: 1px solid #fff;
+  }
+  .swiper-btn-color:hover,
+  .swiper-btn-color2:hover {
+    background-color: #42b983;
+    border: 1px solid #42b983!important;
+  }
+  .flag-text-btns {
+    justify-content: center;
+  }
+  .swiper-button-prev {
+    margin-left: 10px;
+    transform: translateX(0);
+    border-radius: 50%;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+  }
+  .swiper-button-next {
+    margin-right: 10px;
+    transform: translateX(0);
+    border-radius: 50%;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+  }
+  .swiper-button-next:after, .swiper-button-prev:after {
+    font-size: 1.2rem;
+  }
+  @media (min-width: 992px) {
+    .flag-text .excerpt {
+      line-height: 35px;
+      height: 175px;
+    }
+    .default-excerpt {
+      min-height: 150px;
+    }
+    .typed-element {
+      align-items: unset;
+    }
+  }
+  @media (max-width: 992px) {
+    .flag-text {
+      margin-left: 0;
+      height: 60%;
+      top: 55%;
+    }
+    .flag-text .title {
+      font-size: 2.4rem;
+      margin-top: 0;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+    }
+    .flag-text .excerpt {
+      line-height: 35px;
+      height: 185px;
+    }
+    .flag-text .read-more {
+      margin-top: 20px;
+    }
+  }
+  @media (max-width: 551px) {
+    .flag-text {
+      height: 60%;
+    }
+    .flag-text .title {
+      font-size: 2.2rem;
+    }
+    .flag-text .excerpt {
+      line-height: 30px;
+    }
+    .flag-text .read-more {
+      margin-top: 50px;
+      padding: 10px 30px;
+    }
+    .swiper-button-prev {
+      margin-left: 0;
+    }
+    .swiper-button-next {
+      margin-right: 0;
+    }
+    .default-excerpt {
+      margin-top: 1rem;
+    }
+  }
+
+
+/* video */
+.swiper-video {
+  width: 100%;
+  height: 100%;
+}
+.swiper-video video {
+  pointer-events: none;
+}
+.swiper-video-maskBox{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #000;
+  opacity: 0.2;
+  z-index: 1;
+}
+@media (min-width: 992px) {
+  
+    .swiper-video {
+      display: none;
+    }
+    .swiper-default-bgImg {
+      display: block;  
+    }
+  
+}
+@media (max-width: 992px) {
+  .swiper-video {
+    display: none;
+  }
+  .swiper-default-bgImg {
+    display: block;  
+  }
+}
+/* video-end */
 </style>
 
 
+<div id="l_main">
+  <div class="l_content">
+    <!-- 自定义的内容 -->
     
+    <!-- 首页座右铭 -->
     
-    <!-- 评论 -->
-    <!-- 评论 -->
+    <!-- 首页公告 -->
+    
+    <!-- 首页文章置顶 -->
+    
 
-  <div id="myComment">
+
+
+    <div class="bg-floor" id="home-bg-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"></div>
+    <!-- 每一篇文章卡片 -->
+    <!-- hash算法 -->
+
+<section class="posts">
+  
     
-      
-<section id="comments" style="padding: 1em;"
-	class="animated bounceInUp">
-	<div id="vcomment" class="comment"></div>
+    <article class="post reveal" style="flex-direction: row-reverse;   ">
+      <div class="post-main">
+        <div class="post-info">
+          <div class="post-time">
+            <i class="fas fa-clock" aria-hidden="true"></i>
+            <span class="post-time">2021-08-07</span>
+          </div>
+          <div class="post-title">
+            <a class="post-title-link" href="/2021/08/07/git/">git</a>
+          </div>
+          <div class="post-meta">
+            <div class="post-tags">
+              <!-- 文章详情页的标签 -->
+
+            </div>
+            <div class="post-categories">
+              <!-- 文章详情页的分类 -->
+
+
+            </div>
+          </div>
+          <div class="post-img-mobile">
+            <a href="/2021/08/07/git/" style="background-size: cover; 
+              background-position: center center;">
+              <img class="lazyload lazyload placeholder" src="/medias/10.jpg" class="lazyload placeholder" data-srcset="/medias/10.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+            </a>
+          </div>
+          <div class="post-content">
+            
+          </div>
+        </div>
+        <div class="post-more">
+          <a href="/2021/08/07/git/">
+            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
+          </a>
+        </div>
+      </div>
+      <div class="post-img">
+        <a href="/2021/08/07/git/" style="background-size: cover; 
+          background-position: center center;">
+          <img class="lazyload lazyload placeholder" src="/medias/10.jpg" class="lazyload placeholder" data-srcset="/medias/10.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+        </a>
+      </div>
+    </article>
+  
 </section>
-<style>
-	#comments {
-		background: rgba(255,255,255,0.9);
-	}
-	#veditor {
-		background-image: url('https://img.zcool.cn/community/01a253594c71cfa8012193a329a77f.gif');
-		background-size: contain;
-		background-repeat: no-repeat;
-		background-position: right;
-		background-color: rgba(255, 255, 255, 0);
-		resize: vertical;
-	}
-	#veditor:focus{
-		background-position-y: 200px;
-		transition: all 0.2s ease-in-out 0s;
-	}
-	#vcomment .vcards .vcard .vh .vhead .vtag.vvisitor {
-		background-color: #42b983;
-	}
-	.v[data-class=v] .vbtn:active, .v[data-class=v] .vbtn:hover {
-		color: #42b983;
-		border-color: #42b983;
-	}
-	#vcomment .vcards .vcard .vhead .vsys i {
-		display: none;
-	}
-	/* 底部valine链接 */
-	#vcomment .vpower {
-		display: none;
-	}
-	
-	/* 底下注释是修改 名称和邮箱和网址输入框的样式 */
-	/* #vcomment .vheader {
-		display: flex;
-		justify-content: space-around;
-	}
-	
-	#vcomment .vheader .vnick {
-		width: 31%;
-		border: 2px solid #dedede;
-		padding-left: 10px;
-		padding-right: 10px;
-		border-radius: 5px
-	}
-
-	#vcomment .vheader .vmail {
-		width: 31%;
-		border: 2px solid #dedede;
-		padding-left: 10px;
-		padding-right: 10px;
-		border-radius: 5px
-	}
-
-	#vcomment .vheader .vlink {
-		width: 31%;
-		border: 2px solid #dedede;
-		padding-left: 10px;
-		padding-right: 10px;
-		border-radius: 5px
-	} */
-
-	img.vimg {
-		transition: all 1s;
-		/* 头像旋转时间为 1s */
-	}
-
-	img.vimg:hover {
-		transform: rotate(360deg);
-		-webkit-transform: rotate(360deg);
-		-moz-transform: rotate(360deg);
-		-o-transform: rotate(360deg);
-		-ms-transform: rotate(360deg);
-	}
-
-	#vcomment .vcards .vcard {
-		padding: 15px 20px 0 20px;
-		border-radius: 10px;
-		margin-bottom: 15px;
-		box-shadow: 0 0 4px 1px rgba(0, 0, 0, .12);
-		transition: all .3s
-	}
-
-	#vcomment .vcards .vcard:hover {
-		box-shadow: 0 0 8px 3px rgba(0, 0, 0, .12)
-	}
-
-	#vcomment .vcards .vcard .vh .vcard {
-		border: none;
-		box-shadow: none;
-	}
-</style>
+    <!-- 翻页 -->
+    
+  <!-- <nav class="page-nav">
+    <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav> -->
+  <div class="page-nav">
+    
+      <a href="/page/2/"
+         class="page-nav-pre">
+         <i class="fas fa-angle-left"></i><span class="ml-5">上一页</span>
+      </a>
+    
+    <div class="page-info">
+        <div class="page-info-text">3 / 3</div>
+    </div>
     
   </div>
 
-<!-- comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
-
-
   </div>
 
-  <!-- 目录 -->
   
 <aside id='l_side'>
   
@@ -989,29 +1275,143 @@ network<span class="token operator">=</span><span class="token punctuation">&#12
   <div class="layout_sticky">    
     
       
-<section class="widget side_toc">
-  
+        
+    <section class="widget side_category">
+      
   <header>
     
-      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+      <a style="color: " href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
     
   </header>
 
 
-  <div class='content'>
-    <div class="toc-main">
-      <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F"><span class="toc-text">1.安装系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%85%8D%E7%BD%AE%E5%BC%80%E6%9C%BA%E8%87%AA%E5%8A%A8%E8%BF%9E%E6%8E%A5wife"><span class="toc-text">2.配置开机自动连接wife</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%89%93%E5%BC%80SSH"><span class="toc-text">3.打开SSH</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-text">4.操作系统</span></a></li></ol> -->
-        <div class="toc"></div>
+      <div class='content'>
+        <ul class="entry navigation">
+          
+            <li><a class="flat-box"
+              title="/categories/GIS/" href="/categories/GIS/"
+              id="categoriesGIS"
+              ><div class='name'>GIS</div><div class='badge'>(1)</div></a></li>
+          
+            <li><a class="flat-box child"
+              title="/categories/GIS/webgis/" href="/categories/GIS/webgis/"
+              id="categoriesGISwebgis"
+              ><div class='name'>webgis</div><div class='badge'>(1)</div></a></li>
+          
+            <li><a class="flat-box child"
+              title="/categories/GIS/webgis/%E5%9D%90%E6%A0%87/" href="/categories/GIS/webgis/%E5%9D%90%E6%A0%87/"
+              id="categoriesGISwebgisE59D90E6A087"
+              ><div class='name'>坐标</div><div class='badge'>(1)</div></a></li>
+          
+            <li><a class="flat-box"
+              title="/categories/NAS/" href="/categories/NAS/"
+              id="categoriesNAS"
+              ><div class='name'>NAS</div><div class='badge'>(1)</div></a></li>
+          
+            <li><a class="flat-box child"
+              title="/categories/NAS/zerotier-one/" href="/categories/NAS/zerotier-one/"
+              id="categoriesNASzerotier-one"
+              ><div class='name'>zerotier-one</div><div class='badge'>(1)</div></a></li>
+          
+            <li><a class="flat-box child"
+              title="/categories/NAS/zerotier-one/moon/" href="/categories/NAS/zerotier-one/moon/"
+              id="categoriesNASzerotier-onemoon"
+              ><div class='name'>moon</div><div class='badge'>(1)</div></a></li>
+          
+            <li><a class="flat-box"
+              title="/categories/cesium/" href="/categories/cesium/"
+              id="categoriescesium"
+              ><div class='name'>cesium</div><div class='badge'>(1)</div></a></li>
+          
+            <li><a class="flat-box child"
+              title="/categories/cesium/webGL/" href="/categories/cesium/webGL/"
+              id="categoriescesiumwebGL"
+              ><div class='name'>webGL</div><div class='badge'>(1)</div></a></li>
+          
+            <li><a class="flat-box"
+              title="/categories/gltf/" href="/categories/gltf/"
+              id="categoriesgltf"
+              ><div class='name'>gltf</div><div class='badge'>(1)</div></a></li>
+          
+            <li><a class="flat-box child"
+              title="/categories/gltf/webGL/" href="/categories/gltf/webGL/"
+              id="categoriesgltfwebGL"
+              ><div class='name'>webGL</div><div class='badge'>(1)</div></a></li>
+          
+            <li><a class="flat-box"
+              title="/categories/java/" href="/categories/java/"
+              id="categoriesjava"
+              ><div class='name'>java</div><div class='badge'>(1)</div></a></li>
+          
+            <li><a class="flat-box"
+              title="/categories/%E5%89%8D%E7%AB%AF/" href="/categories/%E5%89%8D%E7%AB%AF/"
+              id="categoriesE5898DE7ABAF"
+              ><div class='name'>前端</div><div class='badge'>(8)</div></a></li>
+          
+            <li><a class="flat-box child"
+              title="/categories/%E5%89%8D%E7%AB%AF/CSS/" href="/categories/%E5%89%8D%E7%AB%AF/CSS/"
+              id="categoriesE5898DE7ABAFCSS"
+              ><div class='name'>CSS</div><div class='badge'>(1)</div></a></li>
+          
+            <li><a class="flat-box child"
+              title="/categories/%E5%89%8D%E7%AB%AF/GIS/" href="/categories/%E5%89%8D%E7%AB%AF/GIS/"
+              id="categoriesE5898DE7ABAFGIS"
+              ><div class='name'>GIS</div><div class='badge'>(4)</div></a></li>
+          
+            <li><a class="flat-box child"
+              title="/categories/%E5%89%8D%E7%AB%AF/GIS/webGIS/" href="/categories/%E5%89%8D%E7%AB%AF/GIS/webGIS/"
+              id="categoriesE5898DE7ABAFGISwebGIS"
+              ><div class='name'>webGIS</div><div class='badge'>(4)</div></a></li>
+          
+            <li><a class="flat-box child"
+              title="/categories/%E5%89%8D%E7%AB%AF/GLSL/" href="/categories/%E5%89%8D%E7%AB%AF/GLSL/"
+              id="categoriesE5898DE7ABAFGLSL"
+              ><div class='name'>GLSL</div><div class='badge'>(1)</div></a></li>
+          
+            <li><a class="flat-box child"
+              title="/categories/%E5%89%8D%E7%AB%AF/GLSL/webGIS/" href="/categories/%E5%89%8D%E7%AB%AF/GLSL/webGIS/"
+              id="categoriesE5898DE7ABAFGLSLwebGIS"
+              ><div class='name'>webGIS</div><div class='badge'>(1)</div></a></li>
+          
+            <li><a class="flat-box child"
+              title="/categories/%E5%89%8D%E7%AB%AF/pbf/" href="/categories/%E5%89%8D%E7%AB%AF/pbf/"
+              id="categoriesE5898DE7ABAFpbf"
+              ><div class='name'>pbf</div><div class='badge'>(1)</div></a></li>
+          
+            <li><a class="flat-box"
+              title="/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/" href="/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/"
+              id="categoriesE6A091E88E93E6B4BE"
+              ><div class='name'>树莓派</div><div class='badge'>(2)</div></a></li>
+          
+            <li><a class="flat-box"
+              title="/categories/%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/" href="/categories/%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/"
+              id="categoriesE8BF90E8A18CE78EAFE5A283"
+              ><div class='name'>运行环境</div><div class='badge'>(2)</div></a></li>
+          
+        </ul>
       </div>
-    </div>
-  </div>
-</section>
-<!-- 手机端目录按钮 -->
-<div id="toc-mobile-btn">
-  <i class="fas fa-list-ul" aria-hidden="true"></i>
-</div>
+    </section>
+  
+  
+      
+      
+        
+<section class="widget side_tagcloud">
+    
+  <header>
+    
+      <a style="color: " href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
 
+
+    <div class='content'>
+    <a href="/tags/3dtiles/" style="font-size: 14px; color: #999">3dtiles</a> <a href="/tags/CSS/" style="font-size: 14px; color: #999">CSS</a> <a href="/tags/Cesium/" style="font-size: 24px; color: #555">Cesium</a> <a href="/tags/GIS/" style="font-size: 14px; color: #999">GIS</a> <a href="/tags/GLSL/" style="font-size: 14px; color: #999">GLSL</a> <a href="/tags/Google/" style="font-size: 14px; color: #999">Google</a> <a href="/tags/NAS/" style="font-size: 19px; color: #777">NAS</a> <a href="/tags/OpenMediaVault/" style="font-size: 14px; color: #999">OpenMediaVault</a> <a href="/tags/Protobuf/" style="font-size: 14px; color: #999">Protobuf</a> <a href="/tags/gis/" style="font-size: 24px; color: #555">gis</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/gitee/" style="font-size: 14px; color: #999">gitee</a> <a href="/tags/github/" style="font-size: 14px; color: #999">github</a> <a href="/tags/gltf/" style="font-size: 14px; color: #999">gltf</a> <a href="/tags/java/" style="font-size: 14px; color: #999">java</a> <a href="/tags/pick/" style="font-size: 14px; color: #999">pick</a> <a href="/tags/threejs/" style="font-size: 14px; color: #999">threejs</a> <a href="/tags/tomcat/" style="font-size: 14px; color: #999">tomcat</a> <a href="/tags/vscode/" style="font-size: 14px; color: #999">vscode</a> <a href="/tags/%E5%8D%95%E4%BD%93%E5%8C%96/" style="font-size: 14px; color: #999">单体化</a> <a href="/tags/%E6%8A%BD%E7%A8%80/" style="font-size: 14px; color: #999">抽稀</a> <a href="/tags/%E6%8F%92%E4%BB%B6%E5%90%8C%E6%AD%A5/" style="font-size: 14px; color: #999">插件同步</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 19px; color: #777">树莓派</a> <a href="/tags/%E7%82%B9%E5%87%BB%E6%8B%BE%E5%8F%96/" style="font-size: 14px; color: #999">点击拾取</a> <a href="/tags/%E7%B3%BB%E7%BB%9F/" style="font-size: 14px; color: #999">系统</a> <a href="/tags/%E8%B7%A8%E5%9F%9F/" style="font-size: 14px; color: #999">跨域</a>
+    </div>
+</section>
+
+  
+      
       
   <section class="widget side_recent_post">
     
@@ -1137,164 +1537,140 @@ network<span class="token operator">=</span><span class="token punctuation">&#12
     </div>
   </section>
 
+      
+  <section class="widget side_archives">
+    
+    <header><a style="color: red" href='/archives/'><i class="fas fa-archive fa-fw" aria-hidden="true"></i><span class='name'>归档</span></a></header><div class="content"><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/12/"><span class="card-archive-list-date">十二月 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/10/"><span class="card-archive-list-date">十月 2021</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/09/"><span class="card-archive-list-date">九月 2021</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/08/"><span class="card-archive-list-date">八月 2021</span><span class="card-archive-list-count">12</span></a></li></ul></div>
+  </section>
+
+      <section class="widget side_webinfo">
+  
+  <header>
+    
+      <i style="color: " class="fas fa-chart-line fa-fw" aria-hidden="true"></i><span class='name'>站点信息</span>
+    
+  </header>
+
+
+  <div class='content'>
+    <div class="webinfo">
+      
+        <div class="webinfo-item">
+          <div>文章数目：</div>
+          <div>21 篇</div>
+        </div>
+      
+
+      
+        <div class="webinfo-item">
+          <div>已运行时间：</div>
+          <div id="webinfo-runtime-count" publish_date="03/24/2020 21:34:09"></div>
+        </div>
+        <script>
+          var BirthDay = new Date(new Date('2020/01/01'));
+          var today = new Date();
+          var timeold = (today.getTime() - BirthDay.getTime());
+          var daysold = Math.floor(timeold / (24 * 60 * 60 * 1000));
+          document.getElementById('webinfo-runtime-count').innerHTML = daysold + ' 天';
+        </script>
+      
+
+
+      
+
+      
+        <div class="webinfo-item">
+          <div>本站访客数：</div>
+          
+          <div><span id="busuanzi_value_site_uv"><i class="fas fa-fan fa-spin fa-fw" aria-hidden="true"></i></span> 人</div>
+          
+        </div>
+      
+
+      
+        <div class="webinfo-item">
+          <div>本站总访问量：</div>
+          
+          <div><span id="busuanzi_value_site_pv"><i class="fas fa-fan fa-spin fa-fw" aria-hidden="true"></i></span> 次</div>
+          
+        </div>
+      
+
+      
+        <div class="webinfo-item">
+          <div>最后活动时间：</div>
+          
+            <div id="last-update" style="display: none;">Mon Jun 19 2023 18:24:04 GMT+0800 (中国标准时间)</div>
+            <div id="last-update-show">2023-06-19 日</div>
+          
+        </div>
+        
+        <script>
+          function timeago(dateTimeStamp) {
+              var minute = 1000 * 60; //把分，时，天，周，半个月，一个月用毫秒表示
+              var hour = minute * 60;
+              var day = hour * 24;
+              var week = day * 7;
+              var month = day * 30;
+              var now = new Date().getTime(); //获取当前时间毫秒
+              var diffValue = now - dateTimeStamp; //时间差
+              if (diffValue < 0) {
+                  return;
+              }
+              var minC = diffValue / minute; //计算时间差的分，时，天，周，月
+              var hourC = diffValue / hour;
+              var dayC = diffValue / day;
+              var weekC = diffValue / week;
+              var monthC = diffValue / month;
+              if (monthC >= 1 && monthC <= 3) {
+                  result = " " + parseInt(monthC) + " 月前"
+              } else if (weekC >= 1 && weekC <= 3) {
+                  result = " " + parseInt(weekC) + " 周前"
+              } else if (dayC >= 1 && dayC <= 6) {
+                  result = " " + parseInt(dayC) + " 天前"
+              } else if (hourC >= 1 && hourC <= 23) {
+                  result = " " + parseInt(hourC) + " 小时前"
+              } else if (minC >= 1 && minC <= 59) {
+                  result = " " + parseInt(minC) + " 分钟前"
+              } else if (diffValue >= 0 && diffValue <= minute) {
+                  result = "刚刚"
+              } else {
+                  var datetime = new Date();
+                  datetime.setTime(dateTimeStamp);
+                  var Nyear = datetime.getFullYear();
+                  var Nmonth = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+                  var Ndate = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
+                  var Nhour = datetime.getHours() < 10 ? "0" + datetime.getHours() : datetime.getHours();
+                  var Nminute = datetime.getMinutes() < 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
+                  var Nsecond = datetime.getSeconds() < 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
+                  result = Nyear + "-" + Nmonth + "-" + Ndate
+              }
+              return result;
+          }
+          var lastUpDate = document.getElementById('last-update').innerHTML;
+          try {
+            document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
+          } catch (error) {
+            document.getElementById('last-update-show').innerHTML = '2023-06-19 日';
+          }
+        </script>
+        
+      
+    </div>
+  </div>
+</section>
+      
     
   </div>
 </aside>
 
-
-  <!-- 图片放大 Wrap images with fancybox support -->
-  <script src="/js/wrapImage.js"></script>
 </div>
-
-<!-- 文章详情页背景图 -->
-<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
-	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
-	<transition-group tag="ul" :name="names">
-		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
-			<img :src="image" class="bg-swiper-img no-lazy">
-		</li>
-	</transition-group>
-</div>
-<script>
-	var vm = new Vue({
-		el: '#appBgSwiper',
-		data: {
-			names: '' || 'fade' || 'fade', // translate-fade fade
-			mark: 0,
-			img: [],
-			bgColor: '',
-			time: null
-		},
-		methods: {   //添加方法
-			change(i, m) {
-				if (i > m) {
-					// this.names = 'fade';
-				} else if (i < m) {
-					// this.names = 'fade';
-				} else {
-					return;
-				}
-				this.mark = i;
-			},
-			prev() {
-				// this.names = 'fade';
-				this.mark--;
-				if (this.mark === -1) {
-					this.mark = 3;
-					return
-				}
-			},
-			next() {
-				// this.names = 'fade';
-				this.mark++;
-				if (this.mark === this.img.length) {
-					this.mark = 0;
-					return
-				}
-			},
-			autoPlay() {
-				// this.names = 'fade';
-				this.mark++;
-				if (this.mark === this.img.length) {
-					this.mark = 0;
-					return
-				}
-			},
-			play() {
-				let bgImgDelay = '' || '180000'
-				let delay = parseInt(bgImgDelay) || 180000;
-				this.time = setInterval(this.autoPlay, delay);
-			},
-			enter() {
-				clearInterval(this.time);
-			},
-			leave() {
-				this.play();
-			}
-		},
-		created() {
-			this.play()
-		},
-		beforeDestroy() {
-			clearInterval(this.time);
-		},
-		mounted() {
-			let prop = '' || '';
-			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
-			if (isImg) {
-				let img = prop.split(',');
-				let configRoot = '/'
-				let arrImg = [];
-				img.forEach(el => {
-					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
-					var objExp = new RegExp(Expression);
-
-					if (objExp.test(el)) {
-						// http or https
-						arrImg.push(el);
-					} else {
-						// 非http or https开头
-						// 本地文件
-						let firstStr = el.charAt(0);
-						if (firstStr == '/') {
-							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
-						}
-						el = configRoot + el;
-						arrImg.push(el);
-					}
-				})
-				this.img = arrImg;
-			} else {
-				this.bgColor = prop;
-			}
-		}
-	})
-</script>
-
-<style>
-	.bg-swiper-box {
-		position: absolute;
-		display: block;
-		width: 100%;
-		height: 100%;
-	}
-
-	.bg-swiper-img {
-		object-fit: cover;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+<!-- 花瓣和雪花飘落 -->
+<!-- 雪花和花瓣特效 -->
 
 
 
-
-  <script>
-  function loadMermaid() {
-    if (document.getElementsByClassName('mermaid').length) {
-      if (window.mermaidJsLoad) mermaid.init()
-      else {
-        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
-          window.mermaidJsLoad = true
-          mermaid.initialize({
-            theme: 'default',
-          })
-          if ('true') {
-            mermaid.init();
-          }
-        })
-      }
-    }
-  };
-  document.addEventListener("DOMContentLoaded", function () {
-    loadMermaid();
-  })
-
-  document.addEventListener('pjax:complete', function () {
-    loadMermaid();
-  })
-  
-</script>
+<!-- 灯笼 -->
 
 
       </main>

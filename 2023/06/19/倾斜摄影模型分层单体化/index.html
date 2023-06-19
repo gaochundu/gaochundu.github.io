@@ -11,7 +11,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>树莓派安装系统 | GIS技术部门</title>
+  <title>倾斜摄影模型分层单体化 | GIS技术部门</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -541,21 +541,21 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('/medias/4.jpg')">
+  background-position: center center;position: relative;background-image:url('/medias/5.jpg')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        树莓派安装系统
+        倾斜摄影模型分层单体化
       </span>
     </div>
     
     
       
         <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> 发表于：2021-08-08 |
+          <i class="fas fa-calendar"></i> 发表于：2023-06-19 |
         </span>
       
 
@@ -563,8 +563,12 @@
         <span class="post-detail-header_categories">
           <i class="iconfont iconbookmark1"></i> 分类：
           
-            <a href="/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/" class="post-detail-header_category">
-              树莓派
+            <a href="/categories/cesium/" class="post-detail-header_category">
+              cesium
+            </a>
+          
+            <a href="/categories/cesium/webGL/" class="post-detail-header_category">
+              webGL
             </a>
           
         </span>
@@ -588,56 +592,94 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <h2 id="1-安装系统"><a href="#1-安装系统" class="headerlink" title="1.安装系统"></a>1.安装系统</h2><p><strong>系统文件可去官网下载适合自己的：</strong><br><strong>PS：文章下方有操作系统介绍</strong><br>官网：<a target="_blank" rel="noopener" href="https://www.raspberrypi.org/software/operating-systems/#raspberry-pi-os-32-bit">https://www.raspberrypi.org/software/operating-systems/#raspberry-pi-os-32-bit</a></p>
-<blockquote>
-<p>链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1CP4ORh6p2b0uolO1oxrPDA">https://pan.baidu.com/s/1CP4ORh6p2b0uolO1oxrPDA</a><br>提取码：mcm3 </p>
+        <h1 id="倾斜摄影模型分层单体化"><a href="#倾斜摄影模型分层单体化" class="headerlink" title="倾斜摄影模型分层单体化"></a>倾斜摄影模型分层单体化</h1><p><strong>以蓝田新城osgb模型为例</strong></p>
+<h2 id="一、将osgb模型转换为3Dtiles数据"><a href="#一、将osgb模型转换为3Dtiles数据" class="headerlink" title="一、将osgb模型转换为3Dtiles数据"></a>一、将osgb模型转换为3Dtiles数据</h2><p>(软件地址(osg2cesiumApp)：<a target="_blank" rel="noopener" href="https://github.com/fanvanzh/3dtiles/blob/master/README.md">https://github.com/fanvanzh/3dtiles/blob/master/README.md</a> )</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pC3l9w8"><img src="https://s1.ax1x.com/2023/06/19/pC3l9w8.md.png" class="lazyload placeholder" data-srcset="https://s1.ax1x.com/2023/06/19/pC3l9w8.md.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="pC3l9w8.md.png"></a></p>
+<h2 id="二、获取模型位置高程，在cesium中加载此模型，查看贴地状态"><a href="#二、获取模型位置高程，在cesium中加载此模型，查看贴地状态" class="headerlink" title="二、获取模型位置高程，在cesium中加载此模型，查看贴地状态"></a>二、获取模型位置高程，在cesium中加载此模型，查看贴地状态</h2><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> ellipsoid <span class="token operator">=</span> viewer<span class="token punctuation">.</span>scene<span class="token punctuation">.</span>globe<span class="token punctuation">.</span>ellipsoid<span class="token punctuation">;</span>   <span class="token comment">//得到当前三维场景的椭球体</span>
+<span class="token keyword">var</span> terrainProvider <span class="token operator">=</span> viewer<span class="token punctuation">.</span>scene<span class="token punctuation">.</span>terrainProvider<span class="token punctuation">;</span>
+<span class="token keyword">var</span> CesiumEventHandler <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Cesium<span class="token punctuation">.</span>ScreenSpaceEventHandler</span><span class="token punctuation">(</span>viewer<span class="token punctuation">.</span>scene<span class="token punctuation">.</span>canvas<span class="token punctuation">)</span><span class="token punctuation">;</span>
+CesiumEventHandler<span class="token punctuation">.</span><span class="token function">setInputAction</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">movement</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> cartesian <span class="token operator">=</span> viewer<span class="token punctuation">.</span>camera<span class="token punctuation">.</span><span class="token function">pickEllipsoid</span><span class="token punctuation">(</span>movement<span class="token punctuation">.</span>position<span class="token punctuation">,</span> ellipsoid<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>cartesian<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">var</span> cartographic <span class="token operator">=</span> Cesium<span class="token punctuation">.</span>Cartographic<span class="token punctuation">.</span><span class="token function">fromCartesian</span><span class="token punctuation">(</span>cartesian<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//将笛卡尔坐标转换为地理坐标</span>
+        <span class="token keyword">var</span> longitudeDegree <span class="token operator">=</span> Cesium<span class="token punctuation">.</span>Math<span class="token punctuation">.</span><span class="token function">toDegrees</span><span class="token punctuation">(</span>cartographic<span class="token punctuation">.</span>longitude<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">var</span> latitudeDegree <span class="token operator">=</span> Cesium<span class="token punctuation">.</span>Math<span class="token punctuation">.</span><span class="token function">toDegrees</span><span class="token punctuation">(</span>cartographic<span class="token punctuation">.</span>latitude<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//x为longtitude,y为latitude,terrain是地形privider</span>
+        <span class="token keyword">var</span> positions <span class="token operator">=</span> <span class="token punctuation">[</span>
+            Cesium<span class="token punctuation">.</span>Cartographic<span class="token punctuation">.</span><span class="token function">fromDegrees</span><span class="token punctuation">(</span>longitudeDegree<span class="token punctuation">,</span> latitudeDegree<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">var</span> promise <span class="token operator">=</span> Cesium<span class="token punctuation">.</span><span class="token function">sampleTerrainMostDetailed</span><span class="token punctuation">(</span>terrainProvider<span class="token punctuation">,</span> positions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Cesium<span class="token punctuation">.</span><span class="token function">when</span><span class="token punctuation">(</span>promise<span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">updatedPositions</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">var</span> terrainHeight <span class="token operator">=</span> updatedPositions<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>height<span class="token punctuation">;</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>terrainHeight<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">,</span> Cesium<span class="token punctuation">.</span>ScreenSpaceEventType<span class="token punctuation">.</span><span class="token constant">LEFT_CLICK</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 加载 3D tiles</span>
+<span class="token keyword">function</span> <span class="token function">load3DTiles</span><span class="token punctuation">(</span><span class="token parameter">viewer<span class="token punctuation">,</span> url</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token keyword">var</span> tileset <span class="token operator">=</span> viewer<span class="token punctuation">.</span>scene<span class="token punctuation">.</span>primitives<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>
+        <span class="token keyword">new</span> <span class="token class-name">Cesium<span class="token punctuation">.</span>Cesium3DTileset</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+            url<span class="token operator">:</span> url<span class="token punctuation">,</span>
+            ellipsoid<span class="token operator">:</span> viewer<span class="token punctuation">.</span>scene<span class="token punctuation">.</span>globe<span class="token punctuation">.</span>ellipsoid<span class="token punctuation">,</span>
+            <span class="token comment">// clampToGround: true,</span>
+            heightReference<span class="token operator">:</span> Cesium<span class="token punctuation">.</span>HeightReference<span class="token punctuation">.</span><span class="token constant">CLAMP_TO_GROUND</span><span class="token punctuation">,</span>
+            height<span class="token operator">:</span> <span class="token number">447.4957209101552</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    viewer<span class="token punctuation">.</span><span class="token function">zoomTo</span><span class="token punctuation">(</span>tileset<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="三、下载模型所在位置影像图，绘制模型平面轮廓，在同一位置复制多个叠加面，创建顶面和底面两个属性字段，计算高程起点及建筑高度，对数据进行修改叠加"><a href="#三、下载模型所在位置影像图，绘制模型平面轮廓，在同一位置复制多个叠加面，创建顶面和底面两个属性字段，计算高程起点及建筑高度，对数据进行修改叠加" class="headerlink" title="三、下载模型所在位置影像图，绘制模型平面轮廓，在同一位置复制多个叠加面，创建顶面和底面两个属性字段，计算高程起点及建筑高度，对数据进行修改叠加"></a>三、下载模型所在位置影像图，绘制模型平面轮廓，在同一位置复制多个叠加面，创建顶面和底面两个属性字段，计算高程起点及建筑高度，对数据进行修改叠加</h2><p><a target="_blank" rel="noopener" href="https://imgse.com/i/pC3l8p9"><img src="https://s1.ax1x.com/2023/06/19/pC3l8p9.md.png" class="lazyload placeholder" data-srcset="https://s1.ax1x.com/2023/06/19/pC3l8p9.md.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="pC3l8p9.md.png"></a></p>
+<h2 id="四、导入cesiumLab-使用shp文件生成矢量楼块3Dtiiles文件，设置参数如下"><a href="#四、导入cesiumLab-使用shp文件生成矢量楼块3Dtiiles文件，设置参数如下" class="headerlink" title="四、导入cesiumLab,使用shp文件生成矢量楼块3Dtiiles文件，设置参数如下"></a>四、导入cesiumLab,使用shp文件生成矢量楼块3Dtiiles文件，设置参数如下</h2><p><a target="_blank" rel="noopener" href="https://imgse.com/i/pC3lIpj"><img src="https://s1.ax1x.com/2023/06/19/pC3lIpj.md.png" class="lazyload placeholder" data-srcset="https://s1.ax1x.com/2023/06/19/pC3lIpj.md.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="pC3lIpj.md.png"></a></p>
+<h2 id="五、将矢量3dtiles作为classification-type分类瓦片数据加载，分类对象设置为仅3dTiles"><a href="#五、将矢量3dtiles作为classification-type分类瓦片数据加载，分类对象设置为仅3dTiles" class="headerlink" title="五、将矢量3dtiles作为classification type分类瓦片数据加载，分类对象设置为仅3dTiles"></a>五、将矢量3dtiles作为classification type分类瓦片数据加载，分类对象设置为仅3dTiles</h2><blockquote>
+<p>{<br>        文献参考：<br>动态3D贴片交互：<a target="_blank" rel="noopener" href="https://www.cesium.com/blog/2018/11/05/dynamic-3d-tiles-annotations/">https://www.cesium.com/blog/2018/11/05/dynamic-3d-tiles-annotations/</a><br>        Cesium3DTileset ：<a target="_blank" rel="noopener" href="https://cesium.com/docs/cesiumjs-ref-doc/Cesium3DTileset.html">https://cesium.com/docs/cesiumjs-ref-doc/Cesium3DTileset.html</a><br>classificationType ：<a target="_blank" rel="noopener" href="https://cesium.com/docs/cesiumjs-ref-doc/ClassificationType.html?classFilter=classificationType">https://cesium.com/docs/cesiumjs-ref-doc/ClassificationType.html?classFilter=classificationType</a><br>}</p>
 </blockquote>
-<h2 id="2-配置开机自动连接wife"><a href="#2-配置开机自动连接wife" class="headerlink" title="2.配置开机自动连接wife"></a>2.配置开机自动连接wife</h2><p>打开SD卡，在boot区新建一个名为wpa_supplicant.conf空白文件，用记事本打开，例如写入</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js">country<span class="token operator">=</span><span class="token constant">GB</span>
-ctrl_interface<span class="token operator">=</span><span class="token constant">DIR</span><span class="token operator">=</span><span class="token operator">/</span><span class="token keyword">var</span><span class="token operator">/</span>run<span class="token operator">/</span>wpa_supplicant <span class="token constant">GROUP</span><span class="token operator">=</span>netdev
-update_config<span class="token operator">=</span><span class="token number">1</span>
-network<span class="token operator">=</span><span class="token punctuation">&#123;</span>
-	ssid<span class="token operator">=</span><span class="token string">"Wifi222"</span> 
-	psk<span class="token operator">=</span><span class="token string">"dferwrwe"</span>
-	priority<span class="token operator">=</span><span class="token number">2</span>
-<span class="token punctuation">&#125;</span>
-network<span class="token operator">=</span><span class="token punctuation">&#123;</span>
-	ssid<span class="token operator">=</span><span class="token string">"Wifigerger"</span>
-	psk<span class="token operator">=</span><span class="token string">"rwerwerwer"</span>
-	priority<span class="token operator">=</span><span class="token number">1</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<hr>
-<p>ssid=“WiFi名字，不删除引号,不能有中文”<br>psk=“WiFi密码，不删除引号”<br>priority=替换成数字，数字越大代表则优先连接</p>
-<hr>
-<h2 id="3-打开SSH"><a href="#3-打开SSH" class="headerlink" title="3.打开SSH"></a>3.打开SSH</h2><p>在boot区新建一个名为ssh的空白文件，不加后缀</p>
-<h2 id="4-操作系统"><a href="#4-操作系统" class="headerlink" title="4.操作系统"></a>4.操作系统</h2><p>根据偏好选择下列之一。</p>
-<p><strong>Raspbian</strong><br>树莓派官方深度定制的硬件驱动与软件程序，官方推荐系统。如果你第一次使用树莓派，请下载这个。Debian的软件策略偏保守，稳定第一，升级是次要的。<br>桌面版下载链接：<a target="_blank" rel="noopener" href="http://downloads.raspberrypi.org/raspbian_latest">http://downloads.raspberrypi.org/raspbian_latest</a><br>Lite 版（无桌面）下载链接：<a target="_blank" rel="noopener" href="https://downloads.raspberrypi.org/raspbian_lite_latest">https://downloads.raspberrypi.org/raspbian_lite_latest</a><br>默认帐号：Username: pi Password: raspberry</p>
-<p><strong>OpenELEC</strong><br>运行快、且用户体验友好的一款XBMC媒体中心。<br>下载链接：<a target="_blank" rel="noopener" href="http://downloads.raspberrypi.org/openelec_latest">http://downloads.raspberrypi.org/openelec_latest</a></p>
-<p><strong>Pidora</strong><br>Pidora是社区对Fedora在树莓派上的移植。不是Fedora官方版，但被Fedora官网推荐用于树莓派。Pidora基于Fedora 18，采用另一个轻量桌面环境XFCE。Fedora的软件策略相比于Debian，是略偏向先锋的。Fedora能用到版本稍新，但也经受过实测调试的软件包。<br>下载链接：<a target="_blank" rel="noopener" href="http://downloads.raspberrypi.org/pidora_latest">http://downloads.raspberrypi.org/pidora_latest</a><br>默认帐号：Username: root Password: raspberrypi</p>
-<p><strong>Arch Linux ARM</strong><br>著名轻量系统Arch Linux在ARM架构上的移植。注重对于开发者的简洁，任何可有可无的软件一律不自带。仅有命令行界面，不建议初学者使用。Arch Linux的软件策略是相当激进的，使用Arch Linux能用到最新的软件包，但也需要承担尝鲜可能的风险。<br>下载链接：<a target="_blank" rel="noopener" href="http://downloads.raspberrypi.org/arch_latest">http://downloads.raspberrypi.org/arch_latest</a><br>默认帐号：Username: root Password: root</p>
-<p><strong>RISC OS</strong><br>非Linux系统。<br>下载链接：<a target="_blank" rel="noopener" href="http://downloads.raspberrypi.org/riscos_latest">http://downloads.raspberrypi.org/riscos_latest</a><br>默认帐号：无需</p>
-<p><strong>Raspbmc</strong><br>下载链接：<a target="_blank" rel="noopener" href="http://downloads.raspberrypi.org/raspbmc_latest">http://downloads.raspberrypi.org/raspbmc_latest</a><br>多媒体中心、DIY电视盒专用系统。将媒体中心软件XBMC与Raspbian系统结合的衍生系统之一。中文支持良好，建议使用。<br>默认帐号：Username: pi Password: raspberry</p>
-<p><strong>XBian</strong><br>下载链接：<a target="_blank" rel="noopener" href="http://jaist.dl.sourceforge.net/project/xbian/release/XBian_1.0_Beta_1.1.7z">XBian_1.0_Beta_1.1.7z</a><br>与Raspbmc一样，是Raspbian+XBMC的媒体中心。注重性能优化。（存在中文文件名乱码问题）<br>默认帐号：Username: root Password: raspberry</p>
-<p><strong>RetroPie</strong><br>下载链接：<a target="_blank" rel="noopener" href="http://florian.jdc.se/RetroPieImage_v1.7.zip">RetroPieImage_v1.7.zip</a><br>这是一个基于Raspbian构建的家用机模拟器系统，内置了FC、SFC、GB、GBA、DOS等游戏平台的模拟器软件，可以将树莓派快速配置成多功能老游戏主机。<br>默认帐号：Username: pi Password: raspberry</p>
-<p><strong>FreeBSD</strong><br>下载链接：<a target="_blank" rel="noopener" href="http://downloads.raspberrypi.org/images/freebsd/freebsd-pi-r245446/freebsd-pi-r245446.img.gz">freebsd-pi-r245446.img.gz</a><br>BSD系列。<br>默认帐号：Username: pi Password: freebsdarm</p>
-<p><strong>Kali Linux</strong><br>下载链接：<a target="_blank" rel="noopener" href="https://www.offensive-security.com/kali-linux-vmware-arm-image-download/">Kali Linux</a><br>Kali Linux。</p>
-<p><strong>Ubuntu MATE for the Raspberry Pi 2</strong><br>下载链接：<a target="_blank" rel="noopener" href="https://downloads.raspberrypi.org/raspbian_latest">Ubuntu MATE for the Raspberry Pi 2</a><br>Ubuntu MATE是桌面Linux发行，其宗旨是通过MATE这个经典、传统的桌面环境来提供Ubuntu操作系统的简介和典雅。MATE是GNOME 2桌面环境的继续，曾经作为Ubuntu的缺省桌面，直到10.10版中被Unity所取代。<br>Ubuntu MATE适合树莓派新手使用，界面是最好看的，但是在CPU优化方面不如官方的系统做得好。</p>
-<p><strong>Snappy Ubuntu Core</strong><br>下载链接：<a target="_blank" rel="noopener" href="http://people.canonical.com/~platform/snappy/raspberrypi2/ubuntu-15.04-snappy-armhf-rpi2.img.xz">Snappy Ubuntu Core</a><br>非官方系统 Snappy Ubuntu Core。</p>
-<p><strong>Windows 10 IoT（物联网版）</strong><br>RTM版下载：<a target="_blank" rel="noopener" href="http://go.microsoft.com/fwlink/?LinkId=619755">Download RTM Release for Raspberry Pi 2</a><br>预览版下载：<a target="_blank" rel="noopener" href="http://go.microsoft.com/fwlink/?LinkID=625104">Download Insider Preview for Raspberry Pi 2</a><br>微软在Build 2015大会上宣布推出一个独立的Windows 10开发者预览版， 这个版本名称是Windows 10 IoT Core Insider Preview（Windows 10物联网核心内幕预览版），现在可供开发人员下载和研究，它支持树莓派2和英特尔Minnowboard MAX设备，使设备制造商能够充分利用这些产品有限的硬件资源。<br>据微软表示，Windows 10 IoT Core Insider Preview为设备制造商提供了世界一流的开发工具，通用Windows平台的力量，直接访问硬件的能力，并能在树莓派2等硬件设备上进行远程调试，更新和管理软件。</p>
-<p><strong>PiNet</strong><br>安装介绍链接：<a target="_blank" rel="noopener" href="http://pinet.org.uk/articles/installation/installing-ubuntu.html">PiNet</a><br>PiNet 是一个自由和开放源码的项目，为帮助学校建立和管理一个Raspberry Pi的课堂。<br>其主要特点包括<br>基于网络的用户帐户<br>基于网络的操作系统-所有树莓PIS启动一个主Raspbian操作系统。<br>共享文件夹-易于使用共享文件夹系统的教师和学生。<br>工作收集系统简单的工作收集和提交系统，让学生在工作。<br>自动备份-自动备份所有学生的工作，定期向外部驱动器。<br>多个小的功能，如批量用户导入，课堂管理软件集成等<br>服务器软件安装在运行Ubuntu Linux 14.04计算机（这也完全是免费的）。你必须再连接服务器和覆盆子PIS通过有线网络。</p>
-<p><strong>CentOS 7 ARM for the Raspberry Pi 2</strong><br>下载链接：<a target="_blank" rel="noopener" href="http://mirror.centos.org/altarch/7/isos/armhfp/">CentOS 7 ARM</a><br>面向ARM硬件架构的 CentOS 7 Linux。包含各种各样的新特性、以及软件更新与增强，比如面向身份认证管理的Kerberos HTTP代理、OpenJDK7中TLS连接的ECC支持、网络堆栈改进、以及Atomic包的更新等。<br>默认帐号：Username: root Password: centos</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">loadClassificationTileset</span><span class="token punctuation">(</span><span class="token parameter">viewer<span class="token punctuation">,</span> url</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> classificationTileset <span class="token operator">=</span> viewer<span class="token punctuation">.</span>scene<span class="token punctuation">.</span>primitives<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>
+        <span class="token keyword">new</span> <span class="token class-name">Cesium<span class="token punctuation">.</span>Cesium3DTileset</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+            id<span class="token operator">:</span> <span class="token string">"LTXCbuilding"</span><span class="token punctuation">,</span>
+            url<span class="token operator">:</span> url<span class="token punctuation">,</span>
+            classificationType<span class="token operator">:</span> Cesium<span class="token punctuation">.</span>ClassificationType<span class="token punctuation">.</span><span class="token constant">CESIUM_3D_TILE</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    classificationTileset<span class="token punctuation">.</span>style <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Cesium<span class="token punctuation">.</span>Cesium3DTileStyle</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+        color<span class="token operator">:</span> <span class="token string">'rgba(255, 0, 0, 0.01)'</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="6、添加交互"><a href="#6、添加交互" class="headerlink" title="6、添加交互"></a>6、添加交互</h2><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> selectedFeature <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token string">"feature"</span><span class="token operator">:</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
+    <span class="token string">"Color"</span><span class="token operator">:</span> <span class="token keyword">new</span> <span class="token class-name">Cesium<span class="token punctuation">.</span>Color</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> handler <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Cesium<span class="token punctuation">.</span>ScreenSpaceEventHandler</span><span class="token punctuation">(</span>viewer<span class="token punctuation">.</span>scene<span class="token punctuation">.</span>canvas<span class="token punctuation">)</span><span class="token punctuation">;</span>
+handler<span class="token punctuation">.</span><span class="token function">setInputAction</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">movement</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> pickedFeature <span class="token operator">=</span> viewer<span class="token punctuation">.</span>scene<span class="token punctuation">.</span><span class="token function">pick</span><span class="token punctuation">(</span>movement<span class="token punctuation">.</span>endPosition<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Cesium<span class="token punctuation">.</span><span class="token function">defined</span><span class="token punctuation">(</span>selectedFeature<span class="token punctuation">.</span>feature<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        selectedFeature<span class="token punctuation">.</span>feature<span class="token punctuation">.</span>color <span class="token operator">=</span> Cesium<span class="token punctuation">.</span>Color<span class="token punctuation">.</span><span class="token constant">WHITE</span><span class="token punctuation">.</span><span class="token function">withAlpha</span><span class="token punctuation">(</span><span class="token number">0.01</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        selectedFeature<span class="token punctuation">.</span>feature <span class="token operator">=</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>pickedFeature <span class="token operator">&amp;&amp;</span> pickedFeature <span class="token operator">!==</span> selectedFeature<span class="token punctuation">.</span>feature<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        selectedFeature<span class="token punctuation">.</span>feature <span class="token operator">=</span> pickedFeature<span class="token punctuation">;</span>
+        Cesium<span class="token punctuation">.</span>Color<span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span>pickedFeature<span class="token punctuation">.</span>color<span class="token punctuation">,</span> selectedFeature<span class="token punctuation">.</span>Color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        pickedFeature<span class="token punctuation">.</span>color <span class="token operator">=</span> Cesium<span class="token punctuation">.</span>Color<span class="token punctuation">.</span><span class="token constant">YELLOW</span><span class="token punctuation">.</span><span class="token function">withAlpha</span><span class="token punctuation">(</span><span class="token number">0.5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+<span class="token punctuation">&#125;</span><span class="token punctuation">,</span> Cesium<span class="token punctuation">.</span>ScreenSpaceEventType<span class="token punctuation">.</span><span class="token constant">MOUSE_MOVE</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// MOUSE_MOVE</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="成果"><a href="#成果" class="headerlink" title="成果"></a>成果</h2><p><a target="_blank" rel="noopener" href="https://imgse.com/i/pC3ljNF"><img src="https://s1.ax1x.com/2023/06/19/pC3ljNF.md.png" class="lazyload placeholder" data-srcset="https://s1.ax1x.com/2023/06/19/pC3ljNF.md.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="pC3ljNF.md.png"></a></p>
 
       </div>
       <div class="post-tags-categories">
         
         <div class="tags">
           
-            <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" class="">
-              树莓派
+            <a href="/tags/3dtiles/" class="">
+              3dtiles
             </a>
           
-            <a href="/tags/%E7%B3%BB%E7%BB%9F/" class="">
-              系统
+            <a href="/tags/%E5%8D%95%E4%BD%93%E5%8C%96/" class="">
+              单体化
             </a>
           
         </div>
@@ -651,7 +693,7 @@ network<span class="token operator">=</span><span class="token punctuation">&#12
     </li>
     <li class="post-copyright-link">
     <strong>文章链接:  </strong>
-    <a href="/2021/08/08/树莓派安装系统/" target="_blank" title="树莓派安装系统">https://gaochundu.github.io/2021/08/08/树莓派安装系统/</a>
+    <a href="/2023/06/19/倾斜摄影模型分层单体化/" target="_blank" title="倾斜摄影模型分层单体化">https://gaochundu.github.io/2023/06/19/倾斜摄影模型分层单体化/</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明:   </strong>
@@ -669,39 +711,22 @@ network<span class="token operator">=</span><span class="token punctuation">&#12
 
 
 
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="/medias/5.jpg" class="lazyload placeholder" data-srcset="/medias/5.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-    </div>
-    <a href="/2021/08/08/java%E7%BB%8F%E7%BA%AC%E5%BA%A6%E6%8A%BD%E7%A8%80%E7%AE%97%E6%B3%95/" class="post-nav-link">
-      <div class="title">
-        <i class="fas fa-angle-left"></i> 上一篇:
-        <div class="title-text">java经纬度抽稀算法</div>
-      </div>
-      
-      <!-- <div class="content">
-        java经纬度抽稀算法 (拉默–道格拉斯–普克算法)public static List&lt;LatLng> simp
-      </div> -->
-    </a>
-  </div>
-
 
 
   
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="/medias/3.jpg" class="lazyload placeholder" data-srcset="/medias/3.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload lazyload placeholder" src="/medias/5.jpg" class="lazyload placeholder" data-srcset="/medias/5.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
     </div>
-    <a href="/2021/08/08/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85OpenMediaVault/" class="post-nav-link">
+    <a href="/2023/06/19/gltf%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F/" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fas fa-angle-right"></i>
-        <div class="title-text">树莓派安装OpenMediaVault</div>
+        <div class="title-text">gltf数据格式</div>
       </div>
       <!-- <div class="content">
-        2 安装OpenMediaVault1 换源sudo nano &#x2F;etc&#x2F;apt&#x2F;sour
+        
+accessors: 包含访问器（accessor）的数组。访问器定义了访问和解释二进制数据的方式，例如顶点坐标、法线
       </div> -->
     </a>
   </div>
@@ -1001,7 +1026,7 @@ network<span class="token operator">=</span><span class="token punctuation">&#12
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F"><span class="toc-text">1.安装系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%85%8D%E7%BD%AE%E5%BC%80%E6%9C%BA%E8%87%AA%E5%8A%A8%E8%BF%9E%E6%8E%A5wife"><span class="toc-text">2.配置开机自动连接wife</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%89%93%E5%BC%80SSH"><span class="toc-text">3.打开SSH</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-text">4.操作系统</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%80%BE%E6%96%9C%E6%91%84%E5%BD%B1%E6%A8%A1%E5%9E%8B%E5%88%86%E5%B1%82%E5%8D%95%E4%BD%93%E5%8C%96"><span class="toc-text">倾斜摄影模型分层单体化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%B0%86osgb%E6%A8%A1%E5%9E%8B%E8%BD%AC%E6%8D%A2%E4%B8%BA3Dtiles%E6%95%B0%E6%8D%AE"><span class="toc-text">一、将osgb模型转换为3Dtiles数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%8E%B7%E5%8F%96%E6%A8%A1%E5%9E%8B%E4%BD%8D%E7%BD%AE%E9%AB%98%E7%A8%8B%EF%BC%8C%E5%9C%A8cesium%E4%B8%AD%E5%8A%A0%E8%BD%BD%E6%AD%A4%E6%A8%A1%E5%9E%8B%EF%BC%8C%E6%9F%A5%E7%9C%8B%E8%B4%B4%E5%9C%B0%E7%8A%B6%E6%80%81"><span class="toc-text">二、获取模型位置高程，在cesium中加载此模型，查看贴地状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E4%B8%8B%E8%BD%BD%E6%A8%A1%E5%9E%8B%E6%89%80%E5%9C%A8%E4%BD%8D%E7%BD%AE%E5%BD%B1%E5%83%8F%E5%9B%BE%EF%BC%8C%E7%BB%98%E5%88%B6%E6%A8%A1%E5%9E%8B%E5%B9%B3%E9%9D%A2%E8%BD%AE%E5%BB%93%EF%BC%8C%E5%9C%A8%E5%90%8C%E4%B8%80%E4%BD%8D%E7%BD%AE%E5%A4%8D%E5%88%B6%E5%A4%9A%E4%B8%AA%E5%8F%A0%E5%8A%A0%E9%9D%A2%EF%BC%8C%E5%88%9B%E5%BB%BA%E9%A1%B6%E9%9D%A2%E5%92%8C%E5%BA%95%E9%9D%A2%E4%B8%A4%E4%B8%AA%E5%B1%9E%E6%80%A7%E5%AD%97%E6%AE%B5%EF%BC%8C%E8%AE%A1%E7%AE%97%E9%AB%98%E7%A8%8B%E8%B5%B7%E7%82%B9%E5%8F%8A%E5%BB%BA%E7%AD%91%E9%AB%98%E5%BA%A6%EF%BC%8C%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%BF%9B%E8%A1%8C%E4%BF%AE%E6%94%B9%E5%8F%A0%E5%8A%A0"><span class="toc-text">三、下载模型所在位置影像图，绘制模型平面轮廓，在同一位置复制多个叠加面，创建顶面和底面两个属性字段，计算高程起点及建筑高度，对数据进行修改叠加</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%AF%BC%E5%85%A5cesiumLab-%E4%BD%BF%E7%94%A8shp%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E7%9F%A2%E9%87%8F%E6%A5%BC%E5%9D%973Dtiiles%E6%96%87%E4%BB%B6%EF%BC%8C%E8%AE%BE%E7%BD%AE%E5%8F%82%E6%95%B0%E5%A6%82%E4%B8%8B"><span class="toc-text">四、导入cesiumLab,使用shp文件生成矢量楼块3Dtiiles文件，设置参数如下</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%B0%86%E7%9F%A2%E9%87%8F3dtiles%E4%BD%9C%E4%B8%BAclassification-type%E5%88%86%E7%B1%BB%E7%93%A6%E7%89%87%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%EF%BC%8C%E5%88%86%E7%B1%BB%E5%AF%B9%E8%B1%A1%E8%AE%BE%E7%BD%AE%E4%B8%BA%E4%BB%853dTiles"><span class="toc-text">五、将矢量3dtiles作为classification type分类瓦片数据加载，分类对象设置为仅3dTiles</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%E3%80%81%E6%B7%BB%E5%8A%A0%E4%BA%A4%E4%BA%92"><span class="toc-text">6、添加交互</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%90%E6%9E%9C"><span class="toc-text">成果</span></a></li></ol></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>

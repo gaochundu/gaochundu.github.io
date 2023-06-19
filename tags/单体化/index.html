@@ -11,7 +11,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>树莓派安装系统 | GIS技术部门</title>
+  <title>标签: 单体化 | GIS技术部门</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -513,789 +513,110 @@
 </header>
         <!-- 内容区域 -->
         
- <!-- prismjs 代码高亮 -->
- 
-    
-    <link href="/js/prism/prism-line-numbers.css" rel="stylesheet">
-    
-        <link href="/js/prism/prism.min.css" rel="stylesheet">
-    
 
-    <style>
-        pre[class*="language-"] {
-            overflow-y: hidden;
-        }
-        .line-numbers .line-numbers-rows {
-            border: none;
-        }
-    </style>
-  
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"></div>
+<div class="bg-light-floor-tagDetail" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -3;"></div>
 
-
-<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
-
-
-  <!-- 文章详情页顶部图片和标题 -->
-
-
-
-
-<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('/medias/4.jpg')">
-  <div class="post-detail-header-mask"></div>
-  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
-  
-  <div class="post-detail-header_info-box">
-    <div class="title-box">
-      <span class="title">
-        树莓派安装系统
-      </span>
-    </div>
-    
-    
-      
-        <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> 发表于：2021-08-08 |
-        </span>
-      
-
-      
-        <span class="post-detail-header_categories">
-          <i class="iconfont iconbookmark1"></i> 分类：
-          
-            <a href="/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/" class="post-detail-header_category">
-              树莓派
-            </a>
-          
-        </span>
-      
-
-      
-    
+<div class="tag-header" style="background-image: url('https://pic1.zhimg.com/80/v2-604a15cef201cf177943af2d915eb2e7_1440w.jpg?source=1940ef5c');">
+  <div class="tag-header-title">
+    tag
   </div>
+  <div class="tag-header-desc">
   
-  
-    <script src="/js/bubble/bubble.js"></script>
-  
-</div>
-
-
-
-
-
-<div class="post-detail-content post-row" 
-  style="padding-top: 0px;">
-  <div class="main-content">
-    <article class="post post-detail">
-      <div class="post-content">
-        <h2 id="1-安装系统"><a href="#1-安装系统" class="headerlink" title="1.安装系统"></a>1.安装系统</h2><p><strong>系统文件可去官网下载适合自己的：</strong><br><strong>PS：文章下方有操作系统介绍</strong><br>官网：<a target="_blank" rel="noopener" href="https://www.raspberrypi.org/software/operating-systems/#raspberry-pi-os-32-bit">https://www.raspberrypi.org/software/operating-systems/#raspberry-pi-os-32-bit</a></p>
-<blockquote>
-<p>链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1CP4ORh6p2b0uolO1oxrPDA">https://pan.baidu.com/s/1CP4ORh6p2b0uolO1oxrPDA</a><br>提取码：mcm3 </p>
-</blockquote>
-<h2 id="2-配置开机自动连接wife"><a href="#2-配置开机自动连接wife" class="headerlink" title="2.配置开机自动连接wife"></a>2.配置开机自动连接wife</h2><p>打开SD卡，在boot区新建一个名为wpa_supplicant.conf空白文件，用记事本打开，例如写入</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js">country<span class="token operator">=</span><span class="token constant">GB</span>
-ctrl_interface<span class="token operator">=</span><span class="token constant">DIR</span><span class="token operator">=</span><span class="token operator">/</span><span class="token keyword">var</span><span class="token operator">/</span>run<span class="token operator">/</span>wpa_supplicant <span class="token constant">GROUP</span><span class="token operator">=</span>netdev
-update_config<span class="token operator">=</span><span class="token number">1</span>
-network<span class="token operator">=</span><span class="token punctuation">&#123;</span>
-	ssid<span class="token operator">=</span><span class="token string">"Wifi222"</span> 
-	psk<span class="token operator">=</span><span class="token string">"dferwrwe"</span>
-	priority<span class="token operator">=</span><span class="token number">2</span>
-<span class="token punctuation">&#125;</span>
-network<span class="token operator">=</span><span class="token punctuation">&#123;</span>
-	ssid<span class="token operator">=</span><span class="token string">"Wifigerger"</span>
-	psk<span class="token operator">=</span><span class="token string">"rwerwerwer"</span>
-	priority<span class="token operator">=</span><span class="token number">1</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<hr>
-<p>ssid=“WiFi名字，不删除引号,不能有中文”<br>psk=“WiFi密码，不删除引号”<br>priority=替换成数字，数字越大代表则优先连接</p>
-<hr>
-<h2 id="3-打开SSH"><a href="#3-打开SSH" class="headerlink" title="3.打开SSH"></a>3.打开SSH</h2><p>在boot区新建一个名为ssh的空白文件，不加后缀</p>
-<h2 id="4-操作系统"><a href="#4-操作系统" class="headerlink" title="4.操作系统"></a>4.操作系统</h2><p>根据偏好选择下列之一。</p>
-<p><strong>Raspbian</strong><br>树莓派官方深度定制的硬件驱动与软件程序，官方推荐系统。如果你第一次使用树莓派，请下载这个。Debian的软件策略偏保守，稳定第一，升级是次要的。<br>桌面版下载链接：<a target="_blank" rel="noopener" href="http://downloads.raspberrypi.org/raspbian_latest">http://downloads.raspberrypi.org/raspbian_latest</a><br>Lite 版（无桌面）下载链接：<a target="_blank" rel="noopener" href="https://downloads.raspberrypi.org/raspbian_lite_latest">https://downloads.raspberrypi.org/raspbian_lite_latest</a><br>默认帐号：Username: pi Password: raspberry</p>
-<p><strong>OpenELEC</strong><br>运行快、且用户体验友好的一款XBMC媒体中心。<br>下载链接：<a target="_blank" rel="noopener" href="http://downloads.raspberrypi.org/openelec_latest">http://downloads.raspberrypi.org/openelec_latest</a></p>
-<p><strong>Pidora</strong><br>Pidora是社区对Fedora在树莓派上的移植。不是Fedora官方版，但被Fedora官网推荐用于树莓派。Pidora基于Fedora 18，采用另一个轻量桌面环境XFCE。Fedora的软件策略相比于Debian，是略偏向先锋的。Fedora能用到版本稍新，但也经受过实测调试的软件包。<br>下载链接：<a target="_blank" rel="noopener" href="http://downloads.raspberrypi.org/pidora_latest">http://downloads.raspberrypi.org/pidora_latest</a><br>默认帐号：Username: root Password: raspberrypi</p>
-<p><strong>Arch Linux ARM</strong><br>著名轻量系统Arch Linux在ARM架构上的移植。注重对于开发者的简洁，任何可有可无的软件一律不自带。仅有命令行界面，不建议初学者使用。Arch Linux的软件策略是相当激进的，使用Arch Linux能用到最新的软件包，但也需要承担尝鲜可能的风险。<br>下载链接：<a target="_blank" rel="noopener" href="http://downloads.raspberrypi.org/arch_latest">http://downloads.raspberrypi.org/arch_latest</a><br>默认帐号：Username: root Password: root</p>
-<p><strong>RISC OS</strong><br>非Linux系统。<br>下载链接：<a target="_blank" rel="noopener" href="http://downloads.raspberrypi.org/riscos_latest">http://downloads.raspberrypi.org/riscos_latest</a><br>默认帐号：无需</p>
-<p><strong>Raspbmc</strong><br>下载链接：<a target="_blank" rel="noopener" href="http://downloads.raspberrypi.org/raspbmc_latest">http://downloads.raspberrypi.org/raspbmc_latest</a><br>多媒体中心、DIY电视盒专用系统。将媒体中心软件XBMC与Raspbian系统结合的衍生系统之一。中文支持良好，建议使用。<br>默认帐号：Username: pi Password: raspberry</p>
-<p><strong>XBian</strong><br>下载链接：<a target="_blank" rel="noopener" href="http://jaist.dl.sourceforge.net/project/xbian/release/XBian_1.0_Beta_1.1.7z">XBian_1.0_Beta_1.1.7z</a><br>与Raspbmc一样，是Raspbian+XBMC的媒体中心。注重性能优化。（存在中文文件名乱码问题）<br>默认帐号：Username: root Password: raspberry</p>
-<p><strong>RetroPie</strong><br>下载链接：<a target="_blank" rel="noopener" href="http://florian.jdc.se/RetroPieImage_v1.7.zip">RetroPieImage_v1.7.zip</a><br>这是一个基于Raspbian构建的家用机模拟器系统，内置了FC、SFC、GB、GBA、DOS等游戏平台的模拟器软件，可以将树莓派快速配置成多功能老游戏主机。<br>默认帐号：Username: pi Password: raspberry</p>
-<p><strong>FreeBSD</strong><br>下载链接：<a target="_blank" rel="noopener" href="http://downloads.raspberrypi.org/images/freebsd/freebsd-pi-r245446/freebsd-pi-r245446.img.gz">freebsd-pi-r245446.img.gz</a><br>BSD系列。<br>默认帐号：Username: pi Password: freebsdarm</p>
-<p><strong>Kali Linux</strong><br>下载链接：<a target="_blank" rel="noopener" href="https://www.offensive-security.com/kali-linux-vmware-arm-image-download/">Kali Linux</a><br>Kali Linux。</p>
-<p><strong>Ubuntu MATE for the Raspberry Pi 2</strong><br>下载链接：<a target="_blank" rel="noopener" href="https://downloads.raspberrypi.org/raspbian_latest">Ubuntu MATE for the Raspberry Pi 2</a><br>Ubuntu MATE是桌面Linux发行，其宗旨是通过MATE这个经典、传统的桌面环境来提供Ubuntu操作系统的简介和典雅。MATE是GNOME 2桌面环境的继续，曾经作为Ubuntu的缺省桌面，直到10.10版中被Unity所取代。<br>Ubuntu MATE适合树莓派新手使用，界面是最好看的，但是在CPU优化方面不如官方的系统做得好。</p>
-<p><strong>Snappy Ubuntu Core</strong><br>下载链接：<a target="_blank" rel="noopener" href="http://people.canonical.com/~platform/snappy/raspberrypi2/ubuntu-15.04-snappy-armhf-rpi2.img.xz">Snappy Ubuntu Core</a><br>非官方系统 Snappy Ubuntu Core。</p>
-<p><strong>Windows 10 IoT（物联网版）</strong><br>RTM版下载：<a target="_blank" rel="noopener" href="http://go.microsoft.com/fwlink/?LinkId=619755">Download RTM Release for Raspberry Pi 2</a><br>预览版下载：<a target="_blank" rel="noopener" href="http://go.microsoft.com/fwlink/?LinkID=625104">Download Insider Preview for Raspberry Pi 2</a><br>微软在Build 2015大会上宣布推出一个独立的Windows 10开发者预览版， 这个版本名称是Windows 10 IoT Core Insider Preview（Windows 10物联网核心内幕预览版），现在可供开发人员下载和研究，它支持树莓派2和英特尔Minnowboard MAX设备，使设备制造商能够充分利用这些产品有限的硬件资源。<br>据微软表示，Windows 10 IoT Core Insider Preview为设备制造商提供了世界一流的开发工具，通用Windows平台的力量，直接访问硬件的能力，并能在树莓派2等硬件设备上进行远程调试，更新和管理软件。</p>
-<p><strong>PiNet</strong><br>安装介绍链接：<a target="_blank" rel="noopener" href="http://pinet.org.uk/articles/installation/installing-ubuntu.html">PiNet</a><br>PiNet 是一个自由和开放源码的项目，为帮助学校建立和管理一个Raspberry Pi的课堂。<br>其主要特点包括<br>基于网络的用户帐户<br>基于网络的操作系统-所有树莓PIS启动一个主Raspbian操作系统。<br>共享文件夹-易于使用共享文件夹系统的教师和学生。<br>工作收集系统简单的工作收集和提交系统，让学生在工作。<br>自动备份-自动备份所有学生的工作，定期向外部驱动器。<br>多个小的功能，如批量用户导入，课堂管理软件集成等<br>服务器软件安装在运行Ubuntu Linux 14.04计算机（这也完全是免费的）。你必须再连接服务器和覆盆子PIS通过有线网络。</p>
-<p><strong>CentOS 7 ARM for the Raspberry Pi 2</strong><br>下载链接：<a target="_blank" rel="noopener" href="http://mirror.centos.org/altarch/7/isos/armhfp/">CentOS 7 ARM</a><br>面向ARM硬件架构的 CentOS 7 Linux。包含各种各样的新特性、以及软件更新与增强，比如面向身份认证管理的Kerberos HTTP代理、OpenJDK7中TLS连接的ECC支持、网络堆栈改进、以及Atomic包的更新等。<br>默认帐号：Username: root Password: centos</p>
-
-      </div>
-      <div class="post-tags-categories">
-        
-        <div class="tags">
-          
-            <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" class="">
-              树莓派
-            </a>
-          
-            <a href="/tags/%E7%B3%BB%E7%BB%9F/" class="">
-              系统
-            </a>
-          
-        </div>
-        
-      </div>
-      
-        <div class="copyright">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-    <strong>作者:  </strong>Giser</a>
-    </li>
-    <li class="post-copyright-link">
-    <strong>文章链接:  </strong>
-    <a href="/2021/08/08/树莓派安装系统/" target="_blank" title="树莓派安装系统">https://gaochundu.github.io/2021/08/08/树莓派安装系统/</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>版权声明:   </strong>
-      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
-      许可协议。转载请注明出处!
-    </li>
-  </ul>
-<div>
-      
-    </article>
-    <!-- 上一篇文章和下一篇文章 -->
-    
-      <!-- 文章详情页的上一页和下一页 -->
-<div class="post-nav">
-
-
-
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="/medias/5.jpg" class="lazyload placeholder" data-srcset="/medias/5.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-    </div>
-    <a href="/2021/08/08/java%E7%BB%8F%E7%BA%AC%E5%BA%A6%E6%8A%BD%E7%A8%80%E7%AE%97%E6%B3%95/" class="post-nav-link">
-      <div class="title">
-        <i class="fas fa-angle-left"></i> 上一篇:
-        <div class="title-text">java经纬度抽稀算法</div>
-      </div>
-      
-      <!-- <div class="content">
-        java经纬度抽稀算法 (拉默–道格拉斯–普克算法)public static List&lt;LatLng> simp
-      </div> -->
-    </a>
-  </div>
-
-
-
-  
-  <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="/medias/3.jpg" class="lazyload placeholder" data-srcset="/medias/3.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
-    </div>
-    <a href="/2021/08/08/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85OpenMediaVault/" class="post-nav-link">
-      <div class="title">
-        下一篇: <i class="fas fa-angle-right"></i>
-        <div class="title-text">树莓派安装OpenMediaVault</div>
-      </div>
-      <!-- <div class="content">
-        2 安装OpenMediaVault1 换源sudo nano &#x2F;etc&#x2F;apt&#x2F;sour
-      </div> -->
-    </a>
-  </div>
-
-</div>
-
-    
-    
-
-    <!-- 打赏 -->
-    
-      <div id="appDonate" class="post-donate">
-  <div id="donate_board" class="donate_bar center" ref="donate">
-    <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏" @click="showDialogDrawer()"></a>
-  </div>
-  <transition name="fade">
-    <div 
-      class="donate-box-mask"
-      v-cloak 
-      v-show="visible"
-      @click="cancelDialogDrawer()"
-    >
-    </div>
-  </transition>
-  <transition name="bounce">
-    <div class="donate-box" v-cloak v-show="visible">
-      <div class="donate-box_close">
-        <i class="fas fa-times" aria-hidden="true" @click="cancelDialogDrawer" pointer></i>
-      </div>
-      <div class="donate-box_title">
-        <h4>
-          你的赏识是我前进的动力
-        </h4>
-      </div>
-      <div class="donate-box_tab">
-        <div class="Alipay" pointer :class="{'active': tabActive === 'Alipay'}" @click="changeTabActive('Alipay')">
-          支付宝
-        </div>
-        <div class="WeChatpay" pointer :class="{'active': tabActive === 'WeChatpay'}" @click="changeTabActive('WeChatpay')">
-          微信
-        </div>
-      </div>
-      <div class="donate-box_img">
-        <div class="AlipayImg" v-show="tabActive === 'Alipay'">
-          <img src="/medias/zfb.png" class="lazyload placeholder" data-srcset="/medias/zfb.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="支付宝打赏" />
-        </div> 
-        <div class="WeChatpayImg" v-show="tabActive === 'WeChatpay'">
-          <img src="/medias/wx.png" class="lazyload placeholder" data-srcset="/medias/wx.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="微信打赏" />
-        </div>
-      </div>
-    </div>
-  </transition>
-</div>
-
-<script>
-  var body = document.body || document.documentElement || window;
-  var vm = new Vue({
-    el: '#appDonate',
-    data: {
-      visible: false,
-      tabActive: 'Alipay',
-      top: 0,
-    },
-    computed: {
-    },
-    mounted() {
-    },
-    methods: {
-      showDialogDrawer() {
-        this.visible = true;
-        // 防止页面滚动，只能让弹框滚动
-        // function getScroll() {
-        //   return {
-        //     left: window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0,
-        //     top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
-        //   };
-        // }
-        this.top = $(document).scrollTop() // or getScroll().top
-        // console.log('aa', $('.main-content'));
-        body.style.cssText = 'overflow: hidden;';
-      },
-      cancelDialogDrawer() {
-        this.visible = false;
-        body.removeAttribute('style');
-        $(document).scrollTop(this.top)
-      },
-      changeTabActive(name) {
-        this.tabActive = name;
-      }
-    },
-    created() {}
-  })
-</script>
-    
-
-    <!-- 分享 -->
-    
-      <!-- https://github.com/overtrue/share.js -->
-<!-- 文章详情页的分享 -->
-<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-
-<script src="/js/shareJs/social-share.min.js"></script>
-</script>
-
-<style>
-  .social-share {
-    margin: 20px 0;
+    <span class="title" id="tag-header-desc"></span>
+    <script>
+  function typedFn() {
+    const el = '#tag-header-desc';
+    const type = 'tagDetail';
+    let desc = '愿你如风，被人温柔以待'
+    var typed = new Typed(el, {
+      strings: [desc],
+      startDelay: 100,
+      typeSpeed: 100,
+      loop: true,
+      backSpeed: 50,
+      showCursor: true
+    });
   }
-</style>
-
-
-    
-    
-    <!-- 评论 -->
-    <!-- 评论 -->
-
-  <div id="myComment">
-    
-      
-<section id="comments" style="padding: 1em;"
-	class="animated bounceInUp">
-	<div id="vcomment" class="comment"></div>
-</section>
-<style>
-	#comments {
-		background: rgba(255,255,255,0.9);
-	}
-	#veditor {
-		background-image: url('https://img.zcool.cn/community/01a253594c71cfa8012193a329a77f.gif');
-		background-size: contain;
-		background-repeat: no-repeat;
-		background-position: right;
-		background-color: rgba(255, 255, 255, 0);
-		resize: vertical;
-	}
-	#veditor:focus{
-		background-position-y: 200px;
-		transition: all 0.2s ease-in-out 0s;
-	}
-	#vcomment .vcards .vcard .vh .vhead .vtag.vvisitor {
-		background-color: #42b983;
-	}
-	.v[data-class=v] .vbtn:active, .v[data-class=v] .vbtn:hover {
-		color: #42b983;
-		border-color: #42b983;
-	}
-	#vcomment .vcards .vcard .vhead .vsys i {
-		display: none;
-	}
-	/* 底部valine链接 */
-	#vcomment .vpower {
-		display: none;
-	}
-	
-	/* 底下注释是修改 名称和邮箱和网址输入框的样式 */
-	/* #vcomment .vheader {
-		display: flex;
-		justify-content: space-around;
-	}
-	
-	#vcomment .vheader .vnick {
-		width: 31%;
-		border: 2px solid #dedede;
-		padding-left: 10px;
-		padding-right: 10px;
-		border-radius: 5px
-	}
-
-	#vcomment .vheader .vmail {
-		width: 31%;
-		border: 2px solid #dedede;
-		padding-left: 10px;
-		padding-right: 10px;
-		border-radius: 5px
-	}
-
-	#vcomment .vheader .vlink {
-		width: 31%;
-		border: 2px solid #dedede;
-		padding-left: 10px;
-		padding-right: 10px;
-		border-radius: 5px
-	} */
-
-	img.vimg {
-		transition: all 1s;
-		/* 头像旋转时间为 1s */
-	}
-
-	img.vimg:hover {
-		transform: rotate(360deg);
-		-webkit-transform: rotate(360deg);
-		-moz-transform: rotate(360deg);
-		-o-transform: rotate(360deg);
-		-ms-transform: rotate(360deg);
-	}
-
-	#vcomment .vcards .vcard {
-		padding: 15px 20px 0 20px;
-		border-radius: 10px;
-		margin-bottom: 15px;
-		box-shadow: 0 0 4px 1px rgba(0, 0, 0, .12);
-		transition: all .3s
-	}
-
-	#vcomment .vcards .vcard:hover {
-		box-shadow: 0 0 8px 3px rgba(0, 0, 0, .12)
-	}
-
-	#vcomment .vcards .vcard .vh .vcard {
-		border: none;
-		box-shadow: none;
-	}
-</style>
+  typedFn();
+</script>
     
   </div>
+  <div class="mask-box"></div>
+</div>
 
-<!-- comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
 
 
+<div class="tag">
+  <div class="tag-name">
+    <div class="name" style="background-color: #D7BDE2;">单体化 分类</div>
   </div>
+  <!-- 每一篇文章卡片 -->
+  <!-- hash算法 -->
 
-  <!-- 目录 -->
-  
-<aside id='l_side'>
+<section class="posts">
   
     
-      
-        <section class="widget side_blogger">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box rectangle' href='/about/'>
-          <img src='http://api.btstu.cn/sjtx/api.php?lx=c1&format=images'/>
+    <article class="post reveal" style="flex-direction: row-reverse;   ">
+      <div class="post-main">
+        <div class="post-info">
+          <div class="post-time">
+            <i class="fas fa-clock" aria-hidden="true"></i>
+            <span class="post-time">2023-06-19</span>
+          </div>
+          <div class="post-title">
+            <a class="post-title-link" href="/2023/06/19/%E5%80%BE%E6%96%9C%E6%91%84%E5%BD%B1%E6%A8%A1%E5%9E%8B%E5%88%86%E5%B1%82%E5%8D%95%E4%BD%93%E5%8C%96/">倾斜摄影模型分层单体化</a>
+          </div>
+          <div class="post-meta">
+            <div class="post-tags">
+              <!-- 文章详情页的标签 -->
+
+    <i class="iconfont icontag"></i>
+    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/3dtiles/" rel="tag">3dtiles</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%95%E4%BD%93%E5%8C%96/" rel="tag">单体化</a></li></ul>
+
+            </div>
+            <div class="post-categories">
+              <!-- 文章详情页的分类 -->
+
+<div class="article-category">
+  <i class="iconfont iconbookmark1"></i>
+  <a class="article-category-link" href="/categories/cesium/">cesium</a> <a class="article-category-link" href="/categories/cesium/webGL/">webGL</a>
+</div>
+
+
+            </div>
+          </div>
+          <div class="post-img-mobile">
+            <a href="/2023/06/19/%E5%80%BE%E6%96%9C%E6%91%84%E5%BD%B1%E6%A8%A1%E5%9E%8B%E5%88%86%E5%B1%82%E5%8D%95%E4%BD%93%E5%8C%96/" style="background-size: cover; 
+              background-position: center center;">
+              <img class="lazyload lazyload placeholder" src="/medias/5.jpg" class="lazyload placeholder" data-srcset="/medias/5.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+            </a>
+          </div>
+          <div class="post-content">
+            倾斜摄影模型分层单体化以蓝田新城osgb模型为例
+一、将osgb模型转换为3Dtiles数据(软件地址(osg2cesiumApp)：https://github.com/fanvanzh/3dtiles/blob/master/READM
+          </div>
+        </div>
+        <div class="post-more">
+          <a href="/2023/06/19/%E5%80%BE%E6%96%9C%E6%91%84%E5%BD%B1%E6%A8%A1%E5%9E%8B%E5%88%86%E5%B1%82%E5%8D%95%E4%BD%93%E5%8C%96/">
+            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
+          </a>
+        </div>
+      </div>
+      <div class="post-img">
+        <a href="/2023/06/19/%E5%80%BE%E6%96%9C%E6%91%84%E5%BD%B1%E6%A8%A1%E5%9E%8B%E5%88%86%E5%B1%82%E5%8D%95%E4%BD%93%E5%8C%96/" style="background-size: cover; 
+          background-position: center center;">
+          <img class="lazyload lazyload placeholder" src="/medias/5.jpg" class="lazyload placeholder" data-srcset="/medias/5.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
         </a>
-      
-    
-    
-      <div class='text'>
-        
-          <h2>GISER</h2>
-        
-        
-          <p>GUI</p>
-
-        
-        
-          <p><span id="jinrishici-sentence">GIS技术部门</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
       </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="/atom.xml"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="mailto:super.gui@qq.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
+    </article>
+  
 </section>
-
-      
-    
-  
-  
-  
-
-  <div class="layout_sticky">    
-    
-      
-<section class="widget side_toc">
-  
-  <header>
-    
-      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <div class="toc-main">
-      <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F"><span class="toc-text">1.安装系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%85%8D%E7%BD%AE%E5%BC%80%E6%9C%BA%E8%87%AA%E5%8A%A8%E8%BF%9E%E6%8E%A5wife"><span class="toc-text">2.配置开机自动连接wife</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%89%93%E5%BC%80SSH"><span class="toc-text">3.打开SSH</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-text">4.操作系统</span></a></li></ol> -->
-        <div class="toc"></div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- 手机端目录按钮 -->
-<div id="toc-mobile-btn">
-  <i class="fas fa-list-ul" aria-hidden="true"></i>
 </div>
 
-      
-  <section class="widget side_recent_post">
-    
-  <header>
-    
-      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      
-      <!-- hash算法 -->
-      
-      <div class="aside-list">
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2023/06/19/%E5%80%BE%E6%96%9C%E6%91%84%E5%BD%B1%E6%A8%A1%E5%9E%8B%E5%88%86%E5%B1%82%E5%8D%95%E4%BD%93%E5%8C%96/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="/medias/5.jpg" class="lazyload placeholder" data-srcset="/medias/5.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">06-19</span>
-                
-              </div>
-              <a class="post-title" href="/2023/06/19/%E5%80%BE%E6%96%9C%E6%91%84%E5%BD%B1%E6%A8%A1%E5%9E%8B%E5%88%86%E5%B1%82%E5%8D%95%E4%BD%93%E5%8C%96/">倾斜摄影模型分层单体化</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2023/06/19/gltf%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="/medias/5.jpg" class="lazyload placeholder" data-srcset="/medias/5.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">06-19</span>
-                
-              </div>
-              <a class="post-title" href="/2023/06/19/gltf%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F/">gltf数据格式</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2022/12/21/%E4%BA%8B%E4%BB%B6/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="/medias/8.jpg" class="lazyload placeholder" data-srcset="/medias/8.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">12-21</span>
-                
-              </div>
-              <a class="post-title" href="/2022/12/21/%E4%BA%8B%E4%BB%B6/">cesium pick和射线的使用（工具篇）</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2021/10/12/%E5%9D%90%E6%A0%87%E7%B3%BB%E7%9A%84%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="/medias/2.jpg" class="lazyload placeholder" data-srcset="/medias/2.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">10-12</span>
-                
-              </div>
-              <a class="post-title" href="/2021/10/12/%E5%9D%90%E6%A0%87%E7%B3%BB%E7%9A%84%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/">坐标系命名规范</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2021/09/29/%E5%8C%BA%E5%88%ABclientX%E3%80%81offsetX%E3%80%81screenX%E3%80%81pageX/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="/medias/5.jpg" class="lazyload placeholder" data-srcset="/medias/5.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">09-29</span>
-                
-              </div>
-              <a class="post-title" href="/2021/09/29/%E5%8C%BA%E5%88%ABclientX%E3%80%81offsetX%E3%80%81screenX%E3%80%81pageX/">区别了 clientX、offsetX、screenX、pageX等</a>
-            </div>
-          </div>
-        
-      </div>
-    </div>
-  </section>
-
-    
-  </div>
-</aside>
-
-
-  <!-- 图片放大 Wrap images with fancybox support -->
-  <script src="/js/wrapImage.js"></script>
-</div>
-
-<!-- 文章详情页背景图 -->
-<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
-	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
-	<transition-group tag="ul" :name="names">
-		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
-			<img :src="image" class="bg-swiper-img no-lazy">
-		</li>
-	</transition-group>
-</div>
-<script>
-	var vm = new Vue({
-		el: '#appBgSwiper',
-		data: {
-			names: '' || 'fade' || 'fade', // translate-fade fade
-			mark: 0,
-			img: [],
-			bgColor: '',
-			time: null
-		},
-		methods: {   //添加方法
-			change(i, m) {
-				if (i > m) {
-					// this.names = 'fade';
-				} else if (i < m) {
-					// this.names = 'fade';
-				} else {
-					return;
-				}
-				this.mark = i;
-			},
-			prev() {
-				// this.names = 'fade';
-				this.mark--;
-				if (this.mark === -1) {
-					this.mark = 3;
-					return
-				}
-			},
-			next() {
-				// this.names = 'fade';
-				this.mark++;
-				if (this.mark === this.img.length) {
-					this.mark = 0;
-					return
-				}
-			},
-			autoPlay() {
-				// this.names = 'fade';
-				this.mark++;
-				if (this.mark === this.img.length) {
-					this.mark = 0;
-					return
-				}
-			},
-			play() {
-				let bgImgDelay = '' || '180000'
-				let delay = parseInt(bgImgDelay) || 180000;
-				this.time = setInterval(this.autoPlay, delay);
-			},
-			enter() {
-				clearInterval(this.time);
-			},
-			leave() {
-				this.play();
-			}
-		},
-		created() {
-			this.play()
-		},
-		beforeDestroy() {
-			clearInterval(this.time);
-		},
-		mounted() {
-			let prop = '' || '';
-			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
-			if (isImg) {
-				let img = prop.split(',');
-				let configRoot = '/'
-				let arrImg = [];
-				img.forEach(el => {
-					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
-					var objExp = new RegExp(Expression);
-
-					if (objExp.test(el)) {
-						// http or https
-						arrImg.push(el);
-					} else {
-						// 非http or https开头
-						// 本地文件
-						let firstStr = el.charAt(0);
-						if (firstStr == '/') {
-							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
-						}
-						el = configRoot + el;
-						arrImg.push(el);
-					}
-				})
-				this.img = arrImg;
-			} else {
-				this.bgColor = prop;
-			}
-		}
-	})
-</script>
-
-<style>
-	.bg-swiper-box {
-		position: absolute;
-		display: block;
-		width: 100%;
-		height: 100%;
-	}
-
-	.bg-swiper-img {
-		object-fit: cover;
-		width: 100%;
-		height: 100%;
-	}
-</style>
-
-
-
-
-  <script>
-  function loadMermaid() {
-    if (document.getElementsByClassName('mermaid').length) {
-      if (window.mermaidJsLoad) mermaid.init()
-      else {
-        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
-          window.mermaidJsLoad = true
-          mermaid.initialize({
-            theme: 'default',
-          })
-          if ('true') {
-            mermaid.init();
-          }
-        })
-      }
-    }
-  };
-  document.addEventListener("DOMContentLoaded", function () {
-    loadMermaid();
-  })
-
-  document.addEventListener('pjax:complete', function () {
-    loadMermaid();
-  })
+<div class="w-70">
   
-</script>
-
+</div>
 
       </main>
     </div>
