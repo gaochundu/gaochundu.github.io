@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>GLTF压缩的技术方法</title>
+      <link href="/2023/08/02/gltf%E5%8E%8B%E7%BC%A9%E7%9A%84%E6%8A%80%E6%9C%AF%E6%96%B9%E6%B3%95/"/>
+      <url>/2023/08/02/gltf%E5%8E%8B%E7%BC%A9%E7%9A%84%E6%8A%80%E6%9C%AF%E6%96%B9%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<h1 id="GLTF压缩的技术方法"><a href="#GLTF压缩的技术方法" class="headerlink" title="GLTF压缩的技术方法"></a>GLTF压缩的技术方法</h1><p><strong>gltf-transform、gltfpack和gltf-pipeline都是用于处理glTF文件的工具库，但它们在功能和使用上有一些不同之处。下面是它们的纵向对比：</strong></p><h2 id="1、gltf-transform"><a href="#1、gltf-transform" class="headerlink" title="1、gltf-transform:"></a>1、<a href="https://gltf-transform.dev/cli">gltf-transform</a>:</h2><ul><li>功能：gltf-transform是一个功能强大的glTF处理库，它提供了对glTF文件进行灵活、高级编辑和优化的功能。它支持修改glTF的结构、添加自定义扩展、处理节点层次结构、更改材质、优化缓冲数据、添加、删除和替换属性等。</li><li>优点：提供了高级编辑和优化功能，非常适合需要进行复杂处理和定制化操作的场景。</li><li>缺点：功能相对较复杂，需要一定的学习成本。</li></ul><h2 id="2、gltfpack"><a href="#2、gltfpack" class="headerlink" title="2、gltfpack:"></a>2、<a href="https://meshoptimizer.org/gltf/">gltfpack</a>:</h2><ul><li><p>功能：gltfpack是一个专注于减小glTF文件大小的工具，主要通过压缩纹理和几何信息来实现。它支持使用Draco压缩几何信息，将纹理转换为KTX格式，并进行大小调整等。</p></li><li><p>优点：简单易用，专注于文件大小优化，适合快速优化glTF文件。</p></li><li><p>缺点：功能相对较为单一，只适合文件大小优化，不提供其他高级编辑功能。</p><h2 id="3、gltf-pipeline"><a href="#3、gltf-pipeline" class="headerlink" title="3、gltf-pipeline:"></a>3、<a href="https://github.com/CesiumGS/gltf-pipeline">gltf-pipeline</a>:</h2></li><li><p>功能：gltf-pipeline是一个综合性的glTF处理工具库，提供了一系列方法用于处理glTF文件，包括优化、拆分、合并、纹理压缩、处理模型等。</p></li><li><p>优点：功能比较全面，可以进行优化、压缩、拆分、合并等多种处理操作。</p></li><li><p>缺点：在某些复杂的场景中，可能没有gltf-transform提供的高级编辑能力。</p></li></ul><p><strong>综合来看，如果你需要对glTF文件进行复杂的编辑和定制化处理，gltf-transform是一个不错的选择。如果你只关注文件大小的优化，gltfpack提供了简单高效的方法。而gltf-pipeline提供了综合性的功能，是一个比较全面的处理工具库，适合在多种场景下使用。根据具体的需求和应用场景，选择合适的工具库进行处理会更加有效和方便</strong></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端 </category>
+          
+          <category> WebGL </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> GLTF </tag>
+            
+            <tag> GPU </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>各种移动GPU压缩纹理的使用方法</title>
       <link href="/2023/08/02/%E5%90%84%E7%A7%8D%E7%A7%BB%E5%8A%A8GPU%E5%8E%8B%E7%BC%A9%E7%BA%B9%E7%90%86%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"/>
       <url>/2023/08/02/%E5%90%84%E7%A7%8D%E7%A7%BB%E5%8A%A8GPU%E5%8E%8B%E7%BC%A9%E7%BA%B9%E7%90%86%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</url>
@@ -22,9 +51,9 @@
       
         <tags>
             
-            <tag> OpenGL </tag>
-            
             <tag> GPU </tag>
+            
+            <tag> OpenGL </tag>
             
         </tags>
       
