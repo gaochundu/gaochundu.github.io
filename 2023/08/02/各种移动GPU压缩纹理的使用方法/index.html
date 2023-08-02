@@ -11,7 +11,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>Tomcat跨域配置 | GIS技术部门</title>
+  <title>各种移动GPU压缩纹理的使用方法 | GIS技术部门</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -541,21 +541,21 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('/medias/2.jpg')">
+  background-position: center center;position: relative;background-image:url('/medias/5.jpg')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        Tomcat跨域配置
+        各种移动GPU压缩纹理的使用方法
       </span>
     </div>
     
     
       
         <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> 发表于：2021-08-08 |
+          <i class="fas fa-calendar"></i> 发表于：2023-08-02 |
         </span>
       
 
@@ -563,8 +563,12 @@
         <span class="post-detail-header_categories">
           <i class="iconfont iconbookmark1"></i> 分类：
           
-            <a href="/categories/%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/" class="post-detail-header_category">
-              运行环境
+            <a href="/categories/%E5%89%8D%E7%AB%AF/" class="post-detail-header_category">
+              前端
+            </a>
+          
+            <a href="/categories/%E5%89%8D%E7%AB%AF/WebGL/" class="post-detail-header_category">
+              WebGL
             </a>
           
         </span>
@@ -588,47 +592,90 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <p>链接:<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1cQqJeh3kuJGafxUEXnFS6w">https://pan.baidu.com/s/1cQqJeh3kuJGafxUEXnFS6w</a>  密码:h125</p>
-<p>1、打开tomcat安装目录 -&gt; 打开 conf 目录 -&gt; 打开web.xml文件<br>2、将如下代码复制到web.xml文件中(我是放在 /400左右的位置，不要放在最前面和最后面，一定要放中间)</p>
-<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>filter</span><span class="token punctuation">></span></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>filter-name</span><span class="token punctuation">></span></span>CorsFilter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>filter-name</span><span class="token punctuation">></span></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>filter-class</span><span class="token punctuation">></span></span>org.apache.catalina.filters.CorsFilter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>filter-class</span><span class="token punctuation">></span></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>init-param</span><span class="token punctuation">></span></span>
-          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>param-name</span><span class="token punctuation">></span></span>cors.allowed.origins<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>param-name</span><span class="token punctuation">></span></span>
-          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>param-value</span><span class="token punctuation">></span></span>*<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>param-value</span><span class="token punctuation">></span></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>init-param</span><span class="token punctuation">></span></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>init-param</span><span class="token punctuation">></span></span>
-          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>param-name</span><span class="token punctuation">></span></span>cors.allowed.methods<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>param-name</span><span class="token punctuation">></span></span>
-          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>param-value</span><span class="token punctuation">></span></span>GET,POST,HEAD,OPTIONS,PUT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>param-value</span><span class="token punctuation">></span></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>init-param</span><span class="token punctuation">></span></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>init-param</span><span class="token punctuation">></span></span>
-          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>param-name</span><span class="token punctuation">></span></span>cors.allowed.headers<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>param-name</span><span class="token punctuation">></span></span>
-          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>param-value</span><span class="token punctuation">></span></span>*<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>param-value</span><span class="token punctuation">></span></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>init-param</span><span class="token punctuation">></span></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>init-param</span><span class="token punctuation">></span></span>
-          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>param-name</span><span class="token punctuation">></span></span>cors.exposed.headers<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>param-name</span><span class="token punctuation">></span></span>
-          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>param-value</span><span class="token punctuation">></span></span>Access-Control-Allow-Origin,Access-Control-Allow-Credentials<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>param-value</span><span class="token punctuation">></span></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>init-param</span><span class="token punctuation">></span></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>init-param</span><span class="token punctuation">></span></span>
-          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>param-name</span><span class="token punctuation">></span></span>cors.support.credentials<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>param-name</span><span class="token punctuation">></span></span>
-          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>param-value</span><span class="token punctuation">></span></span>true<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>param-value</span><span class="token punctuation">></span></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>init-param</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>filter</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>filter-mapping</span><span class="token punctuation">></span></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>filter-name</span><span class="token punctuation">></span></span>CorsFilter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>filter-name</span><span class="token punctuation">></span></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>url-pattern</span><span class="token punctuation">></span></span>/*<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>url-pattern</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>filter-mapping</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <h1 id="各种移动GPU压缩纹理的使用方法"><a href="#各种移动GPU压缩纹理的使用方法" class="headerlink" title="各种移动GPU压缩纹理的使用方法"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lancidie/p/14101171.html">各种移动GPU压缩纹理的使用方法</a></h1><p>转载链接 <a target="_blank" rel="noopener" href="http://www.cnblogs.com/luming1979">http://www.cnblogs.com/luming1979</a></p>
+<p>有问题欢迎加qq群讨论：366239605</p>
+<p>介绍了各种移动设备所使用的GPU，以及各个GPU所支持的压缩纹理的格式和使用方法。</p>
+<p><strong>1. 移动GPU大全</strong><br>目前移动市场的GPU主要有四大厂商系列：</p>
+<p>1）Imagination Technologies的PowerVR SGX系列</p>
+<p>  <img src="https://images0.cnblogs.com/blog/16411/201302/04151140-bc36de0a24534b8fb23a81678197bf55.jpg" class="lazyload placeholder" data-srcset="https://images0.cnblogs.com/blog/16411/201302/04151140-bc36de0a24534b8fb23a81678197bf55.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p>代表型号：PowerVR SGX 535、PowerVR SGX 540、PowerVR SGX 543MP、PowerVR SGX 554MP等<br>代表作 ：Apple iPhone全系、iPad全系，三星I9000、P3100等</p>
+<p>2）Qualcomm(高通)的Adreno系列</p>
+<p>  <img src="https://images0.cnblogs.com/blog/16411/201302/04151206-b91d198a45cf4d2d9e597ddd25a47f1f.jpg" class="lazyload placeholder" data-srcset="https://images0.cnblogs.com/blog/16411/201302/04151206-b91d198a45cf4d2d9e597ddd25a47f1f.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p>代表型号：Adreno 200、Adreno 205、Adreno 220、Adreno 320等<br>代表作 ：HTC G10、G14，小米1、2等</p>
+<p>3）ARM的Mali系列</p>
+<p>  <img src="https://images0.cnblogs.com/blog/16411/201302/04151215-16c57b6387bd471baf0618563c1fb9e3.jpg" class="lazyload placeholder" data-srcset="https://images0.cnblogs.com/blog/16411/201302/04151215-16c57b6387bd471baf0618563c1fb9e3.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p>代表型号：Mali-400、Mali-T604等<br>代表作 ：三星Galaxy SII、Galaxy SIII、Galaxy Note1、Galaxy Note2(亚版)等</p>
+<p>4）nVIDIA(英伟达)的Tegra系列</p>
+<p>  <img src="https://images0.cnblogs.com/blog/16411/201302/04151221-a7c98eedde2d4f44beb5973310fa53ca.jpg" class="lazyload placeholder" data-srcset="https://images0.cnblogs.com/blog/16411/201302/04151221-a7c98eedde2d4f44beb5973310fa53ca.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p>代表型号：nVIDIA Tegra2、nVIDIA Tegra3等<br>代表作 ：Google Nexus 7，HTC One X等</p>
+<p><strong>2. 压缩纹理的必要性</strong><br>1）首先要说一下图像文件格式和纹理格式的区别。<br>常用的图像文件格式有BMP，TGA，JPG，GIF，PNG等；<br>常用的纹理格式有R5G6B5，A4R4G4B4，A1R5G5B5，R8G8B8, A8R8G8B8等。</p>
+<p>  文件格式是图像为了存储信息而使用的对信息的特殊编码方式，它存储在磁盘中，或者内存中，但是并不能被GPU所识别，因为以向量计算见长的GPU对于这些复杂的计算无能为力。这些文件格式当被游戏读入后，还是需要经过CPU解压成R5G6B5，A4R4G4B4，A1R5G5B5，R8G8B8, A8R8G8B8等像素格式，再传送到GPU端进行使用。<br>  纹理格式是能被GPU所识别的像素格式，能被快速寻址并采样。<br>举个例子，DDS文件是游戏开发中常用的文件格式，它内部可以包含A4R4G4B4的纹理格式，也可以包含A8R8G8B8的纹理格式，甚至可以包含DXT1的纹理格式。在这里DDS文件有点容器的意味。</p>
+<p>  OpenGL ES 2.0支持以上提到的R5G6B5，A4R4G4B4，A1R5G5B5，R8G8B8，A8R8G8B8等纹理格式，其中 R5G6B5，A4R4G4B4，A1R5G5B5每个像素占用2个字节(BYTE)，R8G8B8每个像素占用3个字节，A8R8G8B8每个像素占用 4个字节。</p>
+<p>  <img src="https://images0.cnblogs.com/blog/16411/201302/04151230-6caff70f05cb4028a26ac0aa7e4e019f.jpg" class="lazyload placeholder" data-srcset="https://images0.cnblogs.com/blog/16411/201302/04151230-6caff70f05cb4028a26ac0aa7e4e019f.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p>  对于一张512<em>512的纹理的话，R5G6B5格式的文件需要占用512KB的容量，A8R8G8B8格式的文件需要占用1MB的容量；如果是1024</em>1024的纹理，则各需要2M和4M的容量，这对于动辄需要几十、几百张甚至更多纹理的游戏，上G容量的游戏在移动平台上是不容易被接受的(当然，还是有1、2G的大作的，里面包含了几千张的纹理)。</p>
+<p>  聪明的设计师们在想，有没有其他办法，既能表现丰富的色彩和细节，又能是最小失真的情况下，达到更小的纹理容量呢。压缩纹理格式应运而生(当然，并不是在移动平台后才有的产物)。</p>
+<p><strong>3. 常见的压缩纹理格式</strong><br>基于OpenGL ES的压缩纹理有常见的如下几种实现：<br>1）ETC1（Ericsson texture compression)<br>2）PVRTC (PowerVR texture compression)<br>3）ATITC (ATI texture compression)<br>4）S3TC (S3 texture compression)</p>
+<p>ETC1:<br>ETC1格式是OpenGL ES图形标准的一部分，并且被所有的Android设备所支持。<br>扩展名为: GL_OES_compressed_ETC1_RGB8_texture，不支持透明通道，所以仅能用于不透明纹理。<br>当加载压缩纹理时，<internal format>参数支持如下格式：<br>  GL_ETC1_RGB8_OES(RGB，每个像素0.5个字节)</p>
+<p>PVRTC:<br>支持的GPU为Imagination Technologies的PowerVR SGX系列。<br>OpenGL ES的扩展名为: GL_IMG_texture_compression_pvrtc。<br>当加载压缩纹理时，<internal format>参数支持如下几种格式：<br>  GL_COMPRESSED_RGB_PVRTC_4BPPV1_IMG (RGB，每个像素0.5个字节)<br>  GL_COMPRESSED_RGB_PVRTC_2BPPV1_IMG (RGB，每个像素0.25个字节)<br>  GL_COMPRESSED_RGBA_PVRTC_4BPPV1_IMG (RGBA，每个像素0.5个字节)<br>  GL_COMPRESSED_RGBA_PVRTC_2BPPV1_IMG (RGBA，每个像素0.25个字节)</p>
+<p>ATITC:<br>支持的GPU为Qualcomm的Adreno系列。<br>支持的OpenGL ES扩展名为: GL_ATI_texture_compression_atitc。<br>当加载压缩纹理时，<internal format>参数支持如下类型的纹理：<br>  GL_ATC_RGB_AMD (RGB，每个像素0.5个字节)<br>  GL_ATC_RGBA_EXPLICIT_ALPHA_AMD (RGBA，每个像素1个字节)<br>  GL_ATC_RGBA_INTERPOLATED_ALPHA_AMD (RGBA，每个像素1个字节)</p>
+<p>S3TC<br>也被称为DXTC，在PC上广泛被使用，但是在移动设备上还是属于新鲜事物。支持的GPU为NVIDIA Tegra系列。<br>OpenGL ES扩展名为:<br>GL_EXT_texture_compression_dxt1和GL_EXT_texture_compression_s3tc。<br>当加载压缩纹理时，<internal format>的参数有如下几种格式：<br>  GL_COMPRESSED_RGB_S3TC_DXT1 (RGB，每个像素0.5个字节)<br>  GL_COMPRESSED_RGBA_S3TC_DXT1 (RGBA，每个像素0.5个字节)<br>  GL_COMPRESSED_RGBA_S3TC_DXT3 (RGBA，每个像素1个字节)<br>  GL_COMPRESSED_RGBA_S3TC_DXT5 (RGBA，每个像素1个字节)</p>
+<p>  由此可见，Mali系列GPU只支持ETC1格式的压缩纹理，而且该纹理不支持透明通道，有一定局限性。<br>  以上压缩纹理格式每个像素大小相对A8R8G8B8格式的比例，最高压缩比是16:1，最低压缩比是4:1，对于减小纹理的数据容量有明显作用，相应在显存带宽上也有明显优势，从而提高游戏的运行效率(此特性没有绝对数值，根据每个游戏的用法和瓶颈点不同而有差别)。</p>
+<p><strong>4. OpenGL****中相关API的使用</strong></p>
+<p>1） 获得GPU的型号</p>
+<p>  glGetString(GL_RENDERER)</p>
+<p>2） 获得GPU的生产厂商</p>
+<p>  glGetString(GL_VENDOR);</p>
+<p>3） 获取GPU支持哪些压缩纹理</p>
+<p>  string extensions = (const char*)glGetString(GL_EXTENSIONS);</p>
+<p>  a. 判断是否支持ETC1格式的压缩纹理</p>
+<p>  return (extensions.find(“GL_OES_compressed_ETC1_RGB8_texture”)!= string::npos);</p>
+<p>  b. 判断是否支持DXT格式的压缩纹理</p>
+<p>  return (extensions.find(“GL_EXT_texture_compression_dxt1”)!= string::npos ||</p>
+<p>​        extensions.find(“GL_EXT_texture_compression_s3tc”)!= string::npos);</p>
+<p>  c. 判断是否支持PVRTC格式的压缩纹理</p>
+<p>  return (extensions.find(“GL_IMG_texture_compression_pvrtc”)!= string::npos);</p>
+<p>  d. 判断是否支持ATITC格式的压缩纹理</p>
+<p>  return (extensions.find(“GL_AMD_compressed_ATC_texture”)!= string::npos ||</p>
+<p>​        extensions.find(“GL_ATI_texture_compression_atitc”)!= string::npos);</p>
+<p>4） 填充压缩纹理数据</p>
+<p>  void glCompressedTexImage2D (</p>
+<p>​      GLenum target,</p>
+<p>​      GLint level,</p>
+<p>​      GLenum internalformat,</p>
+<p>​      GLsizei width,</p>
+<p>​      GLsizei height,</p>
+<p>​      GLint border,</p>
+<p>​      GLsizei imageSize,</p>
+<p>​      const GLvoid * data);</p>
+<p>  这里的参数不做详细解释，其中internalformat即是压缩纹理格式的类型。</p>
+<p><strong>5. 压缩纹理工具的使用</strong><br>  每种压缩纹理以及相应的厂商都提供了压缩纹理的工具，工具都分两个版本：<br>  a. 可视化转换工具 (给美工或小白少量使用)<br>  b. 命令行转换工具 (给程序批量使用)</p>
+<p>下面对每个工具的用法进行说明。<br>1）Imagination Technologies PowerVR<br>工具下载地址<br>[<a target="_blank" rel="noopener" href="http://www.imgtec.com/powervr/insider/sdkdownloads/index.asp?installer=Windows%20Installer%5D">http://www.imgtec.com/powervr/insider/sdkdownloads/index.asp?installer=Windows%20Installer]</a>(<a target="_blank" rel="noopener" href="http://www.imgtec.com/powervr/insider/sdkdownloads/index.asp?installer=Windows">http://www.imgtec.com/powervr/insider/sdkdownloads/index.asp?installer=Windows</a> Installer)</p>
+<p>可视化转换界面</p>
+<p>  <img src="https://images0.cnblogs.com/blog/16411/201302/04151305-ef3cbb1437df4353a018b7c01a4655f1.jpg" class="lazyload placeholder" data-srcset="https://images0.cnblogs.com/blog/16411/201302/04151305-ef3cbb1437df4353a018b7c01a4655f1.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p>命令行转换脚本<br>for %%i in (*.tga) do PVRTexTool.exe -f PVRTC4 -i %%i<br>(将本目录下的所有tga文件，转换成”PVRTC4”编码格式的pvr文件，不带mipmap)<br>详细使用说明：PvrTexTool.exe /?</p>
+<p>2）Qualcomm Adreno<br>工具下载地址<br><a target="_blank" rel="noopener" href="https://developer.qualcomm.com/mobile-development/mobile-technologies/gaming-graphics-optimization-adreno/tools-and-resources">https://developer.qualcomm.com/mobile-development/mobile-technologies/gaming-graphics-optimization-adreno/tools-and-resources</a></p>
+<p>可视化转换界面</p>
+<p>  <img src="https://images0.cnblogs.com/blog/16411/201302/04151318-cf12aa264c66494aa18c8dd6de9645fa.jpg" class="lazyload placeholder" data-srcset="https://images0.cnblogs.com/blog/16411/201302/04151318-cf12aa264c66494aa18c8dd6de9645fa.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p>命令行转换脚本<br>for %%i in (*.tga) do QCompressCmd.exe %%i %%i.ktx “ATC RGBA Explicit” yes<br>(将本目录下的所有tga文件，转换成”ATC RGBA Explicit”编码格式的ktx文件，带mipmap)<br>详细使用说明：QCompressCmd.exe /?</p>
+<p>3）ARM Mali<br>工具下载地址<br><a target="_blank" rel="noopener" href="http://malideveloper.arm.com/develop-for-mali/mali-gpu-texture-compression-tool/">http://malideveloper.arm.com/develop-for-mali/mali-gpu-texture-compression-tool/</a></p>
+<p>可视化转换界面</p>
+<p>  <img src="https://images0.cnblogs.com/blog/16411/201302/04151340-924f712a69134b5e8ed5af92dbe64599.jpg" class="lazyload placeholder" data-srcset="https://images0.cnblogs.com/blog/16411/201302/04151340-924f712a69134b5e8ed5af92dbe64599.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p>命令行转换脚本<br>for %%i in (*.tga) do PVRTexTool.exe -f ETC -i %%i<br>(将本目录下的所有tga文件，转换成”ETC”编码格式的pvr文件，不带mipmap这里还是使用的PVRTexTool.exe，也可以使用QCompressCmd.exe)<br>详细使用说明：PVRTexTool.exe /?</p>
+<p>4）nVIDIA Tegra<br>可以使用DirectX SDK中自带的DirectX Texture Tool进行转换<br>可视化转换界面</p>
+<p>  <img src="https://images0.cnblogs.com/blog/16411/201302/04151351-1fcfb68100a848cda07c1e8fce02097c.jpg" class="lazyload placeholder" data-srcset="https://images0.cnblogs.com/blog/16411/201302/04151351-1fcfb68100a848cda07c1e8fce02097c.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p>命令行转换脚本<br>for %%i in (*.tga) do texconv.exe -f DXT5 %%i<br>(将本目录下的所有tga文件，转换成”DXT5”编码格式的dds文件，不带mipmap)<br>详细使用说明：TexConv.exe /?</p>
+
       </div>
       <div class="post-tags-categories">
         
         <div class="tags">
           
-            <a href="/tags/tomcat/" class="">
-              tomcat
+            <a href="/tags/OpenGL/" class="">
+              OpenGL
             </a>
           
-            <a href="/tags/%E8%B7%A8%E5%9F%9F/" class="">
-              跨域
+            <a href="/tags/GPU/" class="">
+              GPU
             </a>
           
         </div>
@@ -642,7 +689,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>文章链接:  </strong>
-    <a href="/2021/08/08/Tomcat跨域配置/" target="_blank" title="Tomcat跨域配置">https://gaochundu.github.io/2021/08/08/Tomcat跨域配置/</a>
+    <a href="/2023/08/02/各种移动GPU压缩纹理的使用方法/" target="_blank" title="各种移动GPU压缩纹理的使用方法">https://gaochundu.github.io/2023/08/02/各种移动GPU压缩纹理的使用方法/</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明:   </strong>
@@ -660,40 +707,22 @@
 
 
 
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="/medias/3.jpg" class="lazyload placeholder" data-srcset="/medias/3.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-    </div>
-    <a href="/2021/08/08/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85OpenMediaVault/" class="post-nav-link">
-      <div class="title">
-        <i class="fas fa-angle-left"></i> 上一篇:
-        <div class="title-text">树莓派安装OpenMediaVault</div>
-      </div>
-      
-      <!-- <div class="content">
-        2 安装OpenMediaVault1 换源sudo nano &#x2F;etc&#x2F;apt&#x2F;sour
-      </div> -->
-    </a>
-  </div>
-
 
 
   
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="/medias/1.jpg" class="lazyload placeholder" data-srcset="/medias/1.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload lazyload placeholder" src="/medias/5.jpg" class="lazyload placeholder" data-srcset="/medias/5.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
     </div>
-    <a href="/2021/08/08/git%E5%90%8C%E6%97%B6%E7%AE%A1%E7%90%86gitee%E5%92%8Cgithub/" class="post-nav-link">
+    <a href="/2023/06/19/%E5%80%BE%E6%96%9C%E6%91%84%E5%BD%B1%E6%A8%A1%E5%9E%8B%E5%88%86%E5%B1%82%E5%8D%95%E4%BD%93%E5%8C%96/" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fas fa-angle-right"></i>
-        <div class="title-text">git同时管理gitee和github</div>
+        <div class="title-text">倾斜摄影模型分层单体化</div>
       </div>
       <!-- <div class="content">
-        使用场景: 同一个git需要管理gitee和给github,但是gitee和github需要不同的公钥进行连接
-生成SS
+        倾斜摄影模型分层单体化以蓝田新城osgb模型为例
+一、将osgb模型转换为3Dtiles数据(软件地址(osg2cesi
       </div> -->
     </a>
   </div>
@@ -993,7 +1022,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!--  -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%84%E7%A7%8D%E7%A7%BB%E5%8A%A8GPU%E5%8E%8B%E7%BC%A9%E7%BA%B9%E7%90%86%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">各种移动GPU压缩纹理的使用方法</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
